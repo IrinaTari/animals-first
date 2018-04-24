@@ -19,12 +19,16 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
-        let fbbutton = FBSDKLoginButton(frame: CGRect(x: Int(FBLabel.frame.origin.x), y: Int(FBLabel.frame.origin.y) + 20, width: 100, height: 28))
+    }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(false)
+        let fbbutton = FBSDKLoginButton(frame: loginButton.frame)
         self.view.addSubview(fbbutton)
-        self.view.addConstraint(NSLayoutConstraint(item: fbbutton, attribute: .top, relatedBy: .equal, toItem: FBLabel, attribute: .bottom, multiplier: 1, constant: 20))
-        self.view.addConstraint(NSLayoutConstraint(item: fbbutton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: 100))
-        self.view.addConstraint(NSLayoutConstraint(item: fbbutton, attribute: .centerX, relatedBy: .equal, toItem: FBLabel, attribute: .centerX, multiplier: 1, constant: 0))
+        fbbutton.frame.origin.y = FBLabel.frame.origin.y + fbbutton.frame.height + 8
+        self.view.addConstraint(NSLayoutConstraint(item: fbbutton, attribute: .bottom, relatedBy: .greaterThanOrEqual, toItem: self.view, attribute: .bottom, multiplier: 1, constant: 8))
+        loginButton.layer.cornerRadius = 5.0
+        registerButton.layer.cornerRadius = 5.0
     }
 
     override func didReceiveMemoryWarning() {

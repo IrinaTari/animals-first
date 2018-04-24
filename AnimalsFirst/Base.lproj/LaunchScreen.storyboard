@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,15 +20,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2015_p16_01_logo_animal_first_ales_colorat-1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="dGL-RA-W7q">
-                                <rect key="frame" x="91" y="279" width="193" height="109"/>
+                                <rect key="frame" x="89" y="260" width="196" height="147"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="147" id="oxh-4v-eNS"/>
+                                    <constraint firstAttribute="width" constant="196" id="tWB-jY-SeI"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="dGL-RA-W7q" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="91" id="8sg-bn-m84"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dGL-RA-W7q" secondAttribute="trailing" constant="91" id="GGH-dE-lGe"/>
-                            <constraint firstItem="dGL-RA-W7q" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="259" id="sQW-ZW-cgp"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="dGL-RA-W7q" secondAttribute="bottom" constant="279" id="xh4-tF-S4t"/>
+                            <constraint firstItem="dGL-RA-W7q" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="RQ4-Lg-kOw"/>
+                            <constraint firstItem="dGL-RA-W7q" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="height" multiplier="196:647" id="SvK-Jt-Qoe"/>
+                            <constraint firstItem="dGL-RA-W7q" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="wNO-Qu-nOg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
