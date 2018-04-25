@@ -8,8 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		44830BB49F14AC1205FB9FEF /* Pods_AnimalsFirstTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3343187B46EF49087C4A0677 /* Pods_AnimalsFirstTests.framework */; };
+		667A1BF42090733D0058985E /* Admin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 667A1BF32090733D0058985E /* Admin.storyboard */; };
+		667A1BF6209073660058985E /* AdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667A1BF5209073660058985E /* AdminViewController.swift */; };
+		667A1BF92090749C0058985E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667A1BF82090749C0058985E /* LoginViewController.swift */; };
 		66A8FF1B208DF54D007BCD48 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A8FF1A208DF54D007BCD48 /* AppDelegate.swift */; };
-		66A8FF1D208DF54D007BCD48 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A8FF1C208DF54D007BCD48 /* ViewController.swift */; };
 		66A8FF20208DF54D007BCD48 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66A8FF1E208DF54D007BCD48 /* Main.storyboard */; };
 		66A8FF23208DF54D007BCD48 /* AnimalsFirst.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 66A8FF21208DF54D007BCD48 /* AnimalsFirst.xcdatamodeld */; };
 		66A8FF25208DF54F007BCD48 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66A8FF24208DF54F007BCD48 /* Assets.xcassets */; };
@@ -41,9 +43,11 @@
 /* Begin PBXFileReference section */
 		3343187B46EF49087C4A0677 /* Pods_AnimalsFirstTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AnimalsFirstTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		39A2FF48D3409067064CCF87 /* Pods-AnimalsFirst.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnimalsFirst.release.xcconfig"; path = "Pods/Target Support Files/Pods-AnimalsFirst/Pods-AnimalsFirst.release.xcconfig"; sourceTree = "<group>"; };
+		667A1BF32090733D0058985E /* Admin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Admin.storyboard; sourceTree = "<group>"; };
+		667A1BF5209073660058985E /* AdminViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminViewController.swift; sourceTree = "<group>"; };
+		667A1BF82090749C0058985E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		66A8FF17208DF54D007BCD48 /* AnimalsFirst.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnimalsFirst.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66A8FF1A208DF54D007BCD48 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		66A8FF1C208DF54D007BCD48 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		66A8FF1F208DF54D007BCD48 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		66A8FF22208DF54D007BCD48 /* AnimalsFirst.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AnimalsFirst.xcdatamodel; sourceTree = "<group>"; };
 		66A8FF24208DF54F007BCD48 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -123,7 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				66A8FF1A208DF54D007BCD48 /* AppDelegate.swift */,
-				66A8FF1C208DF54D007BCD48 /* ViewController.swift */,
+				667A1BF82090749C0058985E /* LoginViewController.swift */,
 				66A8FF1E208DF54D007BCD48 /* Main.storyboard */,
 				66A8FF24208DF54F007BCD48 /* Assets.xcassets */,
 				66A8FF26208DF54F007BCD48 /* LaunchScreen.storyboard */,
@@ -132,8 +136,10 @@
 				66A8FF21208DF54D007BCD48 /* AnimalsFirst.xcdatamodeld */,
 				66A8FF3D208DF5BC007BCD48 /* ClientViewController.swift */,
 				66A8FF3F208DF5D6007BCD48 /* DoctorViewController.swift */,
+				667A1BF5209073660058985E /* AdminViewController.swift */,
 				66A8FF41208DF696007BCD48 /* Client.storyboard */,
 				66A8FF43208DF6A4007BCD48 /* Doctor.storyboard */,
+				667A1BF32090733D0058985E /* Admin.storyboard */,
 			);
 			path = AnimalsFirst;
 			sourceTree = "<group>";
@@ -260,6 +266,7 @@
 				66A8FF44208DF6A4007BCD48 /* Doctor.storyboard in Resources */,
 				66A8FF4D208DFC14007BCD48 /* lock-open-blue.png in Resources */,
 				66A8FF54208E029A007BCD48 /* GoogleService-Info.plist in Resources */,
+				667A1BF42090733D0058985E /* Admin.storyboard in Resources */,
 				66A8FF42208DF696007BCD48 /* Client.storyboard in Resources */,
 				66A8FF4C208DFC14007BCD48 /* download.png in Resources */,
 			);
@@ -383,7 +390,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				66A8FF1D208DF54D007BCD48 /* ViewController.swift in Sources */,
+				667A1BF92090749C0058985E /* LoginViewController.swift in Sources */,
+				667A1BF6209073660058985E /* AdminViewController.swift in Sources */,
 				66A8FF40208DF5D6007BCD48 /* DoctorViewController.swift in Sources */,
 				66A8FF1B208DF54D007BCD48 /* AppDelegate.swift in Sources */,
 				66A8FF23208DF54D007BCD48 /* AnimalsFirst.xcdatamodeld in Sources */,

@@ -10,7 +10,7 @@ import UIKit
 import FacebookLogin
 import FBSDKLoginKit
 
-class ViewController: UIViewController, FBSDKLoginButtonDelegate {
+class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var registerButton: UIButton!
@@ -19,6 +19,9 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
+        if (FBSDKAccessToken.current() != nil) {
+            // User is logged in, do work such as go to next view controller.
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -29,6 +32,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
         self.view.addConstraint(NSLayoutConstraint(item: fbbutton, attribute: .bottom, relatedBy: .greaterThanOrEqual, toItem: self.view, attribute: .bottom, multiplier: 1, constant: 8))
         loginButton.layer.cornerRadius = 5.0
         registerButton.layer.cornerRadius = 5.0
+        fbbutton.readPermissions = ["public_profile", "email"]
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,4 +49,3 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
     }
 
 }
-
