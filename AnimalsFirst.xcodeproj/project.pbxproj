@@ -64,7 +64,7 @@
 		66A8FF48208DFABC007BCD48 /* 2015_p16_01_logo_animal_first_ales_colorat-1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "2015_p16_01_logo_animal_first_ales_colorat-1.jpg"; sourceTree = "<group>"; };
 		66A8FF4A208DFC14007BCD48 /* download.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = download.png; sourceTree = "<group>"; };
 		66A8FF4B208DFC14007BCD48 /* lock-open-blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lock-open-blue.png"; sourceTree = "<group>"; };
-		66A8FF53208E029A007BCD48 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		66A8FF53208E029A007BCD48 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "AnimalsFirst/Plists/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		8449021CD6185B694A7C9582 /* Pods_AnimalsFirst.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AnimalsFirst.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		94E4BB5E4CA45F7E93963227 /* Pods-AnimalsFirstTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnimalsFirstTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AnimalsFirstTests/Pods-AnimalsFirstTests.release.xcconfig"; sourceTree = "<group>"; };
 		C4150132947E1B57974172A6 /* Pods-AnimalsFirst.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnimalsFirst.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AnimalsFirst/Pods-AnimalsFirst.debug.xcconfig"; sourceTree = "<group>"; };
@@ -102,6 +102,38 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		661A0837209760ED00211B87 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				667A1BF82090749C0058985E /* LoginViewController.swift */,
+				66A8FF3D208DF5BC007BCD48 /* ClientViewController.swift */,
+				66A8FF3F208DF5D6007BCD48 /* DoctorViewController.swift */,
+				667A1BF5209073660058985E /* AdminViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		661A08382097610900211B87 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				66A8FF26208DF54F007BCD48 /* LaunchScreen.storyboard */,
+				66A8FF41208DF696007BCD48 /* Client.storyboard */,
+				66A8FF43208DF6A4007BCD48 /* Doctor.storyboard */,
+				667A1BF32090733D0058985E /* Admin.storyboard */,
+				66A8FF1E208DF54D007BCD48 /* Main.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		661A08392097613300211B87 /* Plists */ = {
+			isa = PBXGroup;
+			children = (
+				66A8FF53208E029A007BCD48 /* GoogleService-Info.plist */,
+				66A8FF29208DF54F007BCD48 /* Info.plist */,
+			);
+			path = Plists;
+			sourceTree = "<group>";
+		};
 		66A8FF0E208DF54D007BCD48 = {
 			isa = PBXGroup;
 			children = (
@@ -126,20 +158,12 @@
 		66A8FF19208DF54D007BCD48 /* AnimalsFirst */ = {
 			isa = PBXGroup;
 			children = (
+				661A08392097613300211B87 /* Plists */,
+				661A08382097610900211B87 /* Storyboards */,
+				661A0837209760ED00211B87 /* ViewControllers */,
 				66A8FF1A208DF54D007BCD48 /* AppDelegate.swift */,
-				667A1BF82090749C0058985E /* LoginViewController.swift */,
-				66A8FF1E208DF54D007BCD48 /* Main.storyboard */,
 				66A8FF24208DF54F007BCD48 /* Assets.xcassets */,
-				66A8FF26208DF54F007BCD48 /* LaunchScreen.storyboard */,
-				66A8FF29208DF54F007BCD48 /* Info.plist */,
-				66A8FF53208E029A007BCD48 /* GoogleService-Info.plist */,
 				66A8FF21208DF54D007BCD48 /* AnimalsFirst.xcdatamodeld */,
-				66A8FF3D208DF5BC007BCD48 /* ClientViewController.swift */,
-				66A8FF3F208DF5D6007BCD48 /* DoctorViewController.swift */,
-				667A1BF5209073660058985E /* AdminViewController.swift */,
-				66A8FF41208DF696007BCD48 /* Client.storyboard */,
-				66A8FF43208DF6A4007BCD48 /* Doctor.storyboard */,
-				667A1BF32090733D0058985E /* Admin.storyboard */,
 			);
 			path = AnimalsFirst;
 			sourceTree = "<group>";

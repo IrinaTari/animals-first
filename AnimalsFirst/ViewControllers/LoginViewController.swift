@@ -38,19 +38,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         FBPlaceholderButton.isHidden = true
         self.view.addSubview(fbbutton)
 
-        // make round corners for buttons
-        loginButton.layer.cornerRadius = 5.0
-        registerButton.layer.cornerRadius = 5.0
-
-        loginButton.titleLabel?.adjustTextUsingDynamicType()
-        registerButton.titleLabel?.adjustTextUsingDynamicType()
-        usernameTextField.adjustTextUsingDynamicType()
-        passwordTextField.adjustTextUsingDynamicType()
-        FBLabel.adjustTextUsingDynamicType()
-        infoLabel.adjustTextUsingDynamicType()
-        noAccountLabel.adjustTextUsingDynamicType()
-        fbbutton.titleLabel?.adjustTextUsingDynamicType()
-        fbbutton.imageView?.adjustsImageSizeForAccessibilityContentSizeCategory = true
+        adjustViewFontsAndSubviews()
 
         // read fb permissions
         fbbutton.readPermissions = ["public_profile", "email"]
@@ -67,6 +55,23 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
         //handle did log out
+    }
+
+    func adjustViewFontsAndSubviews() {
+        // make round corners for buttons
+            loginButton.layer.cornerRadius = 5.0
+        registerButton.layer.cornerRadius = 5.0
+        //adjust text
+        loginButton.titleLabel?.adjustTextUsingDynamicType()
+        registerButton.titleLabel?.adjustTextUsingDynamicType()
+        usernameTextField.adjustTextUsingDynamicType()
+        passwordTextField.adjustTextUsingDynamicType()
+        FBLabel.adjustTextUsingDynamicType()
+        infoLabel.adjustTextUsingDynamicType()
+        noAccountLabel.adjustTextUsingDynamicType()
+        fbbutton.titleLabel?.adjustTextUsingDynamicType()
+        fbbutton.imageView?.adjustsImageSizeForAccessibilityContentSizeCategory = true
+
     }
 
     override func viewDidLayoutSubviews() {

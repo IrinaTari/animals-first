@@ -168,6 +168,7 @@
                         <outlet property="usernameTextField" destination="IGE-wB-v2B" id="xhU-iq-aYH"/>
                         <segue destination="LIp-Pw-jUa" kind="presentation" identifier="doctor" id="ekf-1i-NKn"/>
                         <segue destination="zch-0w-gGS" kind="presentation" identifier="client" id="H6a-hN-z3x"/>
+                        <segue destination="CFQ-21-g0N" kind="presentation" id="hgD-n2-ktg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -180,7 +181,15 @@
                 <viewControllerPlaceholder storyboardName="Client" id="zch-0w-gGS" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hUQ-Lr-KNU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2189" y="-356"/>
+            <point key="canvasLocation" x="2184" y="-565"/>
+        </scene>
+        <!--Admin-->
+        <scene sceneID="OJp-wE-tHN">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Admin" id="CFQ-21-g0N" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RgW-bk-yCq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2182" y="-338"/>
         </scene>
         <!--Doctor-->
         <scene sceneID="mhL-vw-VMJ">
