@@ -15,6 +15,13 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var registerButton: UIButton!
     @IBOutlet weak var FBLabel: UILabel!
+    @IBOutlet weak var infoLabel: UILabel!
+    @IBOutlet weak var noAccountLabel: UILabel!
+    @IBOutlet weak var usernameTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var FBPlaceholderButton: UIButton!
+    let fbbutton = FBSDKLoginButton()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,12 +33,26 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(false)
-        let fbbutton = FBSDKLoginButton(frame: loginButton.frame)
+        // setup FB button
+        fbbutton.frame = FBPlaceholderButton.frame
+        FBPlaceholderButton.isHidden = true
         self.view.addSubview(fbbutton)
-        fbbutton.frame.origin.y = FBLabel.frame.origin.y + fbbutton.frame.height + 8
-        self.view.addConstraint(NSLayoutConstraint(item: fbbutton, attribute: .bottom, relatedBy: .greaterThanOrEqual, toItem: self.view, attribute: .bottom, multiplier: 1, constant: 8))
+
+        // make round corners for buttons
         loginButton.layer.cornerRadius = 5.0
         registerButton.layer.cornerRadius = 5.0
+
+        loginButton.titleLabel?.adjustTextUsingDynamicType()
+        registerButton.titleLabel?.adjustTextUsingDynamicType()
+        usernameTextField.adjustTextUsingDynamicType()
+        passwordTextField.adjustTextUsingDynamicType()
+        FBLabel.adjustTextUsingDynamicType()
+        infoLabel.adjustTextUsingDynamicType()
+        noAccountLabel.adjustTextUsingDynamicType()
+        fbbutton.titleLabel?.adjustTextUsingDynamicType()
+        fbbutton.imageView?.adjustsImageSizeForAccessibilityContentSizeCategory = true
+
+        // read fb permissions
         fbbutton.readPermissions = ["public_profile", "email"]
     }
 
@@ -48,4 +69,24 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         //handle did log out
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        fbbutton.frame = FBPlaceholderButton.frame
+    }
+}
+
+extension UILabel {
+    func adjustTextUsingDynamicType() {
+        self.font = UIFont.preferredFont(forTextStyle: .body)
+        self.adjustsFontForContentSizeCategory = true
+        self.adjustsFontSizeToFitWidth = true
+    }
+}
+
+extension UITextField {
+    func adjustTextUsingDynamicType() {
+        self.font = UIFont.preferredFont(forTextStyle: .body)
+        self.adjustsFontForContentSizeCategory = true
+        self.adjustsFontSizeToFitWidth = true
+    }
 }
