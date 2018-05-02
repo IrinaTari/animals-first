@@ -290,7 +290,7 @@ static const struct
     if ([invalidObject isKindOfClass:[NSData class]]) {
       NSData *data = (NSData *)invalidObject;
       NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
-        if (didAddToPasteboard || !enablePasteboard ||!_pasteboard || (data.length < _dataLengthThreshold)) {
+      if (didAddToPasteboard || !enablePasteboard || !_pasteboard || (data.length < _dataLengthThreshold)) {
         dictionary[FBSDKBridgeAPIProtocolNativeV1DataKeys.isBase64] = @YES;
         dictionary[FBSDKBridgeAPIProtocolNativeV1DataKeys.tag] = dataTag;
         [FBSDKInternalUtility dictionary:dictionary

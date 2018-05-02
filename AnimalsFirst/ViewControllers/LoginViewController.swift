@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import FacebookLogin
+import Firebase
 import FBSDKLoginKit
 
 class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
@@ -51,6 +51,10 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         // handle didcomplete
+        if (error == nil) {
+            let view = ClientViewController()
+            self.present(view, animated: true, completion: nil)
+        }
     }
 
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {

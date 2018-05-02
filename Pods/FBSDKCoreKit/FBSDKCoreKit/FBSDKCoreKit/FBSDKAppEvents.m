@@ -612,6 +612,10 @@ static NSString *g_overrideAppID = nil;
 - (void)publishInstall
 {
   NSString *appID = [self appID];
+  if ([appID length] == 0) {
+    [FBSDKLogger singleShotLogEntry:FBSDKLoggingBehaviorDeveloperErrors logEntry:@"Missing [FBSDKAppEvents appID] for [FBSDKAppEvents publishInstall:]"];
+    return;
+  }
   NSString *lastAttributionPingString = [NSString stringWithFormat:@"com.facebook.sdk:lastAttributionPing%@", appID];
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   if ([defaults objectForKey:lastAttributionPingString]) {
@@ -620,7 +624,7 @@ static NSString *g_overrideAppID = nil;
   [self fetchServerConfiguration:^{
     NSDictionary *params = [FBSDKAppEventsUtility activityParametersDictionaryForEvent:@"MOBILE_APP_INSTALL"
                                                                     implicitEventsOnly:NO
-                                                             shouldAccessAdvertisingID:self->_serverConfiguration.isAdvertisingIDEnabled];
+                                                             shouldAccessAdvertisingID:_serverConfiguration.isAdvertisingIDEnabled];
     NSString *path = [NSString stringWithFormat:@"%@/activities", appID];
     FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:path
                                                          parameters:params
@@ -643,9 +647,9 @@ static NSString *g_overrideAppID = nil;
 {
   if (_serverConfiguration == nil) {
     [FBSDKServerConfigurationManager loadServerConfigurationWithCompletionBlock:^(FBSDKServerConfiguration *serverConfiguration, NSError *error) {
-        self->_serverConfiguration = serverConfiguration;
+      _serverConfiguration = serverConfiguration;
 
-        if (self->_serverConfiguration.implicitPurchaseLoggingEnabled) {
+      if (_serverConfiguration.implicitPurchaseLoggingEnabled) {
         [FBSDKPaymentObserver startObservingTransactions];
       } else {
         [FBSDKPaymentObserver stopObservingTransactions];
@@ -801,14 +805,21 @@ static NSString *g_overrideAppID = nil;
 - (void)flushOnMainQueue:(FBSDKAppEventsState *)appEventsState
                forReason:(FBSDKAppEventsFlushReason)reason
 {
+
   if (appEventsState.events.count == 0) {
     return;
   }
+
+  if ([appEventsState.appID length] == 0) {
+    [FBSDKLogger singleShotLogEntry:FBSDKLoggingBehaviorDeveloperErrors logEntry:@"Missing [FBSDKAppEvents appEventsState.appID] for [FBSDKAppEvents flushOnMainQueue:]"];
+    return;
+  }
+
   [FBSDKAppEventsUtility ensureOnMainThread:NSStringFromSelector(_cmd) className:NSStringFromClass([self class])];
 
   [self fetchServerConfiguration:^(void) {
     NSString *receipt_data = [appEventsState extractReceiptData];
-      NSString *encodedEvents = [appEventsState JSONStringForEvents:self->_serverConfiguration.implicitLoggingEnabled];
+    NSString *encodedEvents = [appEventsState JSONStringForEvents:_serverConfiguration.implicitLoggingEnabled];
     if (!encodedEvents) {
       [FBSDKLogger singleShotLogEntry:FBSDKLoggingBehaviorAppEvents
                              logEntry:@"FBSDKAppEvents: Flushing skipped - no events after removing implicitly logged ones.\n"];
@@ -817,7 +828,7 @@ static NSString *g_overrideAppID = nil;
     NSMutableDictionary *postParameters = [FBSDKAppEventsUtility
                                            activityParametersDictionaryForEvent:@"CUSTOM_APP_EVENTS"
                                            implicitEventsOnly:appEventsState.areAllEventsImplicit
-                                           shouldAccessAdvertisingID:self->_serverConfiguration.advertisingIDEnabled];
+                                           shouldAccessAdvertisingID:_serverConfiguration.advertisingIDEnabled];
     NSInteger length = [receipt_data length];
     if (length > 0) {
       postParameters[@"receipt_data"] = receipt_data;
@@ -883,7 +894,8 @@ static NSString *g_overrideAppID = nil;
 
     // We interpret a 400 coming back from FBRequestConnection as a server error due to improper data being
     // sent down.  Otherwise we assume no connectivity, or another condition where we could treat it as no connectivity.
-    flushResult = errorCode == 400 ? FlushResultServerError : FlushResultNoConnectivity;
+    // Adding 404 as having wrong/missing appID results in 404 and that is not a connectivity issue
+    flushResult = (errorCode == 400 || errorCode == 404) ? FlushResultServerError : FlushResultNoConnectivity;
   }
 
   if (flushResult == FlushResultServerError) {

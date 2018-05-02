@@ -67,9 +67,9 @@
         // the block returns YES if recovery UI is started (meaning we wait for the alertviewdelegate to resume control flow).
         BOOL (^standardRecoveryWork)(void) = ^BOOL{
           NSArray *recoveryOptionsTitles = error.userInfo[NSLocalizedRecoveryOptionsErrorKey];
-            if (recoveryOptionsTitles.count > 0 && self->_recoveryAttempter) {
+          if (recoveryOptionsTitles.count > 0 && _recoveryAttempter) {
             NSString *recoverySuggestion = error.userInfo[NSLocalizedRecoverySuggestionErrorKey];
-                self->_error = error;
+            _error = error;
             dispatch_async(dispatch_get_main_queue(), ^{
               [self displayAlertWithRecoverySuggestion:recoverySuggestion recoveryOptionsTitles:recoveryOptionsTitles];
             });
