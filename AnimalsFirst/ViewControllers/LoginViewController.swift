@@ -9,6 +9,8 @@
 import UIKit
 import Firebase
 import FBSDKLoginKit
+import FBSDKCoreKit
+import FirebaseAuth
 
 class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 
@@ -50,15 +52,32 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     }
 
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
-        // handle didcomplete
-        if (error == nil) {
-            let view = ClientViewController()
-            self.present(view, animated: true, completion: nil)
+        if let error = error {
+            print(error.localizedDescription)
+            return
+        }
+        let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+
+        Auth.auth().signIn(with: credential) { (user, error) in
+
+            if let error = error {
+               print(error.localizedDescription)
+                return
+            }
+            // User is signed in    
+            print("user is signed in")
+            self.present(ClientViewController(), animated: true, completion: nil)
         }
     }
 
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
-        //handle did log out
+        let firebaseAuth = Auth.auth()
+        do {
+            try firebaseAuth.signOut()
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
+
     }
 
     func adjustViewFontsAndSubviews() {
