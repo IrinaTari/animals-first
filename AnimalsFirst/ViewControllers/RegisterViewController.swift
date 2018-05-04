@@ -12,7 +12,7 @@ import Firebase
 import FirebaseDatabase
 import FirebaseAuth
 
-class RegisterViewController: UIViewController {
+class RegisterViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
@@ -21,11 +21,14 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var createAccountButton: UIButton!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var repeatPasswordTextField: UITextField!
+    @IBOutlet weak var infoLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         cancelButton.addTarget(self, action: #selector(backAction(sender:)), for: .touchUpInside)
+        phoneTextField.keyboardType = .numberPad
+        phoneTextField.delegate = self
         adjustViewFontsAndSubviews()
     }
 
@@ -36,7 +39,12 @@ class RegisterViewController: UIViewController {
 
     @IBAction func createAccountButtonAction(_ sender: Any) {
 
-        guard let lastName = lastNameTextField.text, let firstName = firstNameTextField.text, let email = emailTextField.text, let phone = phoneTextField.text, let password = passwordTextField.text, let repeatPassword = repeatPasswordTextField.text else{
+        guard let lastName = lastNameTextField.text, let firstName = firstNameTextField.text, let email = emailTextField.text, let phone = phoneTextField.text, let password = passwordTextField.text, let repeatPassword = repeatPasswordTextField.text else {
+            showEmptyTextFieldsAlert()
+            return
+        }
+
+        if lastName.isEmpty || firstName.isEmpty || email.isEmpty || phone.isEmpty || password.isEmpty {
             showEmptyTextFieldsAlert()
             return
         }
@@ -44,15 +52,30 @@ class RegisterViewController: UIViewController {
         if password == repeatPassword {
             Auth.auth().createUser(withEmail: emailTextField.text!, password: passwordTextField.text!, completion: {(user: User?, error) in
             if error != nil {
-                    print(error!)
-                    return
+                print(error!)
+                self.createAccFailAlert(error: error!)
+                return
             }
             // success
-            let ref = FirebaseDatabase.DatabaseReference().database.reference(fromURL: "https://animalsfirst-12b83.firebaseio.com/")
-                let values = ["lastName" : lastName, "firstName" : firstName, "email" : email, "phone" : phone, "password" : password]
-            ref.updateChildValues(values)
+            let ref = Database.database().reference(fromURL: "https://animalsfirst-12b83.firebaseio.com/")
+            let fullName = firstName.appending(" ").appending(lastName)
+            print(fullName)
+            let values = ["name" : fullName, "email" : email, "phone" : phone]
+            let usersRef = ref.child("users")
+            let clientUserRef = usersRef.child("client type users")
+            clientUserRef.updateChildValues(values, withCompletionBlock: {(err, ref) in
+                if err != nil {
+                    print(err!)
+                    self.createAccFailAlert(error: err!)
+                    return
+                }
+                self.createAccSuccessAlert()
+                self.emptyAllTextFields()
+                _ = self.navigationController?.popViewController(animated: true)
+                })
             })
         } else {
+            // password != repeat password alert
             print("inequal passwords")
         }
     }
@@ -72,13 +95,43 @@ class RegisterViewController: UIViewController {
         firstNameTextField.adjustTextUsingDynamicType()
         emailTextField.adjustTextUsingDynamicType()
         phoneTextField.adjustTextUsingDynamicType()
+        infoLabel.adjustTextUsingDynamicType()
     }
 
     func showEmptyTextFieldsAlert() {
-        let alert = UIAlertController(title: "Nu s-a putut crea contul", message: "Toate campurile trebuie completate cu date corecte pentru a crea un cont...", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Nu s-a putut crea contul", message: "Toate campurile trebuie completate cu date corecte.", preferredStyle: .alert)
         let cancel = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alert.addAction(cancel)
         self.present(alert, animated: true, completion: nil)
     }
 
+    func createAccFailAlert(error: Error) {
+        let alert = UIAlertController(title: "Nu s-a putut crea contul", message: error.localizedDescription, preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alert.addAction(cancel)
+        self.present(alert, animated: true, completion: nil)
+    }
+
+    func createAccSuccessAlert() {
+        let alert = UIAlertController(title: "Cont creat cu success!", message: nil, preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alert.addAction(cancel)
+        self.present(alert, animated: true, completion: nil)
+    }
+
+    func emptyAllTextFields() {
+        firstNameTextField.text = ""
+        lastNameTextField.text = ""
+        emailTextField.text = ""
+        phoneTextField.text = ""
+        passwordTextField.text = ""
+        repeatPasswordTextField.text = ""
+    }
+
+    // MARK: textField Delegate method
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        return (textField.text?.count)! < 10
+    }
+
 }
+

@@ -12,6 +12,7 @@
 		667A1BF42090733D0058985E /* Admin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 667A1BF32090733D0058985E /* Admin.storyboard */; };
 		667A1BF6209073660058985E /* AdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667A1BF5209073660058985E /* AdminViewController.swift */; };
 		667A1BF92090749C0058985E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667A1BF82090749C0058985E /* LoginViewController.swift */; };
+		66989E53209C860F007B2C12 /* AFAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66989E52209C860F007B2C12 /* AFAlert.swift */; };
 		66A8FF1B208DF54D007BCD48 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A8FF1A208DF54D007BCD48 /* AppDelegate.swift */; };
 		66A8FF20208DF54D007BCD48 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66A8FF1E208DF54D007BCD48 /* Main.storyboard */; };
 		66A8FF23208DF54D007BCD48 /* AnimalsFirst.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 66A8FF21208DF54D007BCD48 /* AnimalsFirst.xcdatamodeld */; };
@@ -48,6 +49,7 @@
 		667A1BF32090733D0058985E /* Admin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Admin.storyboard; sourceTree = "<group>"; };
 		667A1BF5209073660058985E /* AdminViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminViewController.swift; sourceTree = "<group>"; };
 		667A1BF82090749C0058985E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		66989E52209C860F007B2C12 /* AFAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AFAlert.swift; sourceTree = "<group>"; };
 		66A8FF17208DF54D007BCD48 /* AnimalsFirst.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnimalsFirst.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66A8FF1A208DF54D007BCD48 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		66A8FF1F208DF54D007BCD48 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -128,6 +130,14 @@
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
+		66989E51209C85EE007B2C12 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				66989E52209C860F007B2C12 /* AFAlert.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		66A8FF0E208DF54D007BCD48 = {
 			isa = PBXGroup;
 			children = (
@@ -152,6 +162,7 @@
 		66A8FF19208DF54D007BCD48 /* AnimalsFirst */ = {
 			isa = PBXGroup;
 			children = (
+				66989E51209C85EE007B2C12 /* Utils */,
 				661A08382097610900211B87 /* Storyboards */,
 				661A0837209760ED00211B87 /* ViewControllers */,
 				66A8FF1A208DF54D007BCD48 /* AppDelegate.swift */,
@@ -424,6 +435,7 @@
 				66A8FF1B208DF54D007BCD48 /* AppDelegate.swift in Sources */,
 				66A8FF23208DF54D007BCD48 /* AnimalsFirst.xcdatamodeld in Sources */,
 				66A8FF3E208DF5BC007BCD48 /* ClientViewController.swift in Sources */,
+				66989E53209C860F007B2C12 /* AFAlert.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -589,7 +601,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8KDVQ75FTL;
 				INFOPLIST_FILE = AnimalsFirst/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = af.AnimalsFirst;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -605,7 +620,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8KDVQ75FTL;
 				INFOPLIST_FILE = AnimalsFirst/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = af.AnimalsFirst;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -621,7 +639,11 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = AnimalsFirstTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = af.AnimalsFirstTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -638,7 +660,11 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = AnimalsFirstTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = af.AnimalsFirstTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

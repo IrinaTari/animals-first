@@ -66,7 +66,7 @@
                                         <rect key="frame" x="50" y="73" width="241" height="29"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -210,12 +210,6 @@
                                     <color key="titleColor" red="0.66153389080000002" green="0.13522080240000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2015_p16_01_logo_animal_first_ales_colorat-1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="JLN-TH-FVx">
-                                <rect key="frame" x="126" y="84" width="123" height="84"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="JLN-TH-FVx" secondAttribute="height" multiplier="22:15" id="ELL-fm-89g"/>
-                                </constraints>
-                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OaZ-Gb-XWx">
                                 <rect key="frame" x="52" y="190" width="271" height="322"/>
                                 <subviews>
@@ -247,13 +241,13 @@
                                         <rect key="frame" x="8" y="222" width="255" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Repeta parola" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ypP-nS-SLU">
                                         <rect key="frame" x="8" y="272" width="255" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -298,23 +292,44 @@
                                     <action selector="createAccountButtonAction:" destination="Oej-uE-Xh0" eventType="touchUpInside" id="M9g-wa-WEC"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Toate campurile se completeaza in mod obligatoriu" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HHg-Sn-d7k">
+                                <rect key="frame" x="52" y="167" width="271" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="HHg-Sn-d7k" secondAttribute="height" multiplier="271:30" id="31h-mv-5Ej"/>
+                                    <constraint firstAttribute="height" constant="30" id="owF-DB-ZV7"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2015_p16_01_logo_animal_first_ales_colorat-1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="JLN-TH-FVx">
+                                <rect key="frame" x="126" y="75" width="123" height="84"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="JLN-TH-FVx" secondAttribute="height" multiplier="22:15" id="ELL-fm-89g"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="OaZ-Gb-XWx" firstAttribute="centerY" secondItem="QRr-cW-byp" secondAttribute="centerY" constant="17.5" id="0Sy-kt-At0"/>
+                            <constraint firstItem="HHg-Sn-d7k" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="OaZ-Gb-XWx" secondAttribute="trailing" id="22I-J2-GIb"/>
                             <constraint firstItem="KlY-3n-bS4" firstAttribute="leading" secondItem="OaZ-Gb-XWx" secondAttribute="leading" id="5BG-bi-OX6"/>
-                            <constraint firstItem="JLN-TH-FVx" firstAttribute="top" secondItem="MBG-GV-WmK" secondAttribute="top" constant="20" id="8WO-JA-zGH"/>
+                            <constraint firstItem="JLN-TH-FVx" firstAttribute="top" secondItem="MBG-GV-WmK" secondAttribute="top" constant="11" id="8WO-JA-zGH"/>
                             <constraint firstItem="JLN-TH-FVx" firstAttribute="width" secondItem="MBG-GV-WmK" secondAttribute="height" multiplier="132:647" id="945-d6-epP"/>
                             <constraint firstItem="K2g-uQ-FkZ" firstAttribute="top" secondItem="KlY-3n-bS4" secondAttribute="bottom" constant="26.5" id="CgD-MS-5QS"/>
+                            <constraint firstItem="OaZ-Gb-XWx" firstAttribute="top" secondItem="HHg-Sn-d7k" secondAttribute="bottom" constant="-7" id="Gxb-8p-OrK"/>
                             <constraint firstItem="OaZ-Gb-XWx" firstAttribute="width" secondItem="MBG-GV-WmK" secondAttribute="height" multiplier="291:647" id="HXf-Jq-XWq"/>
                             <constraint firstItem="K2g-uQ-FkZ" firstAttribute="trailing" secondItem="KlY-3n-bS4" secondAttribute="trailing" id="ITj-zV-mwr"/>
+                            <constraint firstItem="HHg-Sn-d7k" firstAttribute="top" relation="greaterThanOrEqual" secondItem="JLN-TH-FVx" secondAttribute="bottom" constant="8" id="WJE-QY-zeq"/>
                             <constraint firstItem="KlY-3n-bS4" firstAttribute="width" secondItem="K2g-uQ-FkZ" secondAttribute="width" id="YKy-S8-pAf"/>
                             <constraint firstItem="KlY-3n-bS4" firstAttribute="width" secondItem="OaZ-Gb-XWx" secondAttribute="height" multiplier="291:220" constant="-154.91818181818184" id="bvI-xR-VjQ"/>
                             <constraint firstItem="KlY-3n-bS4" firstAttribute="top" secondItem="OaZ-Gb-XWx" secondAttribute="bottom" constant="8" id="eBr-iA-y5k"/>
                             <constraint firstItem="MBG-GV-WmK" firstAttribute="bottom" secondItem="K2g-uQ-FkZ" secondAttribute="bottom" constant="20" id="exJ-f2-CRU"/>
+                            <constraint firstItem="HHg-Sn-d7k" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="OaZ-Gb-XWx" secondAttribute="leading" id="f83-K4-wwK"/>
                             <constraint firstItem="KlY-3n-bS4" firstAttribute="leading" secondItem="K2g-uQ-FkZ" secondAttribute="leading" id="hZv-IF-4GQ"/>
                             <constraint firstItem="KlY-3n-bS4" firstAttribute="height" secondItem="K2g-uQ-FkZ" secondAttribute="height" id="lDr-R3-vpO"/>
                             <constraint firstItem="KlY-3n-bS4" firstAttribute="trailing" secondItem="OaZ-Gb-XWx" secondAttribute="trailing" id="nSb-78-lCc"/>
+                            <constraint firstItem="HHg-Sn-d7k" firstAttribute="centerX" secondItem="QRr-cW-byp" secondAttribute="centerX" id="okQ-IJ-mLI"/>
                             <constraint firstItem="OaZ-Gb-XWx" firstAttribute="centerX" secondItem="QRr-cW-byp" secondAttribute="centerX" id="pUD-o7-HYx"/>
                             <constraint firstItem="JLN-TH-FVx" firstAttribute="centerX" secondItem="QRr-cW-byp" secondAttribute="centerX" id="sgP-ge-cMJ"/>
                         </constraints>
@@ -328,6 +343,7 @@
                         <outlet property="createAccountButton" destination="KlY-3n-bS4" id="Yze-tX-NFg"/>
                         <outlet property="emailTextField" destination="oOn-ht-QN4" id="M4c-Zp-eDI"/>
                         <outlet property="firstNameTextField" destination="ZLa-i1-yYb" id="dsW-NP-fCB"/>
+                        <outlet property="infoLabel" destination="HHg-Sn-d7k" id="63Y-VK-l3S"/>
                         <outlet property="lastNameTextField" destination="Urt-H5-9IN" id="m9X-xg-mVx"/>
                         <outlet property="passwordTextField" destination="tbS-zb-ujO" id="9Kn-Dc-9ZL"/>
                         <outlet property="phoneTextField" destination="whz-8g-EKK" id="wWr-Kn-FQH"/>
