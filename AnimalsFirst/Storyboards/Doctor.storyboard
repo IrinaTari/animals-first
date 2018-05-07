@@ -13,7 +13,7 @@
         <!--Doctor View Controller-->
         <scene sceneID="W50-fC-6qv">
             <objects>
-                <viewController id="ZI0-k5-lDp" customClass="DoctorViewController" customModule="AnimalsFirst" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Doctor" id="ZI0-k5-lDp" customClass="DoctorViewController" customModule="AnimalsFirst" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="e0p-HM-cTG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

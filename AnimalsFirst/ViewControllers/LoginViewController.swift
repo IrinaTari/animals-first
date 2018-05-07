@@ -28,9 +28,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
-        if (FBSDKAccessToken.current() != nil) {
-            // User is logged in, do work such as go to next view controller.
-        }
+
         // setup FB button
         fbbutton.frame = FBPlaceholderButton.frame
         FBPlaceholderButton.isHidden = true
@@ -40,6 +38,29 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 
         // read fb permissions
         fbbutton.readPermissions = ["public_profile", "email"]
+
+        // if user is logged in with email
+        if Auth.auth().currentUser?.uid != nil {
+            // go to client screen
+            let sb = UIStoryboard(name: "Client", bundle: nil)
+            let vc = sb.instantiateViewController(withIdentifier: "Client")
+            self.present(vc, animated: true, completion: nil)
+        } else {
+            // if user is logged in with facebook
+            if (FBSDKAccessToken.current() != nil) {
+                // go to client screen
+                let sb = UIStoryboard(name: "Client", bundle: nil)
+                let vc = sb.instantiateViewController(withIdentifier: "Client")
+                self.present(vc, animated: true, completion: nil)
+            } else {
+                let firebaseAuth = Auth.auth()
+                do {
+                    try firebaseAuth.signOut()
+                } catch let signOutError as NSError {
+                    print ("Error signing out: %@", signOutError)
+                }
+            }
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -86,7 +107,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         } catch let signOutError as NSError {
             print ("Error signing out: %@", signOutError)
         }
-
     }
 
     func adjustViewFontsAndSubviews() {

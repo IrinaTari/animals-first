@@ -14,7 +14,7 @@
         <!--Inregistrare-->
         <scene sceneID="NPX-hN-3Tl">
             <objects>
-                <viewController id="eMp-tZ-Taa" customClass="RegisterViewController" customModule="AnimalsFirst" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Register" id="eMp-tZ-Taa" customClass="RegisterViewController" customModule="AnimalsFirst" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8kH-tz-MvD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -14,7 +14,7 @@
         <!--Logare-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="AnimalsFirst" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Login" id="BYZ-38-t0r" customClass="LoginViewController" customModule="AnimalsFirst" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -173,9 +173,6 @@
                         <outlet property="passwordTextField" destination="qM7-S4-9no" id="jrm-Yw-S0m"/>
                         <outlet property="registerButton" destination="wgb-Fn-qvF" id="14v-Yo-wPG"/>
                         <outlet property="usernameTextField" destination="IGE-wB-v2B" id="xhU-iq-aYH"/>
-                        <segue destination="LIp-Pw-jUa" kind="presentation" identifier="Doctor" id="ekf-1i-NKn"/>
-                        <segue destination="zch-0w-gGS" kind="presentation" identifier="Client" id="H6a-hN-z3x"/>
-                        <segue destination="CFQ-21-g0N" kind="presentation" identifier="Admin" id="hgD-n2-ktg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -188,7 +185,7 @@
                 <viewControllerPlaceholder storyboardName="Client" id="zch-0w-gGS" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hUQ-Lr-KNU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2069" y="-891"/>
+            <point key="canvasLocation" x="2069" y="-645"/>
         </scene>
         <!--Admin-->
         <scene sceneID="OJp-wE-tHN">
@@ -196,7 +193,7 @@
                 <viewControllerPlaceholder storyboardName="Admin" id="CFQ-21-g0N" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RgW-bk-yCq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2086" y="-791"/>
+            <point key="canvasLocation" x="2066" y="-565"/>
         </scene>
         <!--Register-->
         <scene sceneID="WZ0-KD-fAO">
@@ -212,7 +209,7 @@
                 <viewControllerPlaceholder storyboardName="Doctor" id="LIp-Pw-jUa" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Dn-PH-2Ae" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2032" y="-1028"/>
+            <point key="canvasLocation" x="2074" y="-719"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="zEN-K6-BFr">

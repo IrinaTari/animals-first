@@ -13,7 +13,7 @@
         <!--Client View Controller-->
         <scene sceneID="am4-ha-85P">
             <objects>
-                <viewController id="nwq-EJ-dKD" customClass="ClientViewController" customModule="AnimalsFirst" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Client" id="nwq-EJ-dKD" customClass="ClientViewController" customModule="AnimalsFirst" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="26s-5Z-xvz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -29,7 +29,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="iFI-rX-dnt"/>
                     </view>
-                    <navigationItem key="navigationItem" id="VM4-Yu-YhM"/>
+                    <navigationItem key="navigationItem" id="VM4-Yu-YhM">
+                        <barButtonItem key="leftBarButtonItem" title="Deconectare" id="1lT-q7-JmX">
+                            <connections>
+                                <action selector="handleLogout:" destination="nwq-EJ-dKD" id="tz1-NE-VBw"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RSR-J8-O3S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

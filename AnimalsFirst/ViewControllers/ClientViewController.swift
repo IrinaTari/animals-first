@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import FirebaseAuth
 
 class ClientViewController: UIViewController {
 
@@ -21,5 +22,16 @@ class ClientViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
+    // buttons action
+    @IBAction func handleLogout(_ sender: Any) {
+        let firebaseAuth = Auth.auth()
+        do {
+            try firebaseAuth.signOut()
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "Login")
+        self.present(vc, animated: true, completion: nil)
+    }
 }

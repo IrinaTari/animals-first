@@ -13,7 +13,7 @@
         <!--Admin View Controller-->
         <scene sceneID="ZKH-pt-CHo">
             <objects>
-                <viewController id="x3g-Jh-6al" customClass="AdminViewController" customModule="AnimalsFirst" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Admin" id="x3g-Jh-6al" customClass="AdminViewController" customModule="AnimalsFirst" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RlF-XQ-Yh3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
