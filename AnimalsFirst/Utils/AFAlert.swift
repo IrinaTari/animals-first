@@ -58,6 +58,22 @@ typealias AlertDismissCompletionBlock = ((Int) -> Void)
         return alertController
     }
 
+    @discardableResult static func showBasicAlertView(_ controller: UIViewController,
+                                                 title: String?,
+                                                 message: String?,
+                                                 cancelButtonTitle: String?,
+                                                 tapBlock: ()) -> UIAlertController {
+        let alertController = UIAlertController.init(title: title, message: message, preferredStyle: .alert)
+        if cancelButtonTitle != nil {
+            alertController.addAction(UIAlertAction.init(title: cancelButtonTitle, style: .cancel, handler: { _ in
+            }))
+        }
+        currentAlertController = alertController
+        controller.present(alertController, animated: true, completion: nil)
+        return alertController
+    }
+
+
     static func showCustomAlertView(_ controller: UIViewController, title: String?, message: String?, cancelButtonTitle: String?, completionBlock: AlertDismissCompletionBlock?) {
         AFAlert.showAlertView(controller,
                               title: title,
@@ -66,26 +82,23 @@ typealias AlertDismissCompletionBlock = ((Int) -> Void)
                               tapBlock: completionBlock)
     }
 
-    static func showEmptyTextFieldsAlert(_ controller: UIViewController, completionBlock: AlertDismissCompletionBlock?) {
-        AFAlert.showAlertView(controller,
+    static func showEmptyTextFieldsAlert(_ controller: UIViewController, completionBlock: ()) {
+        AFAlert.showBasicAlertView(controller,
                               title: "Nu s-a putut crea contul",
                               message: "Toate campurile trebuie completate cu date corecte.",
                               cancelButtonTitle: "OK",
                               tapBlock: completionBlock)
     }
 
-    static func createAccFailAlert(_ controller: UIViewController, completionBlock: AlertDismissCompletionBlock?) {
-        AFAlert.showAlertView(controller, title: <#T##String?#>, message: <#T##String?#>, cancelButtonTitle: <#T##String?#>, tapBlock: <#T##AlertDismissCompletionBlock?##AlertDismissCompletionBlock?##(Int) -> Void#>)
-        let alert = UIAlertController(title: "Nu s-a putut crea contul", message: error.localizedDescription, preferredStyle: .alert)
-        let cancel = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-        alert.addAction(cancel)
-        self.present(alert, animated: true, completion: nil)
+    static func showAccFailAlert(_ controller: UIViewController, completionBlock: (), error: Error) {
+        AFAlert.showBasicAlertView(controller, title: "Nu s-a putut crea contul", message: error.localizedDescription, cancelButtonTitle: "OK", tapBlock: completionBlock)
     }
 
-    static func createAccSuccessAlert(_ controller: UIViewController, completionBlock: AlertDismissCompletionBlock?) {
-        let alert = UIAlertController(title: "Cont creat cu success!", message: nil, preferredStyle: .alert)
-        let cancel = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-        alert.addAction(cancel)
-        self.present(alert, animated: true, completion: nil)
+    static func showAccSuccessAlert(_ controller: UIViewController, completionBlock: ()) {
+        AFAlert.showBasicAlertView(controller, title: "Cont creat cu success!", message: nil, cancelButtonTitle: "OK", tapBlock: completionBlock)
+    }
+
+    static func showInequalPasswordAlert(_ controller: UIViewController, completionBlock: ()) {
+        AFAlert.showBasicAlertView(controller, title: "Nu s-a putut crea contul", message: "Parolele nu coincid.", cancelButtonTitle: "OK", tapBlock: completionBlock)
     }
 }

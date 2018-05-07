@@ -23,6 +23,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var repeatPasswordTextField: UITextField!
     @IBOutlet weak var infoLabel: UILabel!
 
+    // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -37,15 +38,22 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
 
+    // MARK: button action
     @IBAction func createAccountButtonAction(_ sender: Any) {
 
         guard let lastName = lastNameTextField.text, let firstName = firstNameTextField.text, let email = emailTextField.text, let phone = phoneTextField.text, let password = passwordTextField.text, let repeatPassword = repeatPasswordTextField.text else {
-            showEmptyTextFieldsAlert()
+            AFAlert.showEmptyTextFieldsAlert(self, completionBlock: {
+                self.passwordTextField.text = ""
+                self.repeatPasswordTextField.text = ""
+            }())
             return
         }
 
         if lastName.isEmpty || firstName.isEmpty || email.isEmpty || phone.isEmpty || password.isEmpty {
-            showEmptyTextFieldsAlert()
+            AFAlert.showEmptyTextFieldsAlert(self, completionBlock: {
+                self.passwordTextField.text = ""
+                self.repeatPasswordTextField.text = ""
+            }())
             return
         }
 
@@ -53,7 +61,10 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
             Auth.auth().createUser(withEmail: emailTextField.text!, password: passwordTextField.text!, completion: {(user: User?, error) in
             if error != nil {
                 print(error!)
-                self.createAccFailAlert(error: error!)
+                AFAlert.showAccFailAlert(self, completionBlock: {
+                    self.passwordTextField.text = ""
+                    self.repeatPasswordTextField.text = ""
+                }(), error: error!)
                 return
             }
             // success
@@ -66,16 +77,18 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
             clientUserRef.updateChildValues(values, withCompletionBlock: {(err, ref) in
                 if err != nil {
                     print(err!)
-                    self.createAccFailAlert(error: err!)
+                    AFAlert.showAccFailAlert(self, completionBlock: (), error: error!)
                     return
                 }
-                self.createAccSuccessAlert()
-                self.emptyAllTextFields()
-                _ = self.navigationController?.popViewController(animated: true)
+                AFAlert.showAccSuccessAlert(self, completionBlock: {
+                    self.emptyAllTextFields()
+                    _ = self.navigationController?.popViewController(animated: true)
+                }())
                 })
             })
         } else {
             // password != repeat password alert
+            AFAlert.showInequalPasswordAlert(self, completionBlock: ())
             print("inequal passwords")
         }
     }
@@ -83,6 +96,18 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     @objc func backAction(sender: UIBarButtonItem) {
         _ = navigationController?.popViewController(animated: true)
     }
+
+
+
+    // MARK: textField Delegate method
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        return (textField.text?.count)! < 10
+    }
+
+}
+
+// MARK: extension
+extension RegisterViewController {
 
     func adjustViewFontsAndSubviews() {
         // make round corners for buttons
@@ -98,27 +123,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         infoLabel.adjustTextUsingDynamicType()
     }
 
-    func showEmptyTextFieldsAlert() {
-        let alert = UIAlertController(title: "Nu s-a putut crea contul", message: "Toate campurile trebuie completate cu date corecte.", preferredStyle: .alert)
-        let cancel = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-        alert.addAction(cancel)
-        self.present(alert, animated: true, completion: nil)
-    }
-
-    func createAccFailAlert(error: Error) {
-        let alert = UIAlertController(title: "Nu s-a putut crea contul", message: error.localizedDescription, preferredStyle: .alert)
-        let cancel = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-        alert.addAction(cancel)
-        self.present(alert, animated: true, completion: nil)
-    }
-
-    func createAccSuccessAlert() {
-        let alert = UIAlertController(title: "Cont creat cu success!", message: nil, preferredStyle: .alert)
-        let cancel = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-        alert.addAction(cancel)
-        self.present(alert, animated: true, completion: nil)
-    }
-
     func emptyAllTextFields() {
         firstNameTextField.text = ""
         lastNameTextField.text = ""
@@ -127,11 +131,5 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         passwordTextField.text = ""
         repeatPasswordTextField.text = ""
     }
-
-    // MARK: textField Delegate method
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        return (textField.text?.count)! < 10
-    }
-
 }
 
