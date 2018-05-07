@@ -27,7 +27,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        cancelButton.addTarget(self, action: #selector(backAction(sender:)), for: .touchUpInside)
         phoneTextField.keyboardType = .numberPad
         phoneTextField.delegate = self
         adjustViewFontsAndSubviews()
@@ -39,21 +38,27 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     }
 
     // MARK: button action
+
+    @IBAction func cancelButton(_ sender: Any) {
+        emptyAllTextFields()
+    }
+
     @IBAction func createAccountButtonAction(_ sender: Any) {
 
         guard let lastName = lastNameTextField.text, let firstName = firstNameTextField.text, let email = emailTextField.text, let phone = phoneTextField.text, let password = passwordTextField.text, let repeatPassword = repeatPasswordTextField.text else {
-            AFAlert.showEmptyTextFieldsAlert(self, completionBlock: {
+            AFAlert.showEmptyTextFieldsAlert(self, completionBlock: {_ in 
                 self.passwordTextField.text = ""
                 self.repeatPasswordTextField.text = ""
-            }())
+            })
             return
         }
 
         if lastName.isEmpty || firstName.isEmpty || email.isEmpty || phone.isEmpty || password.isEmpty {
-            AFAlert.showEmptyTextFieldsAlert(self, completionBlock: {
+            AFAlert.showEmptyTextFieldsAlert(self, completionBlock: {_ in
                 self.passwordTextField.text = ""
                 self.repeatPasswordTextField.text = ""
-            }())
+
+            })
             return
         }
 
@@ -61,10 +66,9 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
             Auth.auth().createUser(withEmail: emailTextField.text!, password: passwordTextField.text!, completion: {(user: User?, error) in
             if error != nil {
                 print(error!)
-                AFAlert.showAccFailAlert(self, completionBlock: {
-                    self.passwordTextField.text = ""
-                    self.repeatPasswordTextField.text = ""
-                }(), error: error!)
+                AFAlert.showAccFailAlert(self, error: error!, completionBlock: {_ in
+                    self.emptyAllTextFields()
+                })
                 return
             }
             // success
@@ -73,31 +77,30 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
             print(fullName)
             let values = ["name" : fullName, "email" : email, "phone" : phone]
             let usersRef = ref.child("users")
-            let clientUserRef = usersRef.child("client type users")
+            let clientUserRef = usersRef.child("clients")
             clientUserRef.updateChildValues(values, withCompletionBlock: {(err, ref) in
                 if err != nil {
                     print(err!)
-                    AFAlert.showAccFailAlert(self, completionBlock: (), error: error!)
+                    AFAlert.showAccFailAlert(self, error: error!, completionBlock: {_ in
+                        self.emptyAllTextFields()
+                    })
                     return
                 }
-                AFAlert.showAccSuccessAlert(self, completionBlock: {
+                AFAlert.showAccSuccessAlert(self, completionBlock: {_ in
                     self.emptyAllTextFields()
                     _ = self.navigationController?.popViewController(animated: true)
-                }())
+                })
                 })
             })
         } else {
             // password != repeat password alert
-            AFAlert.showInequalPasswordAlert(self, completionBlock: ())
+            AFAlert.showInequalPasswordAlert(self, completionBlock: {_ in
+                self.passwordTextField.text = ""
+                self.repeatPasswordTextField.text = ""
+            })
             print("inequal passwords")
         }
     }
-
-    @objc func backAction(sender: UIBarButtonItem) {
-        _ = navigationController?.popViewController(animated: true)
-    }
-
-
 
     // MARK: textField Delegate method
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

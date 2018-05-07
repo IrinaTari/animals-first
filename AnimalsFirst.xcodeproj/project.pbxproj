@@ -12,6 +12,7 @@
 		667A1BF42090733D0058985E /* Admin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 667A1BF32090733D0058985E /* Admin.storyboard */; };
 		667A1BF6209073660058985E /* AdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667A1BF5209073660058985E /* AdminViewController.swift */; };
 		667A1BF92090749C0058985E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667A1BF82090749C0058985E /* LoginViewController.swift */; };
+		66845A3520A06E0F00DF75A7 /* Register.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66845A3420A06E0F00DF75A7 /* Register.storyboard */; };
 		66989E53209C860F007B2C12 /* AFAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66989E52209C860F007B2C12 /* AFAlert.swift */; };
 		66A8FF1B208DF54D007BCD48 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A8FF1A208DF54D007BCD48 /* AppDelegate.swift */; };
 		66A8FF20208DF54D007BCD48 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66A8FF1E208DF54D007BCD48 /* Main.storyboard */; };
@@ -49,6 +50,7 @@
 		667A1BF32090733D0058985E /* Admin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Admin.storyboard; sourceTree = "<group>"; };
 		667A1BF5209073660058985E /* AdminViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminViewController.swift; sourceTree = "<group>"; };
 		667A1BF82090749C0058985E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		66845A3420A06E0F00DF75A7 /* Register.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Register.storyboard; sourceTree = "<group>"; };
 		66989E52209C860F007B2C12 /* AFAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AFAlert.swift; sourceTree = "<group>"; };
 		66A8FF17208DF54D007BCD48 /* AnimalsFirst.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnimalsFirst.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66A8FF1A208DF54D007BCD48 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				66A8FF43208DF6A4007BCD48 /* Doctor.storyboard */,
 				667A1BF32090733D0058985E /* Admin.storyboard */,
 				66A8FF1E208DF54D007BCD48 /* Main.storyboard */,
+				66845A3420A06E0F00DF75A7 /* Register.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -299,6 +302,7 @@
 				667A1BF42090733D0058985E /* Admin.storyboard in Resources */,
 				66A8FF42208DF696007BCD48 /* Client.storyboard in Resources */,
 				66A8FF4C208DFC14007BCD48 /* download.png in Resources */,
+				66845A3520A06E0F00DF75A7 /* Register.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

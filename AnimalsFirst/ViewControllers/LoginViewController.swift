@@ -31,10 +31,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         if (FBSDKAccessToken.current() != nil) {
             // User is logged in, do work such as go to next view controller.
         }
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(false)
         // setup FB button
         fbbutton.frame = FBPlaceholderButton.frame
         FBPlaceholderButton.isHidden = true
@@ -46,9 +42,20 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         fbbutton.readPermissions = ["public_profile", "email"]
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(false)
+
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+
+    // MARK: buttons action
+
+    @IBAction func loginAction(_ sender: Any) {
+
     }
 
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
@@ -66,7 +73,9 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             }
             // User is signed in    
             print("user is signed in")
-            self.present(ClientViewController(), animated: true, completion: nil)
+            // go to client screen
+            let vc : AnyObject! = self.storyboard!.instantiateViewController(withIdentifier: "Client")
+            self.show(vc as! UIViewController, sender: vc)
         }
     }
 
