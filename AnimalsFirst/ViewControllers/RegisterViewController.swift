@@ -88,7 +88,10 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                 }
                 AFAlert.showAccSuccessAlert(self, completionBlock: {_ in
                     self.emptyAllTextFields()
-                    _ = self.navigationController?.popViewController(animated: true)
+                    let sb = UIStoryboard(name: "Main", bundle: nil)
+                    let vc = sb.instantiateViewController(withIdentifier: "Login")
+                    self.present(vc, animated: true, completion: nil)
+                    self.firebaseSignOut()
                 })
                 })
             })
@@ -133,6 +136,15 @@ extension RegisterViewController {
         phoneTextField.text = ""
         passwordTextField.text = ""
         repeatPasswordTextField.text = ""
+    }
+
+    func firebaseSignOut() {
+        let firebaseAuth = Auth.auth()
+        do {
+            try firebaseAuth.signOut()
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
     }
 }
 

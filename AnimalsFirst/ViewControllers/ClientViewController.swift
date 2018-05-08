@@ -11,10 +11,14 @@ import UIKit
 import FirebaseAuth
 
 class ClientViewController: UIViewController {
+    @IBOutlet weak var clientLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+        let clientName = Auth.auth().currentUser?.email
+        clientLabel.text = clientName
+
     }
 
     override func didReceiveMemoryWarning() {

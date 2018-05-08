@@ -40,27 +40,32 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         fbbutton.readPermissions = ["public_profile", "email"]
 
         // if user is logged in with email
-        if Auth.auth().currentUser?.uid != nil {
+        if Auth.auth().currentUser != nil {
             // go to client screen
             let sb = UIStoryboard(name: "Client", bundle: nil)
             let vc = sb.instantiateViewController(withIdentifier: "Client")
             self.present(vc, animated: true, completion: nil)
         } else {
-            // if user is logged in with facebook
-            if (FBSDKAccessToken.current() != nil) {
-                // go to client screen
-                let sb = UIStoryboard(name: "Client", bundle: nil)
-                let vc = sb.instantiateViewController(withIdentifier: "Client")
-                self.present(vc, animated: true, completion: nil)
-            } else {
-                let firebaseAuth = Auth.auth()
-                do {
-                    try firebaseAuth.signOut()
-                } catch let signOutError as NSError {
-                    print ("Error signing out: %@", signOutError)
-                }
+            let firebaseAuth = Auth.auth()
+            do {
+                try firebaseAuth.signOut()
+            } catch let signOutError as NSError {
+                print ("Error signing out: %@", signOutError)
             }
         }
+
+
+
+        // if user is logged in with facebook
+//        if (FBSDKAccessToken.current() != nil) {
+//            // go to client screen
+//            let sb = UIStoryboard(name: "Client", bundle: nil)
+//            let vc = sb.instantiateViewController(withIdentifier: "Client")
+//            self.present(vc, animated: true, completion: nil)
+//        } else {
+//
+//        }
+
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -77,6 +82,25 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 
     @IBAction func loginAction(_ sender: Any) {
 
+        guard let email = usernameTextField.text, let password = passwordTextField.text else {
+            AFAlert.showEmptyTextFieldsAlert(self, completionBlock: {_ in
+                self.passwordTextField.text = ""
+            })
+            return
+        }
+
+        Auth.auth().signIn(withEmail: email, password: password, completion: { (user, error) in
+            if error != nil {
+                print(error!.localizedDescription)
+                AFAlert.showAccFailAlert(self, error: error!, completionBlock: {_ in
+                    self.passwordTextField.text = ""
+                })
+                return
+            }
+            let sb = UIStoryboard(name: "Client", bundle: nil)
+            let vc = sb.instantiateViewController(withIdentifier: "Client")
+            self.present(vc, animated: true, completion: nil)
+        })
     }
 
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
@@ -101,6 +125,10 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     }
 
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
+        firebaseSignOut()
+    }
+
+    func firebaseSignOut() {
         let firebaseAuth = Auth.auth()
         do {
             try firebaseAuth.signOut()
