@@ -54,17 +54,13 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             }
         }
 
-
-
         // if user is logged in with facebook
-//        if (FBSDKAccessToken.current() != nil) {
-//            // go to client screen
-//            let sb = UIStoryboard(name: "Client", bundle: nil)
-//            let vc = sb.instantiateViewController(withIdentifier: "Client")
-//            self.present(vc, animated: true, completion: nil)
-//        } else {
-//
-//        }
+        if (FBSDKAccessToken.current() != nil) {
+            // go to client screen
+            let sb = UIStoryboard(name: "Client", bundle: nil)
+            let vc = sb.instantiateViewController(withIdentifier: "Client")
+            self.present(vc, animated: true, completion: nil)
+        }
 
     }
 
@@ -118,9 +114,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             }
             // User is signed in    
             print("user is signed in")
-            // go to client screen
-            let vc : AnyObject! = self.storyboard!.instantiateViewController(withIdentifier: "Client")
-            self.show(vc as! UIViewController, sender: vc)
         }
     }
 
