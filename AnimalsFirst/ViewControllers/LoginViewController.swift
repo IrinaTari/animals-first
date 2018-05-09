@@ -32,6 +32,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         // setup FB button
         fbbutton.frame = FBPlaceholderButton.frame
         FBPlaceholderButton.isHidden = true
+        fbbutton.delegate = self
         self.view.addSubview(fbbutton)
 
         adjustViewFontsAndSubviews()
@@ -39,29 +40,13 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         // read fb permissions
         fbbutton.readPermissions = ["public_profile", "email"]
 
-        // if user is logged in with email
+        // if user is logged in with email/fb
         if Auth.auth().currentUser != nil {
             // go to client screen
-            let sb = UIStoryboard(name: "Client", bundle: nil)
-            let vc = sb.instantiateViewController(withIdentifier: "Client")
-            self.present(vc, animated: true, completion: nil)
+            goToClientScreen()
         } else {
-            let firebaseAuth = Auth.auth()
-            do {
-                try firebaseAuth.signOut()
-            } catch let signOutError as NSError {
-                print ("Error signing out: %@", signOutError)
-            }
+            firebaseSignOut()
         }
-
-        // if user is logged in with facebook
-        if (FBSDKAccessToken.current() != nil) {
-            // go to client screen
-            let sb = UIStoryboard(name: "Client", bundle: nil)
-            let vc = sb.instantiateViewController(withIdentifier: "Client")
-            self.present(vc, animated: true, completion: nil)
-        }
-
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -93,9 +78,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                 })
                 return
             }
-            let sb = UIStoryboard(name: "Client", bundle: nil)
-            let vc = sb.instantiateViewController(withIdentifier: "Client")
-            self.present(vc, animated: true, completion: nil)
+            self.goToClientScreen()
         })
     }
 
@@ -114,6 +97,10 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             }
             // User is signed in    
             print("user is signed in")
+            if (FBSDKAccessToken.current() != nil) {
+                // go to client screen
+                self.goToClientScreen()
+            }
         }
     }
 
@@ -130,9 +117,15 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         }
     }
 
+    func goToClientScreen() {
+        let sb = UIStoryboard(name: "Client", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "Client")
+        self.present(vc, animated: true, completion: nil)
+    }
+
     func adjustViewFontsAndSubviews() {
         // make round corners for buttons
-            loginButton.layer.cornerRadius = 5.0
+        loginButton.layer.cornerRadius = 5.0
         registerButton.layer.cornerRadius = 5.0
         //adjust text
         loginButton.titleLabel?.adjustTextUsingDynamicType()
