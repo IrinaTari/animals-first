@@ -32,12 +32,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         adjustViewFontsAndSubviews()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    // MARK: button action
+    // MARK: buttons action
 
     @IBAction func cancelButton(_ sender: Any) {
         emptyAllTextFields()
@@ -88,9 +83,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                 }
                 AFAlert.showAccSuccessAlert(self, completionBlock: {_ in
                     self.emptyAllTextFields()
-                    let sb = UIStoryboard(name: "Main", bundle: nil)
-                    let vc = sb.instantiateViewController(withIdentifier: "Login")
-                    self.present(vc, animated: true, completion: nil)
+                    self.goToLoginScreen()
                     self.firebaseSignOut()
                 })
                 })
@@ -145,6 +138,12 @@ extension RegisterViewController {
         } catch let signOutError as NSError {
             print ("Error signing out: %@", signOutError)
         }
+    }
+
+    func goToLoginScreen() {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "Login")
+        self.present(vc, animated: true, completion: nil)
     }
 }
 
