@@ -24,6 +24,10 @@ class ClientViewController: UIViewController {
 
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        fetchUserProfileIfIsFBConnected()
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -47,9 +51,6 @@ class ClientViewController: UIViewController {
         if FBSDKAccessToken.current() == nil {
             return
         }
-        let token = FBSDKAccessToken.current().tokenString
-        UserDefaults.standard.setValue(token, forKey: "fb_token")
-        UserDefaults.standard.synchronize()
 
         let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"id, email, name, phone"], tokenString: UserDefaults.standard.value(forKey: "fb_token") as! String, version: nil, httpMethod: nil)
 
@@ -65,15 +66,11 @@ class ClientViewController: UIViewController {
 
                 print("Print entire fetched result: \(String(describing: result))")
 
-                let id : String = data["id"] as! String
-                print("User ID is: \(id)")
-
-                guard let userName = data["name"] as? String, let email = data["email"] as? String, let phone = data["phone"] as? String else {
+                guard let userName = data["name"] as? String, let email = data["email"] as? String, let phone = data["phone"] as? String, let id : String = data["id"] as? String else {
                     return
                 }
 
-                self.clientLabel.text = userName
-
+                  print("User ID is: \(id)")
                 // save in database
                 // add condition of user was saved already not to do this
                 let ref = Database.database().reference(fromURL: "https://animalsfirst-12b83.firebaseio.com/")
@@ -84,9 +81,6 @@ class ClientViewController: UIViewController {
                 clientUserRef.updateChildValues(values, withCompletionBlock: {(err, ref) in
                     if err != nil {
                         print(err!)
-                        AFAlert.showAccFailAlert(self, error: error!, completionBlock: {_ in
-                            return
-                        })
                         return
                     }
                     // client saved

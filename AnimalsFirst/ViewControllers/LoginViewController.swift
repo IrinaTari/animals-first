@@ -99,6 +99,9 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             print("user is signed in")
             if (FBSDKAccessToken.current() != nil) {
                 // go to client screen
+                let token = FBSDKAccessToken.current().tokenString
+                UserDefaults.standard.setValue(token, forKey: "fb_token")
+                UserDefaults.standard.synchronize()
                 self.goToScreen(withStoryboardName: "Client", andVCIdentifier: "Client")
             }
         }
