@@ -59,33 +59,38 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
 
         if password == repeatPassword {
             Auth.auth().createUser(withEmail: emailTextField.text!, password: passwordTextField.text!, completion: {(user: User?, error) in
-            if error != nil {
-                print(error!)
-                AFAlert.showAccFailAlert(self, error: error!, completionBlock: {_ in
-                    self.emptyAllTextFields()
-                })
-                return
-            }
-            // success
-            let ref = Database.database().reference(fromURL: "https://animalsfirst-12b83.firebaseio.com/")
-            let fullName = firstName.appending(" ").appending(lastName)
-            print(fullName)
-            let values = ["name" : fullName, "email" : email, "phone" : phone]
-            let usersRef = ref.child("users")
-            let clientUserRef = usersRef.child("clients")
-            clientUserRef.updateChildValues(values, withCompletionBlock: {(err, ref) in
-                if err != nil {
-                    print(err!)
+                if error != nil {
+                    print(error!)
                     AFAlert.showAccFailAlert(self, error: error!, completionBlock: {_ in
                         self.emptyAllTextFields()
                     })
                     return
                 }
-                AFAlert.showAccSuccessAlert(self, completionBlock: {_ in
-                    self.emptyAllTextFields()
-                    self.goToScreen(withStoryboardName: "Main", andVCIdentifier: "Login")
-                    self.firebaseSignOut()
-                })
+
+                guard let uid = user?.uid else {
+                    return
+                }
+
+                // success
+                let ref = Database.database().reference(fromURL: "https://animalsfirst-12b83.firebaseio.com/")
+                let fullName = firstName.appending(" ").appending(lastName)
+                print(fullName)
+                let values = ["name" : fullName, "email" : email, "phone" : phone]
+                let usersRef = ref.child("users")
+                let clientUserRef = usersRef.child("clients").child(uid)
+                clientUserRef.updateChildValues(values, withCompletionBlock: {(err, ref) in
+                    if err != nil {
+                        print(err!)
+                        AFAlert.showAccFailAlert(self, error: error!, completionBlock: {_ in
+                            self.emptyAllTextFields()
+                        })
+                        return
+                    }
+                    AFAlert.showAccSuccessAlert(self, completionBlock: {_ in
+                        self.emptyAllTextFields()
+                        self.goToScreen(withStoryboardName: "Main", andVCIdentifier: "Login")
+                        self.firebaseSignOut()
+                    })
                 })
             })
         } else {

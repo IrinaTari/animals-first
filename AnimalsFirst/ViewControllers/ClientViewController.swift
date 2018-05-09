@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 import FirebaseAuth
+import FBSDKCoreKit
+import FirebaseDatabase
 
 class ClientViewController: UIViewController {
     @IBOutlet weak var clientLabel: UILabel!
@@ -18,6 +20,7 @@ class ClientViewController: UIViewController {
 
         let clientName = Auth.auth().currentUser?.email
         clientLabel.text = clientName
+        fetchUserProfileIfIsFBConnected()
 
     }
 
@@ -37,5 +40,59 @@ class ClientViewController: UIViewController {
         let sb = UIStoryboard(name: "Main", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "Login")
         self.present(vc, animated: true, completion: nil)
+    }
+
+    func fetchUserProfileIfIsFBConnected()
+    {
+        if FBSDKAccessToken.current() == nil {
+            return
+        }
+        let token = FBSDKAccessToken.current().tokenString
+        UserDefaults.standard.setValue(token, forKey: "fb_token")
+        UserDefaults.standard.synchronize()
+
+        let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"id, email, name, phone"], tokenString: UserDefaults.standard.value(forKey: "fb_token") as! String, version: nil, httpMethod: nil)
+
+        graphRequest.start(completionHandler: { (connection, result, error) -> Void in
+
+            if ((error) != nil)
+            {
+                print("Error took place: \(String(describing: error))")
+            }
+            else
+            {
+                let data:[String:AnyObject] = result as! [String : AnyObject]
+
+                print("Print entire fetched result: \(String(describing: result))")
+
+                let id : String = data["id"] as! String
+                print("User ID is: \(id)")
+
+                guard let userName = data["name"] as? String, let email = data["email"] as? String, let phone = data["phone"] as? String else {
+                    return
+                }
+
+                self.clientLabel.text = userName
+
+                // save in database
+                // add condition of user was saved already not to do this
+                let ref = Database.database().reference(fromURL: "https://animalsfirst-12b83.firebaseio.com/")
+
+                let values = ["name" : userName, "email" : email, "phone" : phone]
+                let usersRef = ref.child("users")
+                let clientUserRef = usersRef.child("clients").child(id)
+                clientUserRef.updateChildValues(values, withCompletionBlock: {(err, ref) in
+                    if err != nil {
+                        print(err!)
+                        AFAlert.showAccFailAlert(self, error: error!, completionBlock: {_ in
+                            return
+                        })
+                        return
+                    }
+                    // client saved
+                    print("client saved")
+                })
+            }
+        })
     }
 }

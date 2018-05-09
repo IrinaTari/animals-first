@@ -138,6 +138,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         super.viewDidLayoutSubviews()
         fbbutton.frame = FBPlaceholderButton.frame
     }
+
 }
 
 extension UILabel {
