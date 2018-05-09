@@ -83,7 +83,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                 }
                 AFAlert.showAccSuccessAlert(self, completionBlock: {_ in
                     self.emptyAllTextFields()
-                    self.goToLoginScreen()
+                    self.goToScreen(withStoryboardName: "Main", andVCIdentifier: "Login")
                     self.firebaseSignOut()
                 })
                 })
@@ -138,12 +138,6 @@ extension RegisterViewController {
         } catch let signOutError as NSError {
             print ("Error signing out: %@", signOutError)
         }
-    }
-
-    func goToLoginScreen() {
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: "Login")
-        self.present(vc, animated: true, completion: nil)
     }
 }
 

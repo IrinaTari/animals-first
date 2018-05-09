@@ -43,7 +43,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         // if user is logged in with email/fb
         if Auth.auth().currentUser != nil {
             // go to client screen
-            goToClientScreen()
+            self.goToScreen(withStoryboardName: "Client", andVCIdentifier: "Client")
         } else {
             firebaseSignOut()
         }
@@ -78,7 +78,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                 })
                 return
             }
-            self.goToClientScreen()
+            self.goToScreen(withStoryboardName: "Client", andVCIdentifier: "Client")
         })
     }
 
@@ -99,7 +99,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             print("user is signed in")
             if (FBSDKAccessToken.current() != nil) {
                 // go to client screen
-                self.goToClientScreen()
+                self.goToScreen(withStoryboardName: "Client", andVCIdentifier: "Client")
             }
         }
     }
@@ -115,12 +115,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         } catch let signOutError as NSError {
             print ("Error signing out: %@", signOutError)
         }
-    }
-
-    func goToClientScreen() {
-        let sb = UIStoryboard(name: "Client", bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: "Client")
-        self.present(vc, animated: true, completion: nil)
     }
 
     func adjustViewFontsAndSubviews() {
@@ -159,5 +153,13 @@ extension UITextField {
         self.font = UIFont.preferredFont(forTextStyle: .body)
         self.adjustsFontForContentSizeCategory = true
         self.adjustsFontSizeToFitWidth = true
+    }
+}
+
+extension UIViewController {
+    func goToScreen(withStoryboardName: String, andVCIdentifier: String) {
+        let sb = UIStoryboard(name: withStoryboardName, bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: andVCIdentifier)
+        self.present(vc, animated: true, completion: nil)
     }
 }
