@@ -21,7 +21,6 @@ class ClientViewController: UIViewController {
         let clientName = Auth.auth().currentUser?.email
         clientLabel.text = clientName
         fetchUserProfileIfIsFBConnected()
-
     }
 
     override func viewDidAppear(_ animated: Bool) {

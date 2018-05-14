@@ -82,7 +82,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         }
         let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
 
-        Auth.auth().signIn(with: credential) { (user, error) in
+        Auth.auth().signInAndRetrieveData(with: credential, completion: { (user, error) in
 
             if let error = error {
                print(error.localizedDescription)
@@ -100,7 +100,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                 }
                 self.present(clientViewController, animated: true, completion: nil)
             }
-        }
+        })
     }
 
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {

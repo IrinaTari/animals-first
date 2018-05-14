@@ -55,7 +55,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         }
 
         if password == repeatPassword {
-            Auth.auth().createUser(withEmail: emailTextField.text!, password: passwordTextField.text!, completion: {(user: User?, error) in
+            Auth.auth().createUser(withEmail: emailTextField.text!, password: passwordTextField.text!, completion: {(dataResult, error) in
                 if error != nil {
                     print(error!)
                     AFAlert.showAccFailAlert(self, error: error!, completionBlock: {_ in
@@ -64,7 +64,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                     return
                 }
 
-                guard let uid = user?.uid else {
+                guard let uid = dataResult?.user.uid else {
                     return
                 }
 
