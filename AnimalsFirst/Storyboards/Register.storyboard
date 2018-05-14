@@ -14,7 +14,7 @@
         <!--Inregistrare-->
         <scene sceneID="NPX-hN-3Tl">
             <objects>
-                <viewController storyboardIdentifier="Register" id="eMp-tZ-Taa" customClass="RegisterViewController" customModule="AnimalsFirst" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RegisterViewController" id="eMp-tZ-Taa" customClass="RegisterViewController" customModule="AnimalsFirst" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8kH-tz-MvD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -27,7 +27,6 @@
                                 </state>
                                 <connections>
                                     <action selector="cancelButton:" destination="eMp-tZ-Taa" eventType="touchUpInside" id="pqc-g3-36g"/>
-                                    <segue destination="qOf-Nw-nRj" kind="presentation" id="9DP-EI-LXc"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ETD-0v-Ppw">
@@ -170,14 +169,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8uO-Qo-2Cr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3024.8000000000002" y="-292.80359820089956"/>
-        </scene>
-        <!--Main-->
-        <scene sceneID="w34-BB-fmw">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Main" id="qOf-Nw-nRj" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5zX-mL-fR5" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3786" y="-122"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ULM-0q-0gz">

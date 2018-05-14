@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		44830BB49F14AC1205FB9FEF /* Pods_AnimalsFirstTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3343187B46EF49087C4A0677 /* Pods_AnimalsFirstTests.framework */; };
+		6615C6BE20A9C66A00141F2D /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6615C6BD20A9C66A00141F2D /* UIViewControllerExtensions.swift */; };
+		6615C6C020A9C67900141F2D /* StoryboardExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6615C6BF20A9C67900141F2D /* StoryboardExtensions.swift */; };
+		6615C6C220A9C8B800141F2D /* UILabel+UITextFieldExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6615C6C120A9C8B800141F2D /* UILabel+UITextFieldExtensions.swift */; };
 		66729AC92099D1E200486B6F /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66729AC82099D1E200486B6F /* RegisterViewController.swift */; };
 		667A1BF42090733D0058985E /* Admin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 667A1BF32090733D0058985E /* Admin.storyboard */; };
 		667A1BF6209073660058985E /* AdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667A1BF5209073660058985E /* AdminViewController.swift */; };
@@ -15,7 +18,7 @@
 		66845A3520A06E0F00DF75A7 /* Register.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66845A3420A06E0F00DF75A7 /* Register.storyboard */; };
 		66989E53209C860F007B2C12 /* AFAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66989E52209C860F007B2C12 /* AFAlert.swift */; };
 		66A8FF1B208DF54D007BCD48 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A8FF1A208DF54D007BCD48 /* AppDelegate.swift */; };
-		66A8FF20208DF54D007BCD48 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66A8FF1E208DF54D007BCD48 /* Main.storyboard */; };
+		66A8FF20208DF54D007BCD48 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66A8FF1E208DF54D007BCD48 /* Login.storyboard */; };
 		66A8FF23208DF54D007BCD48 /* AnimalsFirst.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 66A8FF21208DF54D007BCD48 /* AnimalsFirst.xcdatamodeld */; };
 		66A8FF25208DF54F007BCD48 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66A8FF24208DF54F007BCD48 /* Assets.xcassets */; };
 		66A8FF28208DF54F007BCD48 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66A8FF26208DF54F007BCD48 /* LaunchScreen.storyboard */; };
@@ -46,6 +49,9 @@
 /* Begin PBXFileReference section */
 		3343187B46EF49087C4A0677 /* Pods_AnimalsFirstTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AnimalsFirstTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		39A2FF48D3409067064CCF87 /* Pods-AnimalsFirst.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnimalsFirst.release.xcconfig"; path = "Pods/Target Support Files/Pods-AnimalsFirst/Pods-AnimalsFirst.release.xcconfig"; sourceTree = "<group>"; };
+		6615C6BD20A9C66A00141F2D /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
+		6615C6BF20A9C67900141F2D /* StoryboardExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardExtensions.swift; sourceTree = "<group>"; };
+		6615C6C120A9C8B800141F2D /* UILabel+UITextFieldExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+UITextFieldExtensions.swift"; sourceTree = "<group>"; };
 		66729AC82099D1E200486B6F /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		667A1BF32090733D0058985E /* Admin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Admin.storyboard; sourceTree = "<group>"; };
 		667A1BF5209073660058985E /* AdminViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminViewController.swift; sourceTree = "<group>"; };
@@ -54,7 +60,7 @@
 		66989E52209C860F007B2C12 /* AFAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AFAlert.swift; sourceTree = "<group>"; };
 		66A8FF17208DF54D007BCD48 /* AnimalsFirst.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnimalsFirst.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66A8FF1A208DF54D007BCD48 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		66A8FF1F208DF54D007BCD48 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		66A8FF1F208DF54D007BCD48 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Login.storyboard; sourceTree = "<group>"; };
 		66A8FF22208DF54D007BCD48 /* AnimalsFirst.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AnimalsFirst.xcdatamodel; sourceTree = "<group>"; };
 		66A8FF24208DF54F007BCD48 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		66A8FF27208DF54F007BCD48 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -108,6 +114,16 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		6615C6BC20A9C64000141F2D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				6615C6BD20A9C66A00141F2D /* UIViewControllerExtensions.swift */,
+				6615C6BF20A9C67900141F2D /* StoryboardExtensions.swift */,
+				6615C6C120A9C8B800141F2D /* UILabel+UITextFieldExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		661A0837209760ED00211B87 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -127,7 +143,7 @@
 				66A8FF41208DF696007BCD48 /* Client.storyboard */,
 				66A8FF43208DF6A4007BCD48 /* Doctor.storyboard */,
 				667A1BF32090733D0058985E /* Admin.storyboard */,
-				66A8FF1E208DF54D007BCD48 /* Main.storyboard */,
+				66A8FF1E208DF54D007BCD48 /* Login.storyboard */,
 				66845A3420A06E0F00DF75A7 /* Register.storyboard */,
 			);
 			path = Storyboards;
@@ -165,6 +181,7 @@
 		66A8FF19208DF54D007BCD48 /* AnimalsFirst */ = {
 			isa = PBXGroup;
 			children = (
+				6615C6BC20A9C64000141F2D /* Extensions */,
 				66989E51209C85EE007B2C12 /* Utils */,
 				661A08382097610900211B87 /* Storyboards */,
 				661A0837209760ED00211B87 /* ViewControllers */,
@@ -293,7 +310,7 @@
 			files = (
 				66A8FF28208DF54F007BCD48 /* LaunchScreen.storyboard in Resources */,
 				66A8FF25208DF54F007BCD48 /* Assets.xcassets in Resources */,
-				66A8FF20208DF54D007BCD48 /* Main.storyboard in Resources */,
+				66A8FF20208DF54D007BCD48 /* Login.storyboard in Resources */,
 				66A8FF49208DFABC007BCD48 /* 2015_p16_01_logo_animal_first_ales_colorat-1.jpg in Resources */,
 				66A8FF47208DF9EB007BCD48 /* 2015_p16_01_logo_animal_first_ales_colorat.pdf in Resources */,
 				66A8FF44208DF6A4007BCD48 /* Doctor.storyboard in Resources */,
@@ -433,9 +450,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				667A1BF92090749C0058985E /* LoginViewController.swift in Sources */,
+				6615C6C220A9C8B800141F2D /* UILabel+UITextFieldExtensions.swift in Sources */,
 				667A1BF6209073660058985E /* AdminViewController.swift in Sources */,
 				66729AC92099D1E200486B6F /* RegisterViewController.swift in Sources */,
 				66A8FF40208DF5D6007BCD48 /* DoctorViewController.swift in Sources */,
+				6615C6C020A9C67900141F2D /* StoryboardExtensions.swift in Sources */,
+				6615C6BE20A9C66A00141F2D /* UIViewControllerExtensions.swift in Sources */,
 				66A8FF1B208DF54D007BCD48 /* AppDelegate.swift in Sources */,
 				66A8FF23208DF54D007BCD48 /* AnimalsFirst.xcdatamodeld in Sources */,
 				66A8FF3E208DF5BC007BCD48 /* ClientViewController.swift in Sources */,
@@ -462,12 +482,12 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		66A8FF1E208DF54D007BCD48 /* Main.storyboard */ = {
+		66A8FF1E208DF54D007BCD48 /* Login.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				66A8FF1F208DF54D007BCD48 /* Base */,
 			);
-			name = Main.storyboard;
+			name = Login.storyboard;
 			sourceTree = "<group>";
 		};
 		66A8FF26208DF54F007BCD48 /* LaunchScreen.storyboard */ = {

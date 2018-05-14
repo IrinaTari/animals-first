@@ -23,17 +23,14 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var repeatPasswordTextField: UITextField!
     @IBOutlet weak var infoLabel: UILabel!
 
-    // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
 
         phoneTextField.keyboardType = .numberPad
         phoneTextField.delegate = self
-        adjustViewFontsAndSubviews()
     }
 
     // MARK: buttons action
-
     @IBAction func cancelButton(_ sender: Any) {
         emptyAllTextFields()
     }
@@ -88,13 +85,12 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                     }
                     AFAlert.showAccSuccessAlert(self, completionBlock: {_ in
                         self.emptyAllTextFields()
-                        self.goToScreen(withStoryboardName: "Main", andVCIdentifier: "Login")
+                        self.navigationController?.popViewController(animated: true)
                         self.firebaseSignOut()
                     })
                 })
             })
         } else {
-            // password != repeat password alert
             AFAlert.showInequalPasswordAlert(self, completionBlock: {_ in
                 self.passwordTextField.text = ""
                 self.repeatPasswordTextField.text = ""
@@ -108,12 +104,9 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         return (textField.text?.count)! < 10
     }
 
-}
-
-// MARK: extension
-extension RegisterViewController {
-
-    func adjustViewFontsAndSubviews() {
+    // MARK: viewDidLayoutSubviews
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         // make round corners for buttons
         cancelButton.layer.cornerRadius = 5.0
         createAccountButton.layer.cornerRadius = 5.0
@@ -126,6 +119,11 @@ extension RegisterViewController {
         phoneTextField.adjustTextUsingDynamicType()
         infoLabel.adjustTextUsingDynamicType()
     }
+
+}
+
+// MARK: extension
+extension RegisterViewController {
 
     func emptyAllTextFields() {
         firstNameTextField.text = ""

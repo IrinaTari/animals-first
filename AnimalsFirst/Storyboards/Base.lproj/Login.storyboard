@@ -14,7 +14,7 @@
         <!--Logare-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="Login" id="BYZ-38-t0r" customClass="LoginViewController" customModule="AnimalsFirst" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="BYZ-38-t0r" customClass="LoginViewController" customModule="AnimalsFirst" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -37,9 +37,6 @@
                                 <state key="normal" title="Inregistrare">
                                     <color key="titleColor" red="0.66153389080000002" green="0.13522080240000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
-                                <connections>
-                                    <segue destination="9Qv-J3-VC6" kind="show" id="1Pl-zo-Ehd"/>
-                                </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ptc-nE-wDa">
                                 <rect key="frame" x="42" y="225" width="291" height="124"/>
@@ -178,38 +175,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1157.5999999999999" y="-564.46776611694156"/>
-        </scene>
-        <!--Client-->
-        <scene sceneID="NCu-Ot-pZV">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Client" id="zch-0w-gGS" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hUQ-Lr-KNU" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2069" y="-645"/>
-        </scene>
-        <!--Admin-->
-        <scene sceneID="OJp-wE-tHN">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Admin" id="CFQ-21-g0N" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="RgW-bk-yCq" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2066" y="-565"/>
-        </scene>
-        <!--Register-->
-        <scene sceneID="WZ0-KD-fAO">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Register" id="9Qv-J3-VC6" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Joc-Ir-fPe" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2095" y="-392"/>
-        </scene>
-        <!--Doctor-->
-        <scene sceneID="mhL-vw-VMJ">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Doctor" id="LIp-Pw-jUa" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1Dn-PH-2Ae" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2074" y="-719"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="zEN-K6-BFr">

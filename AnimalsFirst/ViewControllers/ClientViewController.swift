@@ -28,12 +28,7 @@ class ClientViewController: UIViewController {
         fetchUserProfileIfIsFBConnected()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    // buttons action
+    //MARK: Buttons action
     @IBAction func handleLogout(_ sender: Any) {
         let firebaseAuth = Auth.auth()
         do {
@@ -41,9 +36,10 @@ class ClientViewController: UIViewController {
         } catch let signOutError as NSError {
             print ("Error signing out: %@", signOutError)
         }
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: "Login")
-        self.present(vc, animated: true, completion: nil)
+        guard let loginViewController = UIViewController.login as? LoginViewController else {
+            fatalError("Login View Controller initialization failed")
+        }
+        self.present(loginViewController, animated: true, completion: nil)
     }
 
     func fetchUserProfileIfIsFBConnected()

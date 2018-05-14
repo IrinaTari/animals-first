@@ -35,32 +35,22 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         fbbutton.delegate = self
         self.view.addSubview(fbbutton)
 
-        adjustViewFontsAndSubviews()
-
         // read fb permissions
         fbbutton.readPermissions = ["public_profile", "email"]
 
         // if user is logged in with email/fb
         if Auth.auth().currentUser != nil {
             // go to client screen
-            self.goToScreen(withStoryboardName: "Client", andVCIdentifier: "Client")
+            guard let clientViewController = UIViewController.client as? ClientViewController else {
+                fatalError("Client View Controller failed initialization")
+            }
+            self.present(clientViewController, animated: true, completion: nil)
         } else {
             firebaseSignOut()
         }
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(false)
-
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     // MARK: buttons action
-
     @IBAction func loginAction(_ sender: Any) {
 
         guard let email = usernameTextField.text, let password = passwordTextField.text else {
@@ -78,7 +68,10 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                 })
                 return
             }
-            self.goToScreen(withStoryboardName: "Client", andVCIdentifier: "Client")
+            guard let clientViewController = UIViewController.client as? ClientViewController else {
+                fatalError("Client View Controller failed initialization")
+            }
+            self.present(clientViewController, animated: true, completion: nil)
         })
     }
 
@@ -102,7 +95,10 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                 let token = FBSDKAccessToken.current().tokenString
                 UserDefaults.standard.setValue(token, forKey: "fb_token")
                 UserDefaults.standard.synchronize()
-                self.goToScreen(withStoryboardName: "Client", andVCIdentifier: "Client")
+                guard let clientViewController = UIViewController.client as? ClientViewController else {
+                    fatalError("Client View Controller failed initialization")
+                }
+                self.present(clientViewController, animated: true, completion: nil)
             }
         }
     }
@@ -120,7 +116,10 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         }
     }
 
-    func adjustViewFontsAndSubviews() {
+    // MARK: viewDidLayoutSubviews
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        fbbutton.frame = FBPlaceholderButton.frame
         // make round corners for buttons
         loginButton.layer.cornerRadius = 5.0
         registerButton.layer.cornerRadius = 5.0
@@ -134,36 +133,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         noAccountLabel.adjustTextUsingDynamicType()
         fbbutton.titleLabel?.adjustTextUsingDynamicType()
         fbbutton.imageView?.adjustsImageSizeForAccessibilityContentSizeCategory = true
-
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        fbbutton.frame = FBPlaceholderButton.frame
-    }
-
-}
-
-extension UILabel {
-    func adjustTextUsingDynamicType() {
-        self.font = UIFont.preferredFont(forTextStyle: .body)
-        self.adjustsFontForContentSizeCategory = true
-        self.adjustsFontSizeToFitWidth = true
     }
 }
 
-extension UITextField {
-    func adjustTextUsingDynamicType() {
-        self.font = UIFont.preferredFont(forTextStyle: .body)
-        self.adjustsFontForContentSizeCategory = true
-        self.adjustsFontSizeToFitWidth = true
-    }
-}
-
-extension UIViewController {
-    func goToScreen(withStoryboardName: String, andVCIdentifier: String) {
-        let sb = UIStoryboard(name: withStoryboardName, bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: andVCIdentifier)
-        self.present(vc, animated: true, completion: nil)
-    }
-}
