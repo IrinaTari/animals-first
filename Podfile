@@ -8,10 +8,6 @@ pod 'Firebase/Storage'
 pod 'Firebase/Database'
 pod 'FBSDKLoginKit'
 pod 'FBSDKCoreKit'  
-pod 'FBSDKLoginKit'
-pod 'FBSDKShareKit'
-pod 'FBSDKPlacesKit'
-pod 'FBSDKMessengerShareKit'
   use_frameworks!
 
   # Pods for AnimalsFirst
@@ -25,10 +21,6 @@ pod 'Firebase/Storage'
 pod 'Firebase/Database'
 pod 'FBSDKLoginKit'
 pod 'FBSDKCoreKit'  
-pod 'FBSDKLoginKit'
-pod 'FBSDKShareKit'
-pod 'FBSDKPlacesKit'
-pod 'FBSDKMessengerShareKit'
   end
 
 end
