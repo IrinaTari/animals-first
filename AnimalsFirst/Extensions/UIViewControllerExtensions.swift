@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+import FirebaseDatabase
+import FirebaseAuth
 
 fileprivate enum ViewControllerType: String {
     case login = "LoginViewController"
@@ -49,6 +51,25 @@ extension UIViewController {
     }
     static var admin: UIViewController? {
         return self.viewController(for: .admin)
+    }
+
+
+    func checkUserTypeAndPresentScreen(controller: UIViewController) {
+        let ref = Database.database().reference(fromURL: "https://animalsfirst-12b83.firebaseio.com/")
+        let currentUser = Auth.auth().currentUser
+        if currentUser == ref.child("users").child((currentUser!.uid)) {
+            guard let viewController = UIViewController.client as? ClientViewController else {
+                fatalError("Client View Controller failed initialization")
+
+            }
+            controller.present(viewController, animated: true, completion: nil)
+        } else {
+            guard let viewController = UIViewController.admin as? AdminViewController else {
+                fatalError("Admin View Controller failed initialization")
+
+            }
+            controller.present(viewController, animated: true, completion: nil)
+        }
     }
 }
 

@@ -40,11 +40,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 
         // if user is logged in with email/fb
         if Auth.auth().currentUser != nil {
-            // go to client screen
-            guard let clientViewController = UIViewController.client as? ClientViewController else {
-                fatalError("Client View Controller failed initialization")
-            }
-            self.present(clientViewController, animated: true, completion: nil)
+            self.checkUserTypeAndPresentScreen(controller: self)
         } else {
             firebaseSignOut()
         }
@@ -68,10 +64,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                 })
                 return
             }
-            guard let clientViewController = UIViewController.client as? ClientViewController else {
-                fatalError("Client View Controller failed initialization")
-            }
-            self.present(clientViewController, animated: true, completion: nil)
+            self.checkUserTypeAndPresentScreen(controller: self)
         })
     }
 
@@ -141,5 +134,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         fbbutton.titleLabel?.adjustTextUsingDynamicType()
         fbbutton.imageView?.adjustsImageSizeForAccessibilityContentSizeCategory = true
     }
+
+
 }
+
 
