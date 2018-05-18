@@ -107,6 +107,13 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         firebaseSignOut()
     }
 
+    @IBAction func registerAction(_ sender: Any) {
+        guard let registerViewController = UIViewController.register as? RegisterViewController else {
+            fatalError()
+        }
+        self.present(registerViewController, animated: true, completion: nil)
+    }
+
     func firebaseSignOut() {
         let firebaseAuth = Auth.auth()
         do {
