@@ -69,7 +69,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                 }
 
                 // success
-                let ref = Database.database().reference(fromURL: "https://animalsfirst-12b83.firebaseio.com/")
+                let ref = Database.database().reference(fromURL: AFConstants.Path.databaseRef)
                 let fullName = firstName.appending(" ").appending(lastName)
                 print(fullName)
                 let values = ["name" : fullName, "email" : email, "phone" : phone]

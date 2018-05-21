@@ -68,7 +68,7 @@ class ClientViewController: UIViewController {
                   print("User ID is: \(id)")
                 // save in database
                 // add condition of user was saved already not to do this
-                let ref = Database.database().reference(fromURL: "https://animalsfirst-12b83.firebaseio.com/")
+                let ref = Database.database().reference(fromURL: AFConstants.Path.databaseRef)
 
                 let values = ["name" : userName, "email" : email, "phone" : phone]
                 let usersRef = ref.child("users")

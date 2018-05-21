@@ -55,7 +55,7 @@ extension UIViewController {
 
 
     func checkUserTypeAndPresentScreen(controller: UIViewController) {
-        let ref = Database.database().reference(fromURL: "https://animalsfirst-12b83.firebaseio.com/")
+        let ref = Database.database().reference(fromURL: AFConstants.Path.databaseRef)
         let currentUser = Auth.auth().currentUser
         if currentUser == ref.child("users").child((currentUser!.uid)) {
             guard let viewController = UIViewController.client as? ClientViewController else {
