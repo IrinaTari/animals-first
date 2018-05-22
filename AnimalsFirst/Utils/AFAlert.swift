@@ -100,4 +100,8 @@ typealias AlertDismissCompletionBlock = ((Int) -> Void)
     static func showInequalPasswordAlert(_ controller: UIViewController, completionBlock: @escaping (UIAlertAction) -> Void) {
         AFAlert.showBasicAlertView(controller, title: "Nu s-a putut crea contul", message: "Parolele nu coincid.", cancelButtonTitle: "OK", tapBlock: completionBlock)
     }
+
+    static func showLoginFailure(_ controller: UIViewController, error: Error, completionBlock: @escaping (UIAlertAction) -> Void) {
+        AFAlert.showBasicAlertView(controller, title: "Emailul si parola sunt gresite", message: error.localizedDescription, cancelButtonTitle: "OK", tapBlock: completionBlock)
+    }
 }

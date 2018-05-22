@@ -13,13 +13,13 @@ import FBSDKCoreKit
 import FirebaseDatabase
 
 class ClientViewController: UIViewController {
-    @IBOutlet weak var clientLabel: UILabel!
+    @IBOutlet weak var collectionView: UICollectionView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let clientName = Auth.auth().currentUser?.email
-        clientLabel.text = clientName
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        //let clientName = Auth.auth().currentUser?.email
         fetchUserProfileIfIsFBConnected()
     }
 
@@ -28,17 +28,8 @@ class ClientViewController: UIViewController {
     }
 
     //MARK: Buttons action
-    @IBAction func handleLogout(_ sender: Any) {
-        let firebaseAuth = Auth.auth()
-        do {
-            try firebaseAuth.signOut()
-        } catch let signOutError as NSError {
-            print ("Error signing out: %@", signOutError)
-        }
-        guard let loginViewController = UIViewController.login as? LoginViewController else {
-            fatalError("Login View Controller initialization failed")
-        }
-        self.present(loginViewController, animated: true, completion: nil)
+    @IBAction func handleLogoutButton(_ sender: Any) {
+        self.handleLogout()
     }
 
     func fetchUserProfileIfIsFBConnected()
@@ -84,4 +75,31 @@ class ClientViewController: UIViewController {
             }
         })
     }
+}
+
+// MARK: UICollectionViewDelegate
+extension ClientViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch indexPath.item {
+        case 0:
+            break
+        default:
+            break
+        }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath)
+        cell.backgroundView?.backgroundColor = self.generateRandomColor()
+        return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return AFConstants.Collection.array.count
+    }
+
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+
 }

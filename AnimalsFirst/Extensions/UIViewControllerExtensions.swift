@@ -53,22 +53,79 @@ extension UIViewController {
         return self.viewController(for: .admin)
     }
 
-
-    func checkUserTypeAndPresentScreen(controller: UIViewController) {
-        let ref = Database.database().reference(fromURL: AFConstants.Path.databaseRef)
-        let currentUser = Auth.auth().currentUser
-        if currentUser == ref.child("users").child((currentUser!.uid)) {
+    // MARK: check user and present appropriate screen
+    func showAppropriateScreen(userType: String, controller: UIViewController) {
+        switch userType {
+        case "clients":
             guard let viewController = UIViewController.client as? ClientViewController else {
-                fatalError("Client View Controller failed initialization")
-
+                fatalError()
             }
             controller.present(viewController, animated: true, completion: nil)
-        } else {
+        case "doctors":
+            guard let viewController = UIViewController.doctor as? DoctorViewController else {
+                fatalError()
+            }
+            controller.present(viewController, animated: true, completion: nil)
+        case "admins":
             guard let viewController = UIViewController.admin as? AdminViewController else {
-                fatalError("Admin View Controller failed initialization")
-
+                fatalError()
             }
             controller.present(viewController, animated: true, completion: nil)
+        default:
+            break
+        }
+    }
+
+    // MARK: random colors generator
+    func generateRandomColor() -> UIColor {
+        let hue : CGFloat = CGFloat(arc4random() % 256) / 256 // use 256 to get full range from 0.0 to 1.0
+        let saturation : CGFloat = CGFloat(arc4random() % 128) / 256 + 0.5 // from 0.5 to 1.0 to stay away from white
+        let brightness : CGFloat = CGFloat(arc4random() % 128) / 256 + 0.5 // from 0.5 to 1.0 to stay away from black
+
+        return UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: 1)
+    }
+
+    // MARK: FIREBASE methods
+    func handleLogout() {
+        let firebaseAuth = Auth.auth()
+        do {
+            try firebaseAuth.signOut()
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
+        guard let loginViewController = UIViewController.login as? LoginViewController else {
+            fatalError("Login View Controller initialization failed")
+        }
+        self.present(loginViewController, animated: true, completion: nil)
+    }
+
+    func userExistsInParentNode(name: String, currentUser: User) -> Bool {
+        var userExists = false
+        let ref = Database.database().reference()
+        
+            ref.child("users").child(name).observeSingleEvent(of: .value, with: { (snapshot) in
+                // Get user value
+                guard let dictionary = snapshot.value as? [String : Any] else {
+                   fatalError()
+                }
+                for key in (dictionary.keys) {
+                    if key == currentUser.uid {
+                        userExists = true
+                        return
+                    }
+                }
+            }) { (error) in
+                print(error.localizedDescription)
+            }
+        return userExists
+    }
+
+    func firebaseSignOut() {
+        let firebaseAuth = Auth.auth()
+        do {
+            try firebaseAuth.signOut()
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
         }
     }
 }

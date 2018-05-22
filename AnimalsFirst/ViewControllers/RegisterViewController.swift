@@ -28,11 +28,16 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
 
         phoneTextField.keyboardType = .numberPad
         phoneTextField.delegate = self
+
     }
 
     // MARK: buttons action
     @IBAction func cancelButton(_ sender: Any) {
         emptyAllTextFields()
+        guard let loginViewController = UIViewController.login as? LoginViewController else {
+            fatalError()
+        }
+        self.present(loginViewController, animated: true, completion: nil)
     }
 
     @IBAction func createAccountButtonAction(_ sender: Any) {
@@ -85,7 +90,10 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                     }
                     AFAlert.showAccSuccessAlert(self, completionBlock: {_ in
                         self.emptyAllTextFields()
-                        self.navigationController?.popViewController(animated: true)
+                        guard let loginViewController = UIViewController.login as? LoginViewController else {
+                            fatalError()
+                        }
+                        self.present(loginViewController, animated: true, completion: nil)
                         self.firebaseSignOut()
                     })
                 })
@@ -119,28 +127,18 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         phoneTextField.adjustTextUsingDynamicType()
         infoLabel.adjustTextUsingDynamicType()
     }
-
 }
 
 // MARK: extension
 extension RegisterViewController {
 
-    func emptyAllTextFields() {
+     func emptyAllTextFields() {
         firstNameTextField.text = ""
         lastNameTextField.text = ""
         emailTextField.text = ""
         phoneTextField.text = ""
         passwordTextField.text = ""
         repeatPasswordTextField.text = ""
-    }
-
-    func firebaseSignOut() {
-        let firebaseAuth = Auth.auth()
-        do {
-            try firebaseAuth.signOut()
-        } catch let signOutError as NSError {
-            print ("Error signing out: %@", signOutError)
-        }
     }
 }
 

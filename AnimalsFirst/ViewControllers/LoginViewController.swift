@@ -7,10 +7,10 @@
 //
 
 import UIKit
-import Firebase
 import FBSDKLoginKit
 import FBSDKCoreKit
 import FirebaseAuth
+import FirebaseDatabase
 
 class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 
@@ -38,9 +38,16 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         // read fb permissions
         fbbutton.readPermissions = ["public_profile", "email"]
 
+        
         // if user is logged in with email/fb
-        if Auth.auth().currentUser != nil {
-            self.checkUserTypeAndPresentScreen(controller: self)
+        if let currentUser = Auth.auth().currentUser {
+            print(currentUser)
+            for userType in AFConstants.allTypes() {
+                if self.userExistsInParentNode(name: userType, currentUser: currentUser) {
+                    self.showAppropriateScreen(userType: userType, controller: self)
+                    break
+                }
+            }
         } else {
             firebaseSignOut()
         }
@@ -59,12 +66,12 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         Auth.auth().signIn(withEmail: email, password: password, completion: { (user, error) in
             if error != nil {
                 print(error!.localizedDescription)
-                AFAlert.showAccFailAlert(self, error: error!, completionBlock: {_ in
+                AFAlert.showLoginFailure(self, error: error!, completionBlock: {_ in
                     self.passwordTextField.text = ""
                 })
                 return
             }
-            self.checkUserTypeAndPresentScreen(controller: self)
+            self.showAppropriateScreen(userType: "client", controller: self)
         })
     }
 
@@ -97,7 +104,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     }
 
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
-        firebaseSignOut()
+        self.firebaseSignOut()
     }
 
     @IBAction func registerAction(_ sender: Any) {
@@ -105,15 +112,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             fatalError()
         }
         self.present(registerViewController, animated: true, completion: nil)
-    }
-
-    func firebaseSignOut() {
-        let firebaseAuth = Auth.auth()
-        do {
-            try firebaseAuth.signOut()
-        } catch let signOutError as NSError {
-            print ("Error signing out: %@", signOutError)
-        }
     }
 
     // MARK: viewDidLayoutSubviews
