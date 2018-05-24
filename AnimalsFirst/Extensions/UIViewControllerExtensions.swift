@@ -79,9 +79,8 @@ extension UIViewController {
     // MARK: random colors generator
     func generateRandomColor() -> UIColor {
         let hue : CGFloat = CGFloat(arc4random() % 256) / 256 // use 256 to get full range from 0.0 to 1.0
-        let saturation : CGFloat = CGFloat(arc4random() % 128) / 256 + 0.5 // from 0.5 to 1.0 to stay away from white
+        let saturation : CGFloat = CGFloat(arc4random() % 128) / 256 + 1 // from 0.5 to 1.0 to stay away from white
         let brightness : CGFloat = CGFloat(arc4random() % 128) / 256 + 0.5 // from 0.5 to 1.0 to stay away from black
-
         return UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: 1)
     }
 
@@ -99,25 +98,25 @@ extension UIViewController {
         self.present(loginViewController, animated: true, completion: nil)
     }
 
-    func userExistsInParentNode(name: String, currentUser: User) -> Bool {
-        var userExists = false
+    func findUserAndShowAppropriateScreen(name: String, currentUser: User, controller: UIViewController) {
+
         let ref = Database.database().reference()
-        
             ref.child("users").child(name).observeSingleEvent(of: .value, with: { (snapshot) in
                 // Get user value
+                print(snapshot)
                 guard let dictionary = snapshot.value as? [String : Any] else {
                    fatalError()
                 }
                 for key in (dictionary.keys) {
                     if key == currentUser.uid {
-                        userExists = true
+                        // user exists
+                        self.showAppropriateScreen(userType: name, controller: controller)
                         return
                     }
                 }
             }) { (error) in
                 print(error.localizedDescription)
             }
-        return userExists
     }
 
     func firebaseSignOut() {

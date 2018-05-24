@@ -27,7 +27,8 @@ class AFConstants: NSObject {
     }
 
     static func allTypes() -> [String] {
-        return [AFConstants.UserTypes.client, AFConstants.UserTypes.doctor, AFConstants.UserTypes.admin]
+        //add doctor to string
+        return [AFConstants.UserTypes.client, AFConstants.UserTypes.admin]
     }
 }
 

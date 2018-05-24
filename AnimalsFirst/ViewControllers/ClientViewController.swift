@@ -19,6 +19,8 @@ class ClientViewController: UIViewController {
         super.viewDidLoad()
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.register(UINib(nibName: "ClientCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ClientCollectionViewCell")
+        //collectionView.register(ClientCollectionViewCell.self, forCellWithReuseIdentifier: "ClientCollectionViewCell")
         //let clientName = Auth.auth().currentUser?.email
         fetchUserProfileIfIsFBConnected()
     }
@@ -78,7 +80,7 @@ class ClientViewController: UIViewController {
 }
 
 // MARK: UICollectionViewDelegate
-extension ClientViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension ClientViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.item {
         case 0:
@@ -89,8 +91,12 @@ extension ClientViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath)
-        cell.backgroundView?.backgroundColor = self.generateRandomColor()
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ClientCollectionViewCell", for: indexPath) as? ClientCollectionViewCell else {
+            fatalError()
+        }
+        cell.titleLabel.text = AFConstants.Collection.array[indexPath.item]
+        cell.contentView.backgroundColor = self.generateRandomColor()
+        cell.contentView.backgroundColor = cell.contentView.backgroundColor?.withAlphaComponent(0.7)
         return cell
     }
 
@@ -98,8 +104,20 @@ extension ClientViewController: UICollectionViewDelegate, UICollectionViewDataSo
         return AFConstants.Collection.array.count
     }
 
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let size = UIScreen.main.bounds.size.width/2
+        return CGSize(width: size, height: size)
+    }
+
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
 
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
 }

@@ -38,15 +38,11 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         // read fb permissions
         fbbutton.readPermissions = ["public_profile", "email"]
 
-        
-        // if user is logged in with email/fb
+        // if user is logged in
         if let currentUser = Auth.auth().currentUser {
             print(currentUser)
             for userType in AFConstants.allTypes() {
-                if self.userExistsInParentNode(name: userType, currentUser: currentUser) {
-                    self.showAppropriateScreen(userType: userType, controller: self)
-                    break
-                }
+                self.findUserAndShowAppropriateScreen(name: userType, currentUser: currentUser, controller: self)
             }
         } else {
             firebaseSignOut()
@@ -71,7 +67,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                 })
                 return
             }
-            self.showAppropriateScreen(userType: "client", controller: self)
+            self.showAppropriateScreen(userType: AFConstants.UserTypes.client, controller: self)
         })
     }
 
@@ -95,10 +91,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                 let token = FBSDKAccessToken.current().tokenString
                 UserDefaults.standard.setValue(token, forKey: "fb_token")
                 UserDefaults.standard.synchronize()
-                guard let clientViewController = UIViewController.client as? ClientViewController else {
-                    fatalError("Client View Controller failed initialization")
-                }
-                self.present(clientViewController, animated: true, completion: nil)
+                self.showAppropriateScreen(userType: AFConstants.UserTypes.client, controller: self)
             }
         })
     }
