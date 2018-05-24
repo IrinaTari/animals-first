@@ -91,6 +91,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                 let token = FBSDKAccessToken.current().tokenString
                 UserDefaults.standard.setValue(token, forKey: "fb_token")
                 UserDefaults.standard.synchronize()
+                FirebaseHelpers.fetchUserIfConnectionSuccessAndSaveInDB()
                 StoryboardNavigator.showAppropriateScreen(userType: AFConstants.UserTypes.client, controller: self)
             }
         })
