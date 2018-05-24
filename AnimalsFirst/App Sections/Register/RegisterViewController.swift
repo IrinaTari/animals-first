@@ -37,7 +37,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         guard let loginViewController = UIViewController.login as? LoginViewController else {
             fatalError()
         }
-        self.present(loginViewController, animated: true, completion: nil)
+        self.present(loginViewController, animated: false, completion: nil)
     }
 
     @IBAction func createAccountButtonAction(_ sender: Any) {
@@ -93,7 +93,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                         guard let loginViewController = UIViewController.login as? LoginViewController else {
                             fatalError()
                         }
-                        self.present(loginViewController, animated: true, completion: nil)
+                        self.present(loginViewController, animated: false, completion: nil)
                         FirebaseHelpers.firebaseSignOut()
                     })
                 })

@@ -36,6 +36,28 @@ class StoryboardNavigator: NSObject {
         }
     }
 
+    static func showAppropriateScreenFromClientMenu(indexPath: IndexPath, controller: UIViewController) {
+        switch indexPath.item {
+        case 0:
+            guard let viewController = UIViewController.appointments as? AppointmentsViewController else {
+                fatalError()
+            }
+            controller.present(viewController, animated: false, completion: nil)
+        case 1:
+            guard let viewController = UIViewController.adoptions as? AdoptionsViewController else {
+                fatalError()
+            }
+            controller.present(viewController, animated: false, completion: nil)
+        case 2:
+            guard let viewController = UIViewController.foster as? FosterViewController else {
+                fatalError()
+            }
+            controller.present(viewController, animated: false, completion: nil)
+        default:
+            break
+        }
+    }
+
     static func findUserAndShowAppropriateScreen(name: String, currentUser: User, controller: UIViewController) {
 
         let ref = Database.database().reference()

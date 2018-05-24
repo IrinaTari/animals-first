@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7Aq-6f-Lhl">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="HQr-cu-aTB">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -13,7 +13,7 @@
         <!--Adoptions View Controller-->
         <scene sceneID="TS5-ba-s06">
             <objects>
-                <viewController id="ooa-Th-Hg2" customClass="AdoptionsViewController" customModule="AnimalsFirst" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AdoptionsViewController" id="ooa-Th-Hg2" customClass="AdoptionsViewController" customModule="AnimalsFirst" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="a9m-Fn-z0s">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -22,6 +22,19 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dSA-7Q-9It">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Adoptii" id="zbh-oB-yVY">
+                                        <barButtonItem key="leftBarButtonItem" title="&lt; Inapoi" id="AB6-kh-ppr">
+                                            <connections>
+                                                <action selector="backButtonAction:" destination="ooa-Th-Hg2" id="DN4-oQ-2St"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -32,29 +45,29 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="reV-rX-mw3"/>
                     </view>
-                    <navigationItem key="navigationItem" id="zbh-oB-yVY"/>
+                    <navigationItem key="navigationItem" id="xzN-B9-G9e"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MfN-2I-BCz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="388" y="80.50974512743629"/>
+            <point key="canvasLocation" x="1327.2" y="80.50974512743629"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="Zf2-KC-WlP">
+        <scene sceneID="y0m-eE-bDc">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7Aq-6f-Lhl" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="HQr-cu-aTB" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="f2E-My-ouL">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="qia-Jo-fUh">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="ooa-Th-Hg2" kind="relationship" relationship="rootViewController" id="g7L-6X-4tf"/>
+                        <segue destination="ooa-Th-Hg2" kind="relationship" relationship="rootViewController" id="caX-AT-9PL"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="LrY-GA-XHd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7wE-3b-Cto" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-551.20000000000005" y="80.50974512743629"/>
+            <point key="canvasLocation" x="388" y="80.50974512743629"/>
         </scene>
     </scenes>
 </document>

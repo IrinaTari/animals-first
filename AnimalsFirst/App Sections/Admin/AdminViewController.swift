@@ -22,6 +22,6 @@ class AdminViewController: UIViewController {
         guard let loginViewController = UIViewController.login as? LoginViewController else {
             fatalError("Login View Controller initialization failed")
         }
-        self.present(loginViewController, animated: true, completion: nil)
+        self.present(loginViewController, animated: false, completion: nil)
     }
 }

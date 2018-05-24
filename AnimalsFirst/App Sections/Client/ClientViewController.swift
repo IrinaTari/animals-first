@@ -28,19 +28,14 @@ class ClientViewController: UIViewController {
         guard let loginViewController = UIViewController.login as? LoginViewController else {
             fatalError("Login View Controller initialization failed")
         }
-        self.present(loginViewController, animated: true, completion: nil)
+        self.present(loginViewController, animated: false, completion: nil)
     }
 }
 
 // MARK: UICollectionViewDelegate
 extension ClientViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        switch indexPath.item {
-        case 0:
-            break
-        default:
-            break
-        }
+        StoryboardNavigator.showAppropriateScreenFromClientMenu(indexPath: indexPath, controller: self)
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

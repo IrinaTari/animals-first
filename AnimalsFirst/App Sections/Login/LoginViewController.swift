@@ -91,7 +91,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                 let token = FBSDKAccessToken.current().tokenString
                 UserDefaults.standard.setValue(token, forKey: "fb_token")
                 UserDefaults.standard.synchronize()
-                FirebaseHelpers.fetchUserIfConnectionSuccessAndSaveInDB()
+                FirebaseHelpers.fetchFBUserAndSaveInDB()
                 StoryboardNavigator.showAppropriateScreen(userType: AFConstants.UserTypes.client, controller: self)
             }
         })
@@ -105,7 +105,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         guard let registerViewController = UIViewController.register as? RegisterViewController else {
             fatalError()
         }
-        self.present(registerViewController, animated: true, completion: nil)
+        self.present(registerViewController, animated: false, completion: nil)
     }
 
     // MARK: viewDidLayoutSubviews

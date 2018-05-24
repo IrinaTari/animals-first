@@ -31,4 +31,3 @@ class AFConstants: NSObject {
         return [AFConstants.UserTypes.client, AFConstants.UserTypes.admin]
     }
 }
-

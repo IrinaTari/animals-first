@@ -13,6 +13,12 @@ class AppointmentsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+    }
+
+    @IBAction func backButtonAction(_ sender: Any) {
+        guard let viewController = UIViewController.client as? ClientViewController else {
+            fatalError()
+        }
+        self.present(viewController, animated: false, completion: nil)
     }
 }

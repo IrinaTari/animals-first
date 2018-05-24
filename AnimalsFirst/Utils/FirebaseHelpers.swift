@@ -23,7 +23,7 @@ class FirebaseHelpers: UIViewController {
         }
     }
 
-    static func fetchUserIfConnectionSuccessAndSaveInDB()
+    static func fetchFBUserAndSaveInDB()
     {
         if FBSDKAccessToken.current() == nil {
             return
