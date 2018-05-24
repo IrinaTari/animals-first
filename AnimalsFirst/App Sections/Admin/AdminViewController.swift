@@ -18,6 +18,10 @@ class AdminViewController: UIViewController {
     }
 
     @IBAction func handleLogoutButton(_ sender: Any) {
-        self.handleLogout()
+        FirebaseHelpers.firebaseSignOut()
+        guard let loginViewController = UIViewController.login as? LoginViewController else {
+            fatalError("Login View Controller initialization failed")
+        }
+        self.present(loginViewController, animated: true, completion: nil)
     }
 }

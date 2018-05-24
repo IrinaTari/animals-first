@@ -31,7 +31,11 @@ class ClientViewController: UIViewController {
 
     //MARK: Buttons action
     @IBAction func handleLogoutButton(_ sender: Any) {
-        self.handleLogout()
+        FirebaseHelpers.firebaseSignOut()
+        guard let loginViewController = UIViewController.login as? LoginViewController else {
+            fatalError("Login View Controller initialization failed")
+        }
+        self.present(loginViewController, animated: true, completion: nil)
     }
 
     func fetchUserProfileIfIsFBConnected()
@@ -95,7 +99,7 @@ extension ClientViewController: UICollectionViewDelegate, UICollectionViewDataSo
             fatalError()
         }
         cell.titleLabel.text = AFConstants.Collection.array[indexPath.item]
-        cell.contentView.backgroundColor = self.generateRandomColor()
+        cell.contentView.backgroundColor = UIColor.generateRandomColor()
         cell.contentView.backgroundColor = cell.contentView.backgroundColor?.withAlphaComponent(0.7)
         return cell
     }

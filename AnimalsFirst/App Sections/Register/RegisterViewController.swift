@@ -94,7 +94,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                             fatalError()
                         }
                         self.present(loginViewController, animated: true, completion: nil)
-                        self.firebaseSignOut()
+                        FirebaseHelpers.firebaseSignOut()
                     })
                 })
             })

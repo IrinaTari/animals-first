@@ -42,10 +42,10 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         if let currentUser = Auth.auth().currentUser {
             print(currentUser)
             for userType in AFConstants.allTypes() {
-                self.findUserAndShowAppropriateScreen(name: userType, currentUser: currentUser, controller: self)
+                StoryboardNavigator.findUserAndShowAppropriateScreen(name: userType, currentUser: currentUser, controller: self)
             }
         } else {
-            firebaseSignOut()
+            FirebaseHelpers.firebaseSignOut()
         }
     }
 
@@ -67,7 +67,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                 })
                 return
             }
-            self.showAppropriateScreen(userType: AFConstants.UserTypes.client, controller: self)
+            StoryboardNavigator.showAppropriateScreen(userType: AFConstants.UserTypes.client, controller: self)
         })
     }
 
@@ -91,13 +91,13 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                 let token = FBSDKAccessToken.current().tokenString
                 UserDefaults.standard.setValue(token, forKey: "fb_token")
                 UserDefaults.standard.synchronize()
-                self.showAppropriateScreen(userType: AFConstants.UserTypes.client, controller: self)
+                StoryboardNavigator.showAppropriateScreen(userType: AFConstants.UserTypes.client, controller: self)
             }
         })
     }
 
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
-        self.firebaseSignOut()
+        FirebaseHelpers.firebaseSignOut()
     }
 
     @IBAction func registerAction(_ sender: Any) {
