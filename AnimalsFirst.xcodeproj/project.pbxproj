@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A5E182320D0682C000F5E97 /* CalendarCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A5E182220D0682C000F5E97 /* CalendarCollectionViewCell.xib */; };
+		2A5E182520D068E9000F5E97 /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5E182420D068E9000F5E97 /* CalendarCollectionViewCell.swift */; };
 		44830BB49F14AC1205FB9FEF /* Pods_AnimalsFirstTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3343187B46EF49087C4A0677 /* Pods_AnimalsFirstTests.framework */; };
 		6615C6BE20A9C66A00141F2D /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6615C6BD20A9C66A00141F2D /* UIViewControllerExtensions.swift */; };
 		6615C6C020A9C67900141F2D /* StoryboardExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6615C6BF20A9C67900141F2D /* StoryboardExtensions.swift */; };
@@ -59,6 +61,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2A5E182220D0682C000F5E97 /* CalendarCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarCollectionViewCell.xib; sourceTree = "<group>"; };
+		2A5E182420D068E9000F5E97 /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
 		3343187B46EF49087C4A0677 /* Pods_AnimalsFirstTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AnimalsFirstTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		39A2FF48D3409067064CCF87 /* Pods-AnimalsFirst.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnimalsFirst.release.xcconfig"; path = "Pods/Target Support Files/Pods-AnimalsFirst/Pods-AnimalsFirst.release.xcconfig"; sourceTree = "<group>"; };
 		6615C6BD20A9C66A00141F2D /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
@@ -127,6 +131,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2A5E182120D067D8000F5E97 /* Xibs */ = {
+			isa = PBXGroup;
+			children = (
+				2A5E182220D0682C000F5E97 /* CalendarCollectionViewCell.xib */,
+				2A5E182420D068E9000F5E97 /* CalendarCollectionViewCell.swift */,
+			);
+			path = Xibs;
+			sourceTree = "<group>";
+		};
 		36D36FA6AB74DF5847C86278 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -234,6 +247,7 @@
 		6675C70A20B6E3A0006A089C /* Appointments */ = {
 			isa = PBXGroup;
 			children = (
+				2A5E182120D067D8000F5E97 /* Xibs */,
 				6675C71520B6E423006A089C /* Appointments.storyboard */,
 				6675C71720B6E438006A089C /* AppointmentsViewController.swift */,
 			);
@@ -416,6 +430,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A5E182320D0682C000F5E97 /* CalendarCollectionViewCell.xib in Resources */,
 				6675C70E20B6E3CB006A089C /* Adoptions.storyboard in Resources */,
 				66A8FF28208DF54F007BCD48 /* LaunchScreen.storyboard in Resources */,
 				66A8FF25208DF54F007BCD48 /* Assets.xcassets in Resources */,
@@ -563,6 +578,7 @@
 				66A8FF1B208DF54D007BCD48 /* AppDelegate.swift in Sources */,
 				66A8FF23208DF54D007BCD48 /* AnimalsFirst.xcdatamodeld in Sources */,
 				6675C71820B6E438006A089C /* AppointmentsViewController.swift in Sources */,
+				2A5E182520D068E9000F5E97 /* CalendarCollectionViewCell.swift in Sources */,
 				66A8FF3E208DF5BC007BCD48 /* ClientViewController.swift in Sources */,
 				6675C71E20B6E7CE006A089C /* StoryboardNavigator.swift in Sources */,
 				6675C71C20B6E725006A089C /* FirebaseHelpers.swift in Sources */,
