@@ -30,10 +30,10 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         self.view.backgroundColor = UIColor.white
 
         // setup FB button
-        fbbutton.frame = FBPlaceholderButton.frame
         FBPlaceholderButton.isHidden = true
         fbbutton.delegate = self
         self.view.addSubview(fbbutton)
+        fbbutton.translatesAutoresizingMaskIntoConstraints = false
 
         // read fb permissions
         fbbutton.readPermissions = ["public_profile", "email"]
@@ -125,6 +125,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         noAccountLabel.adjustTextUsingDynamicType()
         fbbutton.titleLabel?.adjustTextUsingDynamicType()
         fbbutton.imageView?.adjustsImageSizeForAccessibilityContentSizeCategory = true
+
     }
 
 

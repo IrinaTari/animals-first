@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wEm-ca-8WT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wEm-ca-8WT">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -143,16 +143,15 @@
                             <constraint firstItem="l7d-Q6-iDQ" firstAttribute="top" secondItem="ShK-AQ-Nw8" secondAttribute="bottom" constant="8" id="LvA-JR-tuG"/>
                             <constraint firstItem="q9B-O5-XRh" firstAttribute="top" secondItem="Ptc-nE-wDa" secondAttribute="bottom" constant="8" id="RGU-EB-w6V"/>
                             <constraint firstItem="q9B-O5-XRh" firstAttribute="width" secondItem="wgb-Fn-qvF" secondAttribute="width" id="T1L-6Q-TAa"/>
-                            <constraint firstItem="wgb-Fn-qvF" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="height" multiplier="97:201" id="XO9-kt-j7O"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="wgb-Fn-qvF" secondAttribute="trailing" constant="20" symbolic="YES" id="Wdi-zO-VTj"/>
                             <constraint firstItem="ShK-AQ-Nw8" firstAttribute="top" secondItem="wgb-Fn-qvF" secondAttribute="bottom" constant="20" id="Y0o-HJ-5XS"/>
                             <constraint firstItem="Z0b-SB-Xqo" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="c5G-3V-4e5"/>
                             <constraint firstItem="q9B-O5-XRh" firstAttribute="height" secondItem="wgb-Fn-qvF" secondAttribute="height" constant="1" id="d4H-7e-4wI"/>
                             <constraint firstItem="Ptc-nE-wDa" firstAttribute="width" secondItem="q9B-O5-XRh" secondAttribute="width" id="eGw-7g-pvI"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="wgb-Fn-qvF" secondAttribute="trailing" constant="20" symbolic="YES" id="eUJ-G5-bsf"/>
                             <constraint firstItem="l7d-Q6-iDQ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="f8t-LE-gfo"/>
                             <constraint firstItem="Z0b-SB-Xqo" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="height" multiplier="44:201" id="gkP-cw-ZAA"/>
+                            <constraint firstItem="wgb-Fn-qvF" firstAttribute="leading" secondItem="tcL-uv-j9m" secondAttribute="leading" id="hd8-SH-IJt"/>
                             <constraint firstItem="l7d-Q6-iDQ" firstAttribute="height" secondItem="wgb-Fn-qvF" secondAttribute="height" id="kkq-LF-9eQ"/>
-                            <constraint firstItem="wgb-Fn-qvF" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="lb8-rM-ggG"/>
                             <constraint firstItem="q9B-O5-XRh" firstAttribute="trailing" secondItem="Ptc-nE-wDa" secondAttribute="trailing" id="mja-jT-ulc"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="tcL-uv-j9m" secondAttribute="trailing" constant="20" symbolic="YES" id="oDp-56-kR2"/>
                             <constraint firstItem="ShK-AQ-Nw8" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="p3o-3w-4Mc"/>
