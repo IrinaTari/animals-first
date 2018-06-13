@@ -30,4 +30,15 @@ class AFConstants: NSObject {
         //add doctor to string
         return [AFConstants.UserTypes.client, AFConstants.UserTypes.admin]
     }
+
+    struct DayCapacity {
+        static let maxDogNr = 5
+        static let maxCatNr = 7
+        static let maxNrAnimals = 10
+    }
+
+    enum AnimalType: String {
+        case dog = "Caine"
+        case cat = "Pisica"
+    }
 }

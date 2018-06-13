@@ -11,26 +11,13 @@ import UIKit
 class AppointmentsViewController: UIViewController {
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var calendarCollectionView: UICollectionView!
-    private var date: Date!
-    private var calendar: Calendar!
-    private var year: Int!
-    private var month: Int!
-    private var day: Int!
-    private var daysLeft = 0
-    private let dateFormatter = DateFormatter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        date = Date()
-        calendar = Calendar.current
-        year = calendar.component(.year, from: date)
-        month = calendar.component(.month, from: date)
-        day = calendar.component(.day, from: date)
         calendarCollectionView.delegate = self
         calendarCollectionView.dataSource = self
         calendarCollectionView.register(UINib(nibName: "CalendarCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CalendarCollectionViewCell")
-        dateFormatter.dateFormat = "LLLL"
-        monthLabel.text = dateFormatter.string(from: Date())
+        calendarCollectionView.register(UINib(nibName: "CalendarCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "CalendarCollectionReusableView")
     }
 
     @IBAction func backButtonAction(_ sender: Any) {
@@ -40,9 +27,10 @@ class AppointmentsViewController: UIViewController {
         self.present(viewController, animated: false, completion: nil)
     }
     
-    func updateMonth(sectionNumber: Int) -> String {
+    func updateMonth(sectionNumber: Int) -> String? {
         let monthNumber = sectionNumber
         let dateString = String(monthNumber)
+        let dateFormatter = DateFormatter()
         
         dateFormatter.dateFormat = "MM"
         guard let myDate = dateFormatter.date(from: dateString) else {
@@ -79,12 +67,12 @@ extension AppointmentsViewController: UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 2
     }
-    
-    func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
-        monthLabel.text = updateMonth(sectionNumber: indexPath.section)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath) {
-        monthLabel.text = updateMonth(sectionNumber: indexPath.section)
+
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let reusableView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "CalendarCollectionReusableView", for: indexPath) as! CalendarCollectionReusableView
+        if let text = updateMonth(sectionNumber: indexPath.section + 1) {
+            reusableView.sectionLabel.text = text
+        }
+        return reusableView
     }
 }

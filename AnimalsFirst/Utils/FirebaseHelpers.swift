@@ -66,4 +66,28 @@ class FirebaseHelpers: UIViewController {
             }
         })
     }
+
+    static func saveAppointment() {
+
+    }
+
+    static func fetchAppointment() {
+
+    }
+
+    static func saveDoctorUser() {
+
+    }
+
+    static func fetchDoctorUser() {
+
+    }
+
+    static func saveClientUser() {
+
+    }
+
+    static func fetchClientUser() {
+
+    }
 }
