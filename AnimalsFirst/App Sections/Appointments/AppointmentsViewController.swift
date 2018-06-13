@@ -11,9 +11,13 @@ import UIKit
 class AppointmentsViewController: UIViewController {
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var calendarCollectionView: UICollectionView!
-    
+    private let appointmentsModel = AppointmentsModel()
+    private var date = Date()
+    private var year: Int!
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        year = Int(date.currentYear!)
         calendarCollectionView.delegate = self
         calendarCollectionView.dataSource = self
         calendarCollectionView.register(UINib(nibName: "CalendarCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CalendarCollectionViewCell")
@@ -57,6 +61,8 @@ extension AppointmentsViewController: UICollectionViewDelegate, UICollectionView
             fatalError()
         }
         cell.calendarLabel.text = "\(indexPath.row + 1)"
+        let newDate = date.setDate(day: indexPath.row + 1, month: indexPath.section + 1, year: year)
+        cell.backgroundColor = appointmentsModel.updateColor(forDate: newDate!)
         return cell
     }
     

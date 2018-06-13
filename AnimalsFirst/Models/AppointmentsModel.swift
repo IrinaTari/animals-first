@@ -37,7 +37,7 @@ class AppointmentsModel: NSObject {
         }
     }
 
-    func updateColor(animalType: AFConstants.AnimalType, forDay: Date) -> UIColor {
+    func updateColor(animalType: AFConstants.AnimalType) -> UIColor {
         if totalNrOfAnimals < AFConstants.DayCapacity.maxNrAnimals {
             switch animalType {
             case .dog:
@@ -49,6 +49,19 @@ class AppointmentsModel: NSObject {
                     color = UIColor.green
                 }
             }
+        }
+        return color
+    }
+
+    func updateColor(forDate: Date) -> UIColor {
+        let date = Date()
+        print(forDate)
+        print(date)
+        let compareResult = forDate.compare(date.currentFullDate!)
+        if compareResult == ComparisonResult.orderedAscending {
+            color = UIColor.darkGray
+        } else {
+            color = UIColor.green
         }
         return color
     }
