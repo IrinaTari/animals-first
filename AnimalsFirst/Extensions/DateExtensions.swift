@@ -18,22 +18,12 @@ extension Date {
 
     // Month
     var currentMonth: String? {
-        return getDateComponent(dateFormat: "mm")
+        return getDateComponent(dateFormat: "MM")
     }
 
     // Day
     var currentDay: String? {
         return getDateComponent(dateFormat: "dd")
-    }
-
-    // full date
-    var currentFullDate: Date? {
-        var components = DateComponents()
-        components.setValue(Int(currentDay!), for: .day)
-        components.setValue(Int(currentMonth!), for: .month)
-        components.setValue(Int(currentYear!), for: .year)
-        let date = Calendar.current.date(from: components)
-        return date
     }
 
     func getDateComponent(dateFormat: String) -> String? {

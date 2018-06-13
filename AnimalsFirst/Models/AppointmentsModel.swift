@@ -53,12 +53,10 @@ class AppointmentsModel: NSObject {
         return color
     }
 
-    func updateColor(forDate: Date) -> UIColor {
+    func updateColor(forDate: Date, calendar: Calendar) -> UIColor {
         let date = Date()
-        print(forDate)
-        print(date)
-        let compareResult = forDate.compare(date.currentFullDate!)
-        if compareResult == ComparisonResult.orderedAscending {
+        let compareResult = forDate.compare(date)
+        if compareResult == ComparisonResult.orderedAscending || calendar.isDateInWeekend(forDate) {
             color = UIColor.darkGray
         } else {
             color = UIColor.green

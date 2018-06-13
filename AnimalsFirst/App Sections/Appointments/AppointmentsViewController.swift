@@ -14,10 +14,13 @@ class AppointmentsViewController: UIViewController {
     private let appointmentsModel = AppointmentsModel()
     private var date = Date()
     private var year: Int!
+    private var calendar = Calendar.current
+    private var onceOnly = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
         year = Int(date.currentYear!)
+        
         calendarCollectionView.delegate = self
         calendarCollectionView.dataSource = self
         calendarCollectionView.register(UINib(nibName: "CalendarCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CalendarCollectionViewCell")
@@ -62,7 +65,7 @@ extension AppointmentsViewController: UICollectionViewDelegate, UICollectionView
         }
         cell.calendarLabel.text = "\(indexPath.row + 1)"
         let newDate = date.setDate(day: indexPath.row + 1, month: indexPath.section + 1, year: year)
-        cell.backgroundColor = appointmentsModel.updateColor(forDate: newDate!)
+        cell.backgroundColor = appointmentsModel.updateColor(forDate: newDate!, calendar: calendar)
         return cell
     }
     
@@ -73,11 +76,24 @@ extension AppointmentsViewController: UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 2
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let size = UIScreen.main.bounds.size.width/7 - 2
+        return CGSize(width: size, height: size)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if !onceOnly {
+            let indexToScrollTo = IndexPath(item: 0, section: Int(date.currentMonth!)!)
+            self.calendarCollectionView.scrollToItem(at: indexToScrollTo, at: .bottom, animated: false)
+            onceOnly = true
+        }
+    }
 
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let reusableView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "CalendarCollectionReusableView", for: indexPath) as! CalendarCollectionReusableView
         if let text = updateMonth(sectionNumber: indexPath.section + 1) {
-            reusableView.sectionLabel.text = text
+            reusableView.sectionLabel.text = text + " " + date.currentYear!
         }
         return reusableView
     }
