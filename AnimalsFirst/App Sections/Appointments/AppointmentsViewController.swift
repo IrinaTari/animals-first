@@ -16,11 +16,29 @@ class AppointmentsViewController: UIViewController {
     private var year: Int!
     private var calendar = Calendar.current
     private var onceOnly = false
+    private var firstDayInMonthIsMonday: [Bool]!
+    private var updatedMonth: [Bool]!
+    private var numberOfDaysInMonth: [Int]!
+    private var indexPathArray: [IndexPath]!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        updatedMonth = []
+        firstDayInMonthIsMonday = []
+        numberOfDaysInMonth = []
         year = Int(date.currentYear!)
-        
+        for i in 1 ... 12 {
+            let newDate = date.setDate(day: 1, month: i, year: year)
+            let weekDay = calendar.component(.weekday, from: newDate!)
+            numberOfDaysInMonth.append((Calendar.current.range(of: .day, in: .month, for: newDate!)?.count)!)
+            if (weekDay != 1) {
+                firstDayInMonthIsMonday.append(false)
+            } else {
+                firstDayInMonthIsMonday.append(true)
+            }
+            updatedMonth.append(false)
+        }
+
         calendarCollectionView.delegate = self
         calendarCollectionView.dataSource = self
         calendarCollectionView.register(UINib(nibName: "CalendarCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CalendarCollectionViewCell")
@@ -52,23 +70,58 @@ class AppointmentsViewController: UIViewController {
 
 extension AppointmentsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return (Calendar.current.range(of: .day, in: .month, for: Date())?.count)!
+        return numberOfDaysInMonth[section]
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return (Calendar.current.range(of: .month, in: .year, for: Date())?.count)!
+        return 12
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CalendarCollectionViewCell", for: indexPath) as? CalendarCollectionViewCell else {
             fatalError()
         }
-        cell.calendarLabel.text = "\(indexPath.row + 1)"
+
         let newDate = date.setDate(day: indexPath.row + 1, month: indexPath.section + 1, year: year)
-        let isEnabled = appointmentsModel.updateColor(forDate: newDate!, calendar: calendar)
-        cell.contentView.isUserInteractionEnabled = isEnabled
-        cell.calendarLabel.isEnabled = isEnabled
-        cell.backgroundColor = isEnabled ? AFConstants.Colors.green : AFConstants.Colors.darkGray
+        let weekDay = calendar.component(.weekday, from: newDate!)
+
+        if firstDayInMonthIsMonday[indexPath.section] == false {
+            if updatedMonth[indexPath.section] == false {
+                indexPathArray = []
+                if calendarCollectionView.numberOfItems(inSection: indexPath.section) == 0 {
+                    calendarCollectionView.reloadData()
+                } else {
+                    for i in 0 ... weekDay - 1 {
+                        indexPathArray.append(IndexPath(row: i, section: indexPath.section))
+                    }
+                    self.numberOfDaysInMonth[indexPath.section] = self.numberOfDaysInMonth[indexPath.section] + weekDay
+                    collectionView.performBatchUpdates({
+                        collectionView.insertItems(at: indexPathArray)
+                    }, completion: nil)
+
+
+                    self.updatedMonth[indexPath.section] = true
+                    calendarCollectionView.reloadData()
+                }
+            }
+            if indexPathArray.contains(indexPath) {
+                cell.calendarLabel.text = ""
+                cell.backgroundColor = UIColor.white
+                cell.isUserInteractionEnabled = false
+            } else {
+                cell.calendarLabel.text = "\(indexPath.row + 1 - weekDay)"
+                let isEnabled = appointmentsModel.updateColor(forDate: newDate!, calendar: calendar)
+                cell.contentView.isUserInteractionEnabled = isEnabled
+                cell.calendarLabel.isEnabled = isEnabled
+                cell.backgroundColor = isEnabled ? AFConstants.Colors.green : AFConstants.Colors.darkGray
+            }
+        } else {
+            cell.calendarLabel.text = "\(indexPath.row + 1)"
+            let isEnabled = appointmentsModel.updateColor(forDate: newDate!, calendar: calendar)
+            cell.contentView.isUserInteractionEnabled = isEnabled
+            cell.calendarLabel.isEnabled = isEnabled
+            cell.backgroundColor = isEnabled ? AFConstants.Colors.green : AFConstants.Colors.darkGray
+        }
         return cell
     }
     
