@@ -65,7 +65,10 @@ extension AppointmentsViewController: UICollectionViewDelegate, UICollectionView
         }
         cell.calendarLabel.text = "\(indexPath.row + 1)"
         let newDate = date.setDate(day: indexPath.row + 1, month: indexPath.section + 1, year: year)
-        cell.backgroundColor = appointmentsModel.updateColor(forDate: newDate!, calendar: calendar)
+        let isEnabled = appointmentsModel.updateColor(forDate: newDate!, calendar: calendar)
+        cell.contentView.isUserInteractionEnabled = isEnabled
+        cell.calendarLabel.isEnabled = isEnabled
+        cell.backgroundColor = isEnabled ? AFConstants.Colors.green : AFConstants.Colors.darkGray
         return cell
     }
     

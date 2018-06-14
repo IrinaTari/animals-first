@@ -7,8 +7,16 @@
 //
 
 import Foundation
+import UIKit
 
 class AFConstants: NSObject {
+    struct Colors {
+        static let green = UIColor(red: 0/255, green: 179/255, blue: 60/255, alpha: 1)
+        static let purple = UIColor(red: 98/255, green: 62/255, blue: 142/255, alpha: 1)
+        static let gray = UIColor(red: 153/255, green: 153/255, blue: 153/255, alpha: 1)
+        static let darkGray = UIColor(red: 106/255, green: 107/255, blue: 106/255, alpha: 1)
+    }
+
     struct Path {
         static let databaseRef = "https://animalsfirst-12b83.firebaseio.com/"
     }

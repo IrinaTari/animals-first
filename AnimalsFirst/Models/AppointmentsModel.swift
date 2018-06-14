@@ -13,7 +13,7 @@ class AppointmentsModel: NSObject {
     var month = 0
     var year = 0
     var isFull = false
-    var color = UIColor.darkGray
+    var enable = false
     var totalNrOfAnimals = 0
     var numberOfCats = 0
     var numberOfDogs = 0
@@ -37,30 +37,30 @@ class AppointmentsModel: NSObject {
         }
     }
 
-    func updateColor(animalType: AFConstants.AnimalType) -> UIColor {
+    func updateColor(animalType: AFConstants.AnimalType) -> Bool {
         if totalNrOfAnimals < AFConstants.DayCapacity.maxNrAnimals {
             switch animalType {
             case .dog:
                 if numberOfDogs < AFConstants.DayCapacity.maxDogNr {
-                    color = UIColor.green
+                    enable = true
                 }
             case .cat:
                 if numberOfCats < AFConstants.DayCapacity.maxCatNr {
-                    color = UIColor.green
+                    enable = true
                 }
             }
         }
-        return color
+        return enable
     }
 
-    func updateColor(forDate: Date, calendar: Calendar) -> UIColor {
+    func updateColor(forDate: Date, calendar: Calendar) -> Bool {
         let date = Date()
         let compareResult = forDate.compare(date)
         if compareResult == ComparisonResult.orderedAscending || calendar.isDateInWeekend(forDate) {
-            color = UIColor.darkGray
+            enable = false
         } else {
-            color = UIColor.green
+            enable = true
         }
-        return color
+        return enable
     }
 }
