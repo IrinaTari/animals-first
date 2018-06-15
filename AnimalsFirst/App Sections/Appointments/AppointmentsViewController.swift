@@ -69,8 +69,6 @@ class AppointmentsViewController: UIViewController {
         var count = 0
         for month in currentCalendar {
             let day = AFDayModel(index: 1, month: month.index + 1, year: year)
-            print(day.month)
-            print(day.weekDay)
             if day.weekDay > 1 {
                 for _ in 1 ... day.weekDay - 1{
                     let newBlankDay = AFDayModel(index: 0, month: 0, year: 0)
@@ -98,8 +96,7 @@ extension AppointmentsViewController: UICollectionViewDelegate, UICollectionView
         
         let dayModel = currentCalendar[indexPath.section].days[indexPath.row]
         
-        
-        if dayModel.index == 0 {
+        if dayModel.index == 0 && dayModel.month == 0 {
             cell.calendarLabel.text = ""
             cell.contentView.isUserInteractionEnabled = false
             cell.backgroundColor = UIColor.white
@@ -107,10 +104,10 @@ extension AppointmentsViewController: UICollectionViewDelegate, UICollectionView
             if dayModel.index == 1 {
                 weekday = dayModel.weekDay
             }
-            guard let newDate = date.setDate(day: indexPath.row + 2 - weekday, month: indexPath.section + 1, year: year) else {
+            guard let newDate = date.setDate(day: dayModel.index!, month: indexPath.section + 1, year: year) else {
                 fatalError()
             }
-            cell.calendarLabel.text = "\(indexPath.row + 2 - weekday)"
+            cell.calendarLabel.text = "\(dayModel.index!)"
             let isEnabled = appointmentsModel.updateColor(forDate: newDate, calendar: calendar)
             cell.contentView.isUserInteractionEnabled = isEnabled
             cell.calendarLabel.isEnabled = isEnabled
