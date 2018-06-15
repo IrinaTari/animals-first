@@ -53,10 +53,10 @@ class AppointmentsModel: NSObject {
         return enable
     }
 
-    func updateColor(forDate: Date, calendar: Calendar) -> Bool {
+    func updateColor(forDate: Date, weekDayIndex: Int) -> Bool {
         let date = Date()
         let compareResult = forDate.compare(date)
-        if compareResult == ComparisonResult.orderedAscending || calendar.isDateInWeekend(forDate) {
+        if compareResult == ComparisonResult.orderedAscending || weekDayIndex == 1 || weekDayIndex == 7 {
             enable = false
         } else {
             enable = true

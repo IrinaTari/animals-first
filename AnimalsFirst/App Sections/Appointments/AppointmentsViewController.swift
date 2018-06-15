@@ -66,15 +66,13 @@ class AppointmentsViewController: UIViewController {
     }
     
     func rearrangeDaysInMonth() {
-        var count = 0
         for month in currentCalendar {
             let day = AFDayModel(index: 1, month: month.index + 1, year: year)
             if day.weekDay > 1 {
                 for _ in 1 ... day.weekDay - 1{
                     let newBlankDay = AFDayModel(index: 0, month: 0, year: 0)
-                    currentCalendar[count].days.insert(newBlankDay, at: 0)
+                    currentCalendar[month.index].days.insert(newBlankDay, at: 0)
                 }
-              count += 1
             }
         }
     }
@@ -108,7 +106,7 @@ extension AppointmentsViewController: UICollectionViewDelegate, UICollectionView
                 fatalError()
             }
             cell.calendarLabel.text = "\(dayModel.index!)"
-            let isEnabled = appointmentsModel.updateColor(forDate: newDate, calendar: calendar)
+            let isEnabled = appointmentsModel.updateColor(forDate: newDate, weekDayIndex: dayModel.weekDay)
             cell.contentView.isUserInteractionEnabled = isEnabled
             cell.calendarLabel.isEnabled = isEnabled
             cell.backgroundColor = isEnabled ? AFConstants.Colors.green : AFConstants.Colors.darkGray
