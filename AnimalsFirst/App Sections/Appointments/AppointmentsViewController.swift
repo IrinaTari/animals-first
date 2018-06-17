@@ -150,6 +150,25 @@ extension AppointmentsViewController: UICollectionViewDelegate, UICollectionView
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let appointmentModel = AppointmentsModel()
+        let dayModel = currentCalendar[indexPath.section].days[indexPath.row]
+        if (dogTextField.text?.isEmpty)! && (catTextField.text?.isEmpty)! {
+            AFAlert.showZeroAnimalsSelectedAlert(self)
+        } else {
+            AFAlert.showAppointmentDayAlert(self, day: dayModel) { (buttonIndex) in
+                if buttonIndex == 0 {
+                    AFAlert.showSterilizationInfoAlert(self, completionBlock: { (buttonIndex) in
+                        if buttonIndex == 0 {
+                            appointmentModel.day = dayModel.index
+                        }
+                    })
+                }
+            }
+        }
+        
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 2
     }
