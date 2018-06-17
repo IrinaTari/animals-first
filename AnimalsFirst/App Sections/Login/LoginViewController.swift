@@ -28,6 +28,10 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tap)
 
         // setup FB button
         FBPlaceholderButton.isHidden = true
@@ -47,6 +51,10 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         } else {
             FirebaseHelpers.firebaseSignOut()
         }
+    }
+    
+    @objc func dismissKeyboard(sender: UIView) {
+        self.view.endEditing(true)
     }
 
     // MARK: buttons action

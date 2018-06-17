@@ -11,6 +11,10 @@ import UIKit
 class AppointmentsViewController: UIViewController {
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var calendarCollectionView: UICollectionView!
+    @IBOutlet weak var dogTextField: UITextField!
+    @IBOutlet weak var catTextField: UITextField!
+    @IBOutlet weak var dogCheckBox: UIButton!
+    @IBOutlet weak var catCheckBox: UIButton!
     private let appointmentsModel = AppointmentsModel()
     private var date = Date()
     private var year: Int!
@@ -21,7 +25,10 @@ class AppointmentsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        dogCheckBox.addTarget(self, action: #selector(toggleCheckBox), for: UIControlEvents.touchUpInside)
+        catCheckBox.addTarget(self, action: #selector(toggleCheckBox), for: UIControlEvents.touchUpInside)
+        dogTextField.delegate = self
+        catTextField.delegate = self
         year = Int(date.currentYear!)
         for i in 0 ... 11 {
             var dayModel = AFDayModel.init(index: 1, month: i + 1, year: year)
@@ -40,9 +47,29 @@ class AppointmentsViewController: UIViewController {
         calendarCollectionView.register(UINib(nibName: "CalendarCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CalendarCollectionViewCell")
         calendarCollectionView.register(UINib(nibName: "CalendarCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "CalendarCollectionReusableView")
         
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tap)
+        
         rearrangeDaysInMonth()
     }
 
+    @objc func dismissKeyboard(sender: UIView) {
+        self.view.endEditing(true)
+        refreshCheckBoxButtons()
+    }
+    
+    @objc func toggleCheckBox(sender: UIButton) {
+        if (sender.isSelected == true) {
+            sender.setBackgroundImage(UIImage(named: "box"), for: .normal)
+            sender.isSelected = false;
+        }
+        else {
+            sender.setBackgroundImage(UIImage(named: "checkBox"), for: .normal)
+            sender.isSelected = true;
+        }
+    }
+    
     @IBAction func backButtonAction(_ sender: Any) {
         guard let viewController = UIViewController.client as? ClientViewController else {
             fatalError()
@@ -74,6 +101,15 @@ class AppointmentsViewController: UIViewController {
                     currentCalendar[month.index].days.insert(newBlankDay, at: 0)
                 }
             }
+        }
+    }
+    
+    func refreshCheckBoxButtons() {
+        if (dogTextField.text?.isEmpty)! && dogCheckBox.isSelected == true {
+            toggleCheckBox(sender: dogCheckBox)
+        }
+        if (catTextField.text?.isEmpty)! && catCheckBox.isSelected == true {
+            toggleCheckBox(sender: catCheckBox)
         }
     }
 }
@@ -141,5 +177,27 @@ extension AppointmentsViewController: UICollectionViewDelegate, UICollectionView
             reusableView.sectionLabel.text = text + " " + date.currentYear!
         }
         return reusableView
+    }
+}
+
+extension AppointmentsViewController: UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == catTextField {
+            if !catCheckBox.isSelected {
+                toggleCheckBox(sender: catCheckBox)
+            }
+            if (dogTextField.text?.isEmpty)! && dogCheckBox.isSelected == true {
+                toggleCheckBox(sender: dogCheckBox)
+            }
+        } else {
+            if !dogCheckBox.isSelected {
+                toggleCheckBox(sender: dogCheckBox)
+            }
+            if (catTextField.text?.isEmpty)! && catCheckBox.isSelected == true {
+                toggleCheckBox(sender: catCheckBox)
+            }
+        }
+        textField.keyboardType = UIKeyboardType.decimalPad
     }
 }
