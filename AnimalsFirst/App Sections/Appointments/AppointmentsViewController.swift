@@ -13,8 +13,10 @@ class AppointmentsViewController: UIViewController {
     @IBOutlet weak var calendarCollectionView: UICollectionView!
     @IBOutlet weak var dogTextField: UITextField!
     @IBOutlet weak var catTextField: UITextField!
+    @IBOutlet weak var maleCatTextField: UITextField!
     @IBOutlet weak var dogCheckBox: UIButton!
     @IBOutlet weak var catCheckBox: UIButton!
+    @IBOutlet weak var maleCatCheckBox: UIButton!
     private let appointmentsModel = AppointmentsModel()
     private var date = Date()
     private var year: Int!
@@ -27,8 +29,10 @@ class AppointmentsViewController: UIViewController {
         super.viewDidLoad()
         dogCheckBox.addTarget(self, action: #selector(toggleCheckBox), for: UIControlEvents.touchUpInside)
         catCheckBox.addTarget(self, action: #selector(toggleCheckBox), for: UIControlEvents.touchUpInside)
+        maleCatCheckBox.addTarget(self, action: #selector(toggleCheckBox), for: UIControlEvents.touchUpInside)
         dogTextField.delegate = self
         catTextField.delegate = self
+        maleCatTextField.delegate = self
         year = Int(date.currentYear!)
         for i in 0 ... 11 {
             var dayModel = AFDayModel.init(index: 1, month: i + 1, year: year)
@@ -111,6 +115,9 @@ class AppointmentsViewController: UIViewController {
         if (catTextField.text?.isEmpty)! && catCheckBox.isSelected == true {
             toggleCheckBox(sender: catCheckBox)
         }
+        if (maleCatTextField.text?.isEmpty)! && maleCatCheckBox.isSelected == true {
+            toggleCheckBox(sender: maleCatCheckBox)
+        }
     }
 }
 
@@ -142,7 +149,7 @@ extension AppointmentsViewController: UICollectionViewDelegate, UICollectionView
                 fatalError()
             }
             cell.calendarLabel.text = "\(dayModel.index!)"
-            let isEnabled = appointmentsModel.updateColor(forDate: newDate, weekDayIndex: dayModel.weekDay)
+            let isEnabled = appointmentsModel.checkValidDate(forDate: newDate, weekDayIndex: dayModel.weekDay)
             cell.contentView.isUserInteractionEnabled = isEnabled
             cell.calendarLabel.isEnabled = isEnabled
             cell.backgroundColor = isEnabled ? AFConstants.Colors.green : AFConstants.Colors.darkGray
@@ -151,8 +158,9 @@ extension AppointmentsViewController: UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let appointmentModel = AppointmentsModel()
+
         let dayModel = currentCalendar[indexPath.section].days[indexPath.row]
+
         if (dogTextField.text?.isEmpty)! && (catTextField.text?.isEmpty)! {
             AFAlert.showZeroAnimalsSelectedAlert(self)
         } else {
@@ -160,7 +168,7 @@ extension AppointmentsViewController: UICollectionViewDelegate, UICollectionView
                 if buttonIndex == 0 {
                     AFAlert.showSterilizationInfoAlert(self, completionBlock: { (buttonIndex) in
                         if buttonIndex == 0 {
-                            appointmentModel.day = dayModel.index
+                            // save appointment info
                         }
                     })
                 }
@@ -209,12 +217,32 @@ extension AppointmentsViewController: UITextFieldDelegate {
             if (dogTextField.text?.isEmpty)! && dogCheckBox.isSelected == true {
                 toggleCheckBox(sender: dogCheckBox)
             }
-        } else {
+            if (maleCatTextField.text?.isEmpty)! && maleCatCheckBox.isSelected == true {
+                toggleCheckBox(sender: maleCatCheckBox)
+            }
+            guard let numberOfCats = Int(catTextField.text!) else {
+                fatalError()
+            }
+            appointmentsModel.updateNumberOfAnimals(animalType: .cat, number: numberOfCats)
+        } else if textField == dogTextField {
             if !dogCheckBox.isSelected {
                 toggleCheckBox(sender: dogCheckBox)
             }
             if (catTextField.text?.isEmpty)! && catCheckBox.isSelected == true {
                 toggleCheckBox(sender: catCheckBox)
+            }
+            if (maleCatTextField.text?.isEmpty)! && maleCatCheckBox.isSelected == true {
+                toggleCheckBox(sender: maleCatCheckBox)
+            }
+        } else {
+            if !maleCatCheckBox.isSelected {
+                toggleCheckBox(sender: maleCatCheckBox)
+            }
+            if (catTextField.text?.isEmpty)! && catCheckBox.isSelected == true {
+                toggleCheckBox(sender: catCheckBox)
+            }
+            if (dogTextField.text?.isEmpty)! && dogCheckBox.isSelected == true {
+                toggleCheckBox(sender: dogCheckBox)
             }
         }
         textField.keyboardType = UIKeyboardType.decimalPad

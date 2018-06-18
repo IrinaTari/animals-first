@@ -40,13 +40,15 @@ class AFConstants: NSObject {
     }
 
     struct DayCapacity {
-        static let maxDogNr = 5
-        static let maxCatNr = 7
+        static let maxDogNr = 10
+        static let maxCatNr = 10
         static let maxNrAnimals = 10
+        static let maxNrOfMaleCats = 6
     }
 
     enum AnimalType: String {
         case dog = "Caine"
         case cat = "Pisica"
+        case maleCat = "Motan"
     }
 }
