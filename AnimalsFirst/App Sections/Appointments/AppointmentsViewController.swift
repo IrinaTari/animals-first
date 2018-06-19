@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class AppointmentsViewController: UIViewController {
     @IBOutlet weak var monthLabel: UILabel!
@@ -25,6 +26,7 @@ class AppointmentsViewController: UIViewController {
     private var animalType = AFConstants.AnimalType.dog
     private var number = 0
     private var showFilteredDay = false
+    let appointmentModel = AppointmentsModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -120,6 +122,18 @@ class AppointmentsViewController: UIViewController {
             toggleCheckBox(sender: maleCatCheckBox)
         }
     }
+    
+    func userInput() -> [(AFConstants.AnimalType, Int)] {
+        var array:[(AFConstants.AnimalType, Int)] = []
+        if (dogTextField.text?.isEmpty)! {
+            array.append((.dog, Int(dogTextField.text!)!))
+        } else if (catTextField.text?.isEmpty)! {
+            array.append((.cat, Int(catTextField.text!)!))
+        } else if (maleCatTextField.text?.isEmpty)! {
+            array.append((.maleCat, Int(maleCatTextField.text!)!))
+        }
+        return array
+    }
 }
 
 extension AppointmentsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -161,9 +175,11 @@ extension AppointmentsViewController: UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
+        let cell = collectionView.cellForItem(at: indexPath)
         let dayModel = currentCalendar[indexPath.section].days[indexPath.row]
-
+        if cell?.contentView.isUserInteractionEnabled == false {
+            return
+        }
         if (dogTextField.text?.isEmpty)! && (catTextField.text?.isEmpty)! {
             AFAlert.showZeroAnimalsSelectedAlert(self)
         } else {
@@ -171,13 +187,17 @@ extension AppointmentsViewController: UICollectionViewDelegate, UICollectionView
                 if buttonIndex == 0 {
                     AFAlert.showSterilizationInfoAlert(self, completionBlock: { (buttonIndex) in
                         if buttonIndex == 0 {
-                            // save appointment info
+                            self.appointmentModel.day = indexPath.row
+                            self.appointmentModel.month = indexPath.section
+                            self.appointmentModel.year = self.year
+                            self.appointmentModel.client = Auth.auth().currentUser
+                            self.appointmentModel.animalType = self.userInput()
+                            // go to next screen and show info
                         }
                     })
                 }
             }
         }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

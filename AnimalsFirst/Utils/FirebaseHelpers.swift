@@ -87,7 +87,24 @@ class FirebaseHelpers: UIViewController {
 
     }
 
-    static func fetchClientUser() {
-
+    static func fetchClientUser(){
+        let currentUser = Auth.auth().currentUser
+        let ref = Database.database().reference()
+        ref.child("users").child(AFConstants.UserTypes.client).observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            print(snapshot)
+            guard let dictionary = snapshot.value as? [String : Any] else {
+                fatalError()
+            }
+            for key in (dictionary.keys) {
+                if key == currentUser?.uid {
+                    // user exists
+                    // return user details
+                    return
+                }
+            }
+        }) { (error) in
+            print(error.localizedDescription)
+        }
     }
 }

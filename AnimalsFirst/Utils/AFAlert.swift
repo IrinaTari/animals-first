@@ -109,6 +109,10 @@ typealias AlertDismissCompletionBlock = ((Int) -> Void)
         AFAlert.showAlertView(controller, title: "Sunteti sigur(a) ca doriti sa va programati pentru ziua de \(day.index!)/\(day.month!)/\(day.year!)?", message: nil, cancelButtonTitle: "DA", destructiveButtonTitle: nil, otherButtonsTitle: ["NU"], tapBlock: completionBlock)
     }
     
+    static func showInvalidDayAlert(_ controller: UIViewController) {
+        AFAlert.showAlertView(controller, title: "Nu se poate face programare", message: "Va rugam alegeti una dintre zilele disponibile (marcate cu verde).", cancelButtonTitle: "OK", destructiveButtonTitle: nil, otherButtonsTitle: nil, tapBlock: nil)
+    }
+    
     static func showSterilizationInfoAlert(_ controller: UIViewController, completionBlock: @escaping AlertDismissCompletionBlock) {
         AFAlert.showAlertView(controller, title: "Inainte sa va programam:", message: " - animalul trebuie transportat intr-o cutie speciala pentru a evita evenimente nedorite \n - se poate sa ramana si o noapte post-operator, dar nu vineri \n - intre 8 si 9 preluam animalele si intre 16 si 17 le dam inapoi \n - aveti optiunea sa aduca cu o zi inainte intre 16 si 17 (in conditia in care programarea nu este luni) \n - la final, fiecare animal este predat stpanului impreuna cu adeverinta de sterilizare si recomandarile post-operatorii care sunt si explicate pe larg verbal", cancelButtonTitle: "Accept", destructiveButtonTitle: nil, otherButtonsTitle: ["Nu accept"], tapBlock: completionBlock)
     }
