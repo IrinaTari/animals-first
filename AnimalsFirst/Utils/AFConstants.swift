@@ -50,5 +50,6 @@ class AFConstants: NSObject {
         case dog = "Caine"
         case cat = "Pisica"
         case maleCat = "Motan"
+        case bothCatAndDog = "Pisica si Caine"
     }
 }

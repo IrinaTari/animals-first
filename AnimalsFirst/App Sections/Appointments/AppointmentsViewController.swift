@@ -214,14 +214,25 @@ extension AppointmentsViewController: UITextFieldDelegate {
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let newText = NSString(string: textField.text!).replacingCharacters(in: range, with: string).trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        var secondNumber = 0
         print(newText)
         if textField == catTextField {
             self.animalType = .cat
         } else if textField == dogTextField {
             self.animalType = .dog
-        } else {
+            
+        } else if textField == maleCatTextField {
             self.animalType = .maleCat
         }
+        if !(catTextField.text?.isEmpty)! && !(dogTextField.text?.isEmpty)! {
+            self.animalType = .bothCatAndDog
+            if textField == catTextField {
+                secondNumber = Int(dogTextField.text!)!
+            } else {
+                secondNumber = Int(catTextField.text!)!
+            }
+        }
+        
         guard let number = Int(newText) else {
             showFilteredDay = false
             self.calendarCollectionView.reloadData()
@@ -234,11 +245,10 @@ extension AppointmentsViewController: UITextFieldDelegate {
                     fatalError()
                 }
                 if day.checkValidDate(forDate: newDate, weekDayIndex: day.weekDay) {
-                    day.isEnabled = !day.checkDayCapacity(animalType: self.animalType, number: number)
+                    day.isEnabled = !day.checkDayCapacity(animalType: self.animalType, number: number, secondNumber: secondNumber)
                 } else {
                     day.isEnabled = false
                 }
-                print(day.isEnabled)
             }
         }
         self.calendarCollectionView.reloadData()
