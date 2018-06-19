@@ -230,12 +230,15 @@ extension AppointmentsViewController: UITextFieldDelegate {
         showFilteredDay = true
         for month in currentCalendar {
             for day in month.days {
-                if day.index == 1 || day.index == 7 {
-                    return true
+                guard let newDate = date.setDate(day: day.index!, month: day.month, year: year) else {
+                    fatalError()
                 }
-                if !day.checkDayCapacity(animalType: self.animalType, number: number) {
+                if day.checkValidDate(forDate: newDate, weekDayIndex: day.weekDay) {
+                    day.isEnabled = !day.checkDayCapacity(animalType: self.animalType, number: number)
+                } else {
                     day.isEnabled = false
                 }
+                print(day.isEnabled)
             }
         }
         self.calendarCollectionView.reloadData()

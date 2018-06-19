@@ -53,20 +53,18 @@ class AFDayModel: NSObject {
 
     func checkDayCapacity(animalType: AFConstants.AnimalType, number: Int) -> Bool {
         var full = false
-        if totalNrOfAnimals < AFConstants.DayCapacity.maxNrAnimals {
-            switch animalType {
-            case .dog:
-                if numberOfDogs >= AFConstants.DayCapacity.maxDogNr - number || totalNrOfAnimals >= AFConstants.DayCapacity.maxNrAnimals - number {
-                    full = true
-                }
-            case .cat:
-                if numberOfCats >= AFConstants.DayCapacity.maxCatNr - number || totalNrOfAnimals >= AFConstants.DayCapacity.maxNrAnimals - number {
-                    full = true
-                }
-            case .maleCat:
-                if numberOfMaleCats >= AFConstants.DayCapacity.maxNrOfMaleCats - number {
-                    full = true
-                }
+        switch animalType {
+        case .dog:
+            if numberOfDogs >= AFConstants.DayCapacity.maxDogNr - number || totalNrOfAnimals >= AFConstants.DayCapacity.maxNrAnimals - number {
+                full = true
+            }
+        case .cat:
+            if numberOfCats >= AFConstants.DayCapacity.maxCatNr - number || totalNrOfAnimals >= AFConstants.DayCapacity.maxNrAnimals - number {
+                full = true
+            }
+        case .maleCat:
+            if numberOfMaleCats >= AFConstants.DayCapacity.maxNrOfMaleCats - number {
+                full = true
             }
         }
         return full
