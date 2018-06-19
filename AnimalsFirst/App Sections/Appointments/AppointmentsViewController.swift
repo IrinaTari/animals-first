@@ -17,13 +17,14 @@ class AppointmentsViewController: UIViewController {
     @IBOutlet weak var dogCheckBox: UIButton!
     @IBOutlet weak var catCheckBox: UIButton!
     @IBOutlet weak var maleCatCheckBox: UIButton!
-    private let appointmentsModel = AppointmentsModel()
     private var date = Date()
     private var year: Int!
-    private var calendar = Calendar.current
     private var onceOnly = false
     private var currentCalendar: [AFMonthModel] = []
     private var weekday = 0
+    private var animalType = AFConstants.AnimalType.dog
+    private var number = 0
+    private var showFilteredDay = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,7 +74,7 @@ class AppointmentsViewController: UIViewController {
             sender.isSelected = true;
         }
     }
-    
+
     @IBAction func backButtonAction(_ sender: Any) {
         guard let viewController = UIViewController.client as? ClientViewController else {
             fatalError()
@@ -142,17 +143,19 @@ extension AppointmentsViewController: UICollectionViewDelegate, UICollectionView
             cell.contentView.isUserInteractionEnabled = false
             cell.backgroundColor = UIColor.white
         } else {
-            if dayModel.index == 1 {
-                weekday = dayModel.weekDay
-            }
-            guard let newDate = date.setDate(day: dayModel.index!, month: indexPath.section + 1, year: year) else {
-                fatalError()
+            if showFilteredDay == false {
+                if dayModel.index == 1 {
+                    weekday = dayModel.weekDay
+                }
+                guard let newDate = date.setDate(day: dayModel.index!, month: indexPath.section + 1, year: year) else {
+                    fatalError()
+                }
+                dayModel.isEnabled = dayModel.checkValidDate(forDate: newDate, weekDayIndex: dayModel.weekDay)
             }
             cell.calendarLabel.text = "\(dayModel.index!)"
-            let isEnabled = appointmentsModel.checkValidDate(forDate: newDate, weekDayIndex: dayModel.weekDay)
-            cell.contentView.isUserInteractionEnabled = isEnabled
-            cell.calendarLabel.isEnabled = isEnabled
-            cell.backgroundColor = isEnabled ? AFConstants.Colors.green : AFConstants.Colors.darkGray
+            cell.contentView.isUserInteractionEnabled = dayModel.isEnabled
+            cell.calendarLabel.isEnabled = dayModel.isEnabled
+            cell.backgroundColor = dayModel.isEnabled ? AFConstants.Colors.green : AFConstants.Colors.darkGray
         }
         return cell
     }
@@ -208,6 +211,36 @@ extension AppointmentsViewController: UICollectionViewDelegate, UICollectionView
 }
 
 extension AppointmentsViewController: UITextFieldDelegate {
+
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let newText = NSString(string: textField.text!).replacingCharacters(in: range, with: string).trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        print(newText)
+        if textField == catTextField {
+            self.animalType = .cat
+        } else if textField == dogTextField {
+            self.animalType = .dog
+        } else {
+            self.animalType = .maleCat
+        }
+        guard let number = Int(newText) else {
+            showFilteredDay = false
+            self.calendarCollectionView.reloadData()
+            return true
+        }
+        showFilteredDay = true
+        for month in currentCalendar {
+            for day in month.days {
+                if day.index == 1 || day.index == 7 {
+                    return true
+                }
+                if !day.checkDayCapacity(animalType: self.animalType, number: number) {
+                    day.isEnabled = false
+                }
+            }
+        }
+        self.calendarCollectionView.reloadData()
+        return true
+    }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == catTextField {
@@ -220,10 +253,6 @@ extension AppointmentsViewController: UITextFieldDelegate {
             if (maleCatTextField.text?.isEmpty)! && maleCatCheckBox.isSelected == true {
                 toggleCheckBox(sender: maleCatCheckBox)
             }
-            guard let numberOfCats = Int(catTextField.text!) else {
-                fatalError()
-            }
-            appointmentsModel.updateNumberOfAnimals(animalType: .cat, number: numberOfCats)
         } else if textField == dogTextField {
             if !dogCheckBox.isSelected {
                 toggleCheckBox(sender: dogCheckBox)
