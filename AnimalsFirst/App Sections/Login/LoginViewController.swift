@@ -135,8 +135,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         fbbutton.imageView?.adjustsImageSizeForAccessibilityContentSizeCategory = true
 
     }
-
-
 }
 
 

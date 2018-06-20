@@ -20,6 +20,9 @@ class AppointmentsDetailViewController: UIViewController {
     @IBOutlet weak var returnNextDayLabel: UILabel!
     @IBOutlet weak var confirmButton: UIButton!
     let appointmentModel = AppointmentsModel()
+    var dateString = ""
+    var previousDayString = ""
+    var nextDayString = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,10 +30,11 @@ class AppointmentsDetailViewController: UIViewController {
         bringPreviousDayCheckBox.addTarget(self, action: #selector(toggleCheckBox), for: UIControlEvents.touchUpInside)
         returnSameDayCheckBox.addTarget(self, action: #selector(toggleCheckBox), for: UIControlEvents.touchUpInside)
         returnNextDayCheckBox.addTarget(self, action: #selector(toggleCheckBox), for: UIControlEvents.touchUpInside)
-        let dateString = "\(appointmentModel.day.index!)/\(appointmentModel.day.month!)/\(appointmentModel.day.year!)"
-        let previousDayString = "\(appointmentModel.day.index! - 1)/\(appointmentModel.day.month!)/\(appointmentModel.day.year!)"
-        let nextDayString = "\(appointmentModel.day.index! + 1)/\(appointmentModel.day.month!)/\(appointmentModel.day.year!)"
-        infoLabel.text = "Date personale: \(appointmentModel.client!) \n Data: \(dateString) \n Companion: \(appointmentModel.animalType!) "
+        dateString = "\(appointmentModel.day.index!)/\(appointmentModel.day.month!)/\(appointmentModel.day.year!)"
+        previousDayString = "\(appointmentModel.day.index! - 1)/\(appointmentModel.day.month!)/\(appointmentModel.day.year!)"
+        nextDayString = "\(appointmentModel.day.index! + 1)/\(appointmentModel.day.month!)/\(appointmentModel.day.year!)"
+        let clientString = "Nume: \(appointmentModel.client[0]) \n Email: \(appointmentModel.client[1]) \n Telefon: \(appointmentModel.client[2]) \n"
+        infoLabel.text = "\(clientString) \n Data: \(dateString) \n Companion: \(appointmentModel.animalType!) "
         bringSameDayLabel.text = "\(dateString) 8:00 - 9:00"
         bringPreviousDayLabel.text = "\(previousDayString) 16:00 - 17:00"
         returnSameDayLabel.text = "\(dateString) 16:00 - 17:00"
@@ -61,7 +65,24 @@ class AppointmentsDetailViewController: UIViewController {
     }
 
     @IBAction func confirmAppointmentAction(_ sender: Any) {
-
+        if returnNextDayCheckBox.isSelected == false && returnSameDayCheckBox.isSelected == false || bringSameDayCheckBox.isSelected == false && bringPreviousDayCheckBox.isSelected == false {
+            AFAlert.showNoDateSelectionAlert(self)
+        } else {
+            if returnSameDayCheckBox.isSelected {
+                appointmentModel.returnDay = "\(dateString) 16:00 - 17:00"
+            }
+            if returnNextDayCheckBox.isSelected {
+                appointmentModel.returnDay = "\(nextDayString) 16:00 - 17:00"
+            }
+            if bringSameDayCheckBox.isSelected {
+                appointmentModel.bringDay = "\(dateString) 16:00 - 17:00"
+            }
+            if bringPreviousDayCheckBox.isSelected {
+                appointmentModel.bringDay = "\(previousDayString) 16:00 - 17:00"
+            }
+            // save in db
+            FirebaseHelpers.saveAppointment(appointment: appointmentModel)
+        }
     }
 
     @IBAction func backButtonAction(_ sender: Any) {

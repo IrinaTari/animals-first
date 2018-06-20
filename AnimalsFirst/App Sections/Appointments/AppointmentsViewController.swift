@@ -194,7 +194,7 @@ extension AppointmentsViewController: UICollectionViewDelegate, UICollectionView
                             viewController.appointmentModel.day.index = dayModel.index
                             viewController.appointmentModel.day.month = dayModel.month
                             viewController.appointmentModel.day.year = self.year
-                            viewController.appointmentModel.client = Auth.auth().currentUser
+                            viewController.appointmentModel.client = FirebaseHelpers.fetchClientUser()
                             viewController.appointmentModel.animalType = self.userInput()
                             self.present(viewController, animated: false, completion: nil)
                         }

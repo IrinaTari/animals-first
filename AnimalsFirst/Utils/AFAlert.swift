@@ -120,4 +120,8 @@ typealias AlertDismissCompletionBlock = ((Int) -> Void)
     static func showZeroAnimalsSelectedAlert(_ controller: UIViewController) {
         AFAlert.showAlertView(controller, title: "Nu se poate face programare", message: "Introduceti numarul de caini/pisici/ motani.", cancelButtonTitle: "OK", destructiveButtonTitle: nil, otherButtonsTitle: nil, tapBlock: nil)
     }
+
+    static func showNoDateSelectionAlert(_ controller: UIViewController) {
+        AFAlert.showAlertView(controller, title: "Nu se poate face programare", message: "Va rugam, selectati o date de predare si una de recuperare.", cancelButtonTitle: "OK", destructiveButtonTitle: nil, otherButtonsTitle: nil, tapBlock: nil)
+    }
 }

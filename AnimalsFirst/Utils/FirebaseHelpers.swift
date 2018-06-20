@@ -67,7 +67,7 @@ class FirebaseHelpers: UIViewController {
         })
     }
 
-    static func saveAppointment() {
+    static func saveAppointment(appointment: AppointmentsModel) {
 
     }
 
@@ -83,28 +83,39 @@ class FirebaseHelpers: UIViewController {
 
     }
 
-    static func saveClientUser() {
+    static func saveClientUser(name: String, email: String, phone: String, id: String) {
+        let ref = Database.database().reference(fromURL: AFConstants.Path.databaseRef)
 
+        let values = ["name" : name, "email" : email, "phone" : phone]
+        let usersRef = ref.child("users")
+        let clientUserRef = usersRef.child("clients").child(id)
+        clientUserRef.updateChildValues(values, withCompletionBlock: {(err, ref) in
+            if err != nil {
+                print(err!)
+                return
+            }
+            // client saved
+            print("client saved")
+        })
     }
 
-    static func fetchClientUser(){
-        let currentUser = Auth.auth().currentUser
-        let ref = Database.database().reference()
-        ref.child("users").child(AFConstants.UserTypes.client).observeSingleEvent(of: .value, with: { (snapshot) in
+
+    static func fetchClientUser() -> [String] {
+        let ref = Database.database().reference(fromURL: AFConstants.Path.databaseRef)
+        let userID = Auth.auth().currentUser?.uid
+        var username = ""
+        var email = ""
+        var phone = ""
+        ref.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
             print(snapshot)
-            guard let dictionary = snapshot.value as? [String : Any] else {
-                fatalError()
-            }
-            for key in (dictionary.keys) {
-                if key == currentUser?.uid {
-                    // user exists
-                    // return user details
-                    return
-                }
-            }
+            let value = snapshot.value as? NSDictionary
+            username = value?["name"] as? String ?? ""
+            email = value?["email"] as? String ?? ""
+            phone = value?["phone"] as? String ?? ""
         }) { (error) in
             print(error.localizedDescription)
         }
+        return [username, email, phone]
     }
 }
