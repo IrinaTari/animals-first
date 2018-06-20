@@ -18,6 +18,7 @@ class AppointmentsViewController: UIViewController {
     @IBOutlet weak var dogCheckBox: UIButton!
     @IBOutlet weak var catCheckBox: UIButton!
     @IBOutlet weak var maleCatCheckBox: UIButton!
+    @IBOutlet weak var containerView: UIView!
     private var date = Date()
     private var year: Int!
     private var onceOnly = false
@@ -26,7 +27,6 @@ class AppointmentsViewController: UIViewController {
     private var animalType = AFConstants.AnimalType.dog
     private var number = 0
     private var showFilteredDay = false
-    let appointmentModel = AppointmentsModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -125,11 +125,11 @@ class AppointmentsViewController: UIViewController {
     
     func userInput() -> [(AFConstants.AnimalType, Int)] {
         var array:[(AFConstants.AnimalType, Int)] = []
-        if (dogTextField.text?.isEmpty)! {
+        if !(dogTextField.text?.isEmpty)! {
             array.append((.dog, Int(dogTextField.text!)!))
-        } else if (catTextField.text?.isEmpty)! {
+        } else if !(catTextField.text?.isEmpty)! {
             array.append((.cat, Int(catTextField.text!)!))
-        } else if (maleCatTextField.text?.isEmpty)! {
+        } else if !(maleCatTextField.text?.isEmpty)! {
             array.append((.maleCat, Int(maleCatTextField.text!)!))
         }
         return array
@@ -180,19 +180,23 @@ extension AppointmentsViewController: UICollectionViewDelegate, UICollectionView
         if cell?.contentView.isUserInteractionEnabled == false {
             return
         }
-        if (dogTextField.text?.isEmpty)! && (catTextField.text?.isEmpty)! {
+        if (dogTextField.text?.isEmpty)! && (catTextField.text?.isEmpty)! && (maleCatTextField.text?.isEmpty)! {
             AFAlert.showZeroAnimalsSelectedAlert(self)
         } else {
             AFAlert.showAppointmentDayAlert(self, day: dayModel) { (buttonIndex) in
                 if buttonIndex == 0 {
                     AFAlert.showSterilizationInfoAlert(self, completionBlock: { (buttonIndex) in
                         if buttonIndex == 0 {
-                            self.appointmentModel.day = indexPath.row
-                            self.appointmentModel.month = indexPath.section
-                            self.appointmentModel.year = self.year
-                            self.appointmentModel.client = Auth.auth().currentUser
-                            self.appointmentModel.animalType = self.userInput()
                             // go to next screen and show info
+                            guard let viewController = UIViewController.appointmentsDetail as? AppointmentsDetailViewController else {
+                                fatalError("AppointmentsDetailViewController initialization problem")
+                            }
+                            viewController.appointmentModel.day.index = dayModel.index
+                            viewController.appointmentModel.day.month = dayModel.month
+                            viewController.appointmentModel.day.year = self.year
+                            viewController.appointmentModel.client = Auth.auth().currentUser
+                            viewController.appointmentModel.animalType = self.userInput()
+                            self.present(viewController, animated: false, completion: nil)
                         }
                     })
                 }

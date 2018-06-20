@@ -10,9 +10,7 @@ import UIKit
 import Firebase
 
 class AppointmentsModel: NSObject {
-    var day = 0
-    var month = 0
-    var year = 0
+    var day = AFDayModel(index: 0, month: 0, year: 0)
     var client: User!
     var animalType: [(AFConstants.AnimalType, Int)]!
 }

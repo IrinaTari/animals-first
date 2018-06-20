@@ -18,6 +18,7 @@ fileprivate enum ViewControllerType: String {
     case adoptions = "AdoptionsViewController"
     case appointments = "AppointmentsViewController"
     case foster = "FosterViewController"
+    case appointmentsDetails = "AppointmentsDetailViewController"
 
     var storyboard: UIStoryboard {
         switch self {
@@ -37,6 +38,8 @@ fileprivate enum ViewControllerType: String {
             return UIStoryboard.appointments
         case .foster:
             return UIStoryboard.foster
+        case .appointmentsDetails:
+            return UIStoryboard.appointments
         }
     }
 }
@@ -66,6 +69,9 @@ extension UIViewController {
     }
     static var foster: UIViewController? {
         return self.viewController(for: .foster)
+    }
+    static var appointmentsDetail: UIViewController? {
+        return self.viewController(for: .appointmentsDetails)
     }
 }
 
