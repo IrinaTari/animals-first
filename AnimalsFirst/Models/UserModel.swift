@@ -14,6 +14,7 @@ class UserModel {
     var email = ""
     var phone = ""
     var type = ""
+    var uid = ""
 
     convenience init(name: String, email: String, phone: String, type: String) {
         self.init()
