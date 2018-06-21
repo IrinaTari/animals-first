@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A1534F220DC3D06003148BE /* AdoptionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1534F020DC3D06003148BE /* AdoptionsTableViewCell.swift */; };
+		2A1534F320DC3D06003148BE /* AdoptionsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A1534F120DC3D06003148BE /* AdoptionsTableViewCell.xib */; };
 		2A1AAF5320D301FE00C6D573 /* AFDateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1AAF5220D301FE00C6D573 /* AFDateModel.swift */; };
 		2A5E182320D0682C000F5E97 /* CalendarCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A5E182220D0682C000F5E97 /* CalendarCollectionViewCell.xib */; };
 		2A5E182520D068E9000F5E97 /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5E182420D068E9000F5E97 /* CalendarCollectionViewCell.swift */; };
@@ -20,10 +22,8 @@
 		6660934920DBE41A00FCE46A /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6660934820DBE41A00FCE46A /* HistoryViewController.swift */; };
 		6660934B20DBE43A00FCE46A /* History.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6660934A20DBE43A00FCE46A /* History.storyboard */; };
 		6660934D20DBE44D00FCE46A /* Contact.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6660934C20DBE44D00FCE46A /* Contact.storyboard */; };
-		6660935020DBE47500FCE46A /* AdoptionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6660934E20DBE47500FCE46A /* AdoptionsTableViewCell.swift */; };
 		6660935420DBE48600FCE46A /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6660935220DBE48600FCE46A /* HistoryTableViewCell.swift */; };
 		6660935520DBE48600FCE46A /* HistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6660935320DBE48600FCE46A /* HistoryTableViewCell.xib */; };
-		6660935720DBED1200FCE46A /* AdoptionsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6660935620DBED1200FCE46A /* AdoptionsTableViewCell.xib */; };
 		6660935B20DBED3C00FCE46A /* FosterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6660935920DBED3C00FCE46A /* FosterTableViewCell.swift */; };
 		6660935C20DBED3C00FCE46A /* FosterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6660935A20DBED3C00FCE46A /* FosterTableViewCell.xib */; };
 		6664C0BF20D13E3300BD2363 /* AppointmentsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6664C0BE20D13E3300BD2363 /* AppointmentsModel.swift */; };
@@ -77,6 +77,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2A1534F020DC3D06003148BE /* AdoptionsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdoptionsTableViewCell.swift; sourceTree = "<group>"; };
+		2A1534F120DC3D06003148BE /* AdoptionsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdoptionsTableViewCell.xib; sourceTree = "<group>"; };
 		2A1AAF5220D301FE00C6D573 /* AFDateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AFDateModel.swift; sourceTree = "<group>"; };
 		2A5E182220D0682C000F5E97 /* CalendarCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarCollectionViewCell.xib; sourceTree = "<group>"; };
 		2A5E182420D068E9000F5E97 /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -91,10 +93,8 @@
 		6660934820DBE41A00FCE46A /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		6660934A20DBE43A00FCE46A /* History.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = History.storyboard; sourceTree = "<group>"; };
 		6660934C20DBE44D00FCE46A /* Contact.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Contact.storyboard; sourceTree = "<group>"; };
-		6660934E20DBE47500FCE46A /* AdoptionsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdoptionsTableViewCell.swift; sourceTree = "<group>"; };
 		6660935220DBE48600FCE46A /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		6660935320DBE48600FCE46A /* HistoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryTableViewCell.xib; sourceTree = "<group>"; };
-		6660935620DBED1200FCE46A /* AdoptionsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdoptionsTableViewCell.xib; sourceTree = "<group>"; };
 		6660935920DBED3C00FCE46A /* FosterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FosterTableViewCell.swift; sourceTree = "<group>"; };
 		6660935A20DBED3C00FCE46A /* FosterTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FosterTableViewCell.xib; sourceTree = "<group>"; };
 		6664C0BE20D13E3300BD2363 /* AppointmentsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsModel.swift; sourceTree = "<group>"; };
@@ -237,8 +237,8 @@
 		6660934520DBE3DF00FCE46A /* Xibs */ = {
 			isa = PBXGroup;
 			children = (
-				6660934E20DBE47500FCE46A /* AdoptionsTableViewCell.swift */,
-				6660935620DBED1200FCE46A /* AdoptionsTableViewCell.xib */,
+				2A1534F020DC3D06003148BE /* AdoptionsTableViewCell.swift */,
+				2A1534F120DC3D06003148BE /* AdoptionsTableViewCell.xib */,
 			);
 			path = Xibs;
 			sourceTree = "<group>";
@@ -526,7 +526,6 @@
 				6675C70920B6E1D1006A089C /* 2015_p16_01_logo_animal_first_ales_colorat-1.jpg in Resources */,
 				6664C0C720D1577000BD2363 /* CalendarCollectionReusableView.xib in Resources */,
 				66A8FF20208DF54D007BCD48 /* Login.storyboard in Resources */,
-				6660935720DBED1200FCE46A /* AdoptionsTableViewCell.xib in Resources */,
 				6675C71220B6E400006A089C /* Foster.storyboard in Resources */,
 				66A8FF44208DF6A4007BCD48 /* Doctor.storyboard in Resources */,
 				66A8FF4D208DFC14007BCD48 /* lock-open-blue.png in Resources */,
@@ -538,6 +537,7 @@
 				66A8FF4C208DFC14007BCD48 /* download.png in Resources */,
 				66845A3520A06E0F00DF75A7 /* Register.storyboard in Resources */,
 				6675C71620B6E423006A089C /* Appointments.storyboard in Resources */,
+				2A1534F320DC3D06003148BE /* AdoptionsTableViewCell.xib in Resources */,
 				6660935520DBE48600FCE46A /* HistoryTableViewCell.xib in Resources */,
 				6660934B20DBE43A00FCE46A /* History.storyboard in Resources */,
 			);
@@ -661,6 +661,7 @@
 				6615C6C220A9C8B800141F2D /* UILabel+UITextFieldExtensions.swift in Sources */,
 				6660935B20DBED3C00FCE46A /* FosterTableViewCell.swift in Sources */,
 				2A1AAF5320D301FE00C6D573 /* AFDateModel.swift in Sources */,
+				2A1534F220DC3D06003148BE /* AdoptionsTableViewCell.swift in Sources */,
 				667A1BF6209073660058985E /* AdminViewController.swift in Sources */,
 				6664C0BF20D13E3300BD2363 /* AppointmentsModel.swift in Sources */,
 				6660934720DBE3FC00FCE46A /* ContactViewController.swift in Sources */,
@@ -687,7 +688,6 @@
 				66713E7820DA6D3400E01CA1 /* AppointmentsDetailViewController.swift in Sources */,
 				66989E53209C860F007B2C12 /* AFAlert.swift in Sources */,
 				6675C71020B6E3E1006A089C /* AdoptionsViewController.swift in Sources */,
-				6660935020DBE47500FCE46A /* AdoptionsTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
