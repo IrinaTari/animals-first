@@ -25,7 +25,9 @@ class AFConstants: NSObject {
         static let firstTitle = "Programari pentru sterilizare"
         static let secondTitle = "Adoptii"
         static let thirdTitle = "Foster"
-        static let array = [firstTitle, secondTitle, thirdTitle]
+        static let fourthTitle = "Istoric"
+        static let fifthTitle = "Contact"
+        static let array = [firstTitle, secondTitle, thirdTitle, fourthTitle, fifthTitle]
     }
 
     struct UserTypes {

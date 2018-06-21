@@ -9,11 +9,13 @@
 import UIKit
 
 class FosterViewController: UIViewController {
+    @IBOutlet weak var fosterTableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        fosterTableView.delegate = self
+        fosterTableView.dataSource = self
+        fosterTableView.register(HistoryTableViewCell.self, forCellReuseIdentifier: "FosterTableViewCell")
     }
 
     @IBAction func backButtonAction(_ sender: Any) {
@@ -21,5 +23,22 @@ class FosterViewController: UIViewController {
             fatalError()
         }
         self.present(viewController, animated: false, completion: nil)
+    }
+}
+
+// MARK: UITableViewDelegate
+extension FosterViewController: UITableViewDelegate {
+
+}
+
+// MARK: UITableViewDataSource
+extension FosterViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FosterTableViewCell", for: indexPath)
+        return cell
     }
 }

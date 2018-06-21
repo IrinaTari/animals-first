@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Vjd-UC-4UA">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--History View Controller-->
+        <scene sceneID="v8W-Mr-tCa">
+            <objects>
+                <viewController storyboardIdentifier="HistoryViewController" id="Vjd-UC-4UA" customClass="HistoryViewController" customModule="AnimalsFirst" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="GtW-4Q-uPA">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="to3-cW-Mub">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="TWF-Pc-CqD"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="Istoric" id="q75-HD-Zef">
+                                        <barButtonItem key="leftBarButtonItem" title="&lt; Inapoi" id="xgB-VZ-ugz">
+                                            <connections>
+                                                <action selector="backButtonAction:" destination="Vjd-UC-4UA" id="MmM-et-fwI"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kaD-c8-cDd">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="to3-cW-Mub" firstAttribute="top" secondItem="uJX-Uq-3uS" secondAttribute="top" id="GZz-5a-TKK"/>
+                            <constraint firstItem="kaD-c8-cDd" firstAttribute="leading" secondItem="uJX-Uq-3uS" secondAttribute="leading" id="RIa-i4-8ad"/>
+                            <constraint firstItem="to3-cW-Mub" firstAttribute="trailing" secondItem="uJX-Uq-3uS" secondAttribute="trailing" id="RXJ-mf-yax"/>
+                            <constraint firstItem="kaD-c8-cDd" firstAttribute="top" secondItem="to3-cW-Mub" secondAttribute="bottom" id="Ud9-J6-FoQ"/>
+                            <constraint firstItem="to3-cW-Mub" firstAttribute="leading" secondItem="uJX-Uq-3uS" secondAttribute="leading" id="WGG-GD-Pwb"/>
+                            <constraint firstItem="kaD-c8-cDd" firstAttribute="top" secondItem="to3-cW-Mub" secondAttribute="bottom" id="Z47-Xb-wde"/>
+                            <constraint firstItem="kaD-c8-cDd" firstAttribute="trailing" secondItem="uJX-Uq-3uS" secondAttribute="trailing" id="c1N-fi-Vp3"/>
+                            <constraint firstAttribute="bottom" secondItem="kaD-c8-cDd" secondAttribute="bottom" id="udh-1U-Ucu"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="uJX-Uq-3uS"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="fOb-12-pAn"/>
+                    <connections>
+                        <outlet property="historyTableView" destination="kaD-c8-cDd" id="jDG-Gb-IF7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jJ2-mm-lUB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="696.79999999999995" y="174.96251874062969"/>
+        </scene>
+    </scenes>
+</document>

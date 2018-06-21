@@ -27,6 +27,7 @@ class AppointmentsViewController: UIViewController {
     private var animalType = AFConstants.AnimalType.dog
     private var number = 0
     private var showFilteredDay = false
+    private var user = UserModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +58,8 @@ class AppointmentsViewController: UIViewController {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         tap.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tap)
+
+        FirebaseHelpers.fetchClientUser(user: user)
         
         rearrangeDaysInMonth()
     }
@@ -67,13 +70,15 @@ class AppointmentsViewController: UIViewController {
     }
     
     @objc func toggleCheckBox(sender: UIButton) {
-        if (sender.isSelected == true) {
-            sender.setBackgroundImage(UIImage(named: "box"), for: .normal)
-            sender.isSelected = false;
-        }
-        else {
-            sender.setBackgroundImage(UIImage(named: "checkBox"), for: .normal)
-            sender.isSelected = true;
+        UIView.animate(withDuration: 1) {
+            if (sender.isSelected == true) {
+                sender.setBackgroundImage(UIImage(named: "box"), for: .normal)
+                sender.isSelected = false;
+            }
+            else {
+                sender.setBackgroundImage(UIImage(named: "checkBox"), for: .normal)
+                sender.isSelected = true;
+            }
         }
     }
 
@@ -123,14 +128,16 @@ class AppointmentsViewController: UIViewController {
         }
     }
     
-    func userInput() -> [(AFConstants.AnimalType, Int)] {
-        var array:[(AFConstants.AnimalType, Int)] = []
+    func userInput() -> [[AFConstants.AnimalType : Int]] {
+        var array:[[AFConstants.AnimalType : Int]] = [[:]]
         if !(dogTextField.text?.isEmpty)! {
-            array.append((.dog, Int(dogTextField.text!)!))
-        } else if !(catTextField.text?.isEmpty)! {
-            array.append((.cat, Int(catTextField.text!)!))
-        } else if !(maleCatTextField.text?.isEmpty)! {
-            array.append((.maleCat, Int(maleCatTextField.text!)!))
+            array.append([.dog : Int(dogTextField.text!)!])
+        }
+        if !(catTextField.text?.isEmpty)! {
+            array.append([.cat : Int(catTextField.text!)!])
+        }
+        if !(maleCatTextField.text?.isEmpty)! {
+            array.append([.maleCat : Int(maleCatTextField.text!)!])
         }
         return array
     }
@@ -194,7 +201,7 @@ extension AppointmentsViewController: UICollectionViewDelegate, UICollectionView
                             viewController.appointmentModel.day.index = dayModel.index
                             viewController.appointmentModel.day.month = dayModel.month
                             viewController.appointmentModel.day.year = self.year
-                            viewController.appointmentModel.client = FirebaseHelpers.fetchClientUser()
+                            viewController.appointmentModel.client = self.user
                             viewController.appointmentModel.animalType = self.userInput()
                             self.present(viewController, animated: false, completion: nil)
                         }

@@ -100,22 +100,19 @@ class FirebaseHelpers: UIViewController {
     }
 
 
-    static func fetchClientUser() -> [String] {
+    static func fetchClientUser(user: UserModel) {
         let ref = Database.database().reference(fromURL: AFConstants.Path.databaseRef)
         let userID = Auth.auth().currentUser?.uid
-        var username = ""
-        var email = ""
-        var phone = ""
-        ref.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+        ref.child("users").child("clients").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
             print(snapshot)
             let value = snapshot.value as? NSDictionary
-            username = value?["name"] as? String ?? ""
-            email = value?["email"] as? String ?? ""
-            phone = value?["phone"] as? String ?? ""
+            user.name = value?["name"] as? String ?? ""
+            user.email = value?["email"] as? String ?? ""
+            user.phone = value?["phone"] as? String ?? ""
+            user.type = "clients"
         }) { (error) in
             print(error.localizedDescription)
         }
-        return [username, email, phone]
     }
 }

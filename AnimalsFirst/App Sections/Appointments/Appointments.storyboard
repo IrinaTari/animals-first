@@ -232,7 +232,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pCL-wR-1sE">
                                 <rect key="frame" x="35" y="79" width="305" height="171"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="171" id="Gb4-Zy-JNF"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="171" id="Gb4-Zy-JNF"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -355,6 +355,7 @@
                                     <constraint firstAttribute="height" constant="55" id="GXx-LU-vo5"/>
                                     <constraint firstAttribute="width" constant="291" id="wyL-25-L9z"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" name=".SFNSText" family=".SF NS Text" pointSize="15"/>
                                 <state key="normal" title="Confirm programarea">
                                     <color key="titleColor" red="0.66153389080000002" green="0.13522080240000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -381,7 +382,7 @@
                         <constraints>
                             <constraint firstItem="bQO-iM-Cg2" firstAttribute="top" secondItem="pCL-wR-1sE" secondAttribute="bottom" constant="8" id="0cU-Li-Vor"/>
                             <constraint firstAttribute="bottomMargin" secondItem="ZRs-Bw-buh" secondAttribute="bottom" constant="20" id="2fG-qX-IXx"/>
-                            <constraint firstItem="ZRs-Bw-buh" firstAttribute="top" secondItem="FtD-Nt-b2L" secondAttribute="bottom" constant="15" id="47p-9J-JEp"/>
+                            <constraint firstItem="ZRs-Bw-buh" firstAttribute="top" secondItem="FtD-Nt-b2L" secondAttribute="bottom" priority="750" constant="15" id="47p-9J-JEp"/>
                             <constraint firstItem="FtD-Nt-b2L" firstAttribute="leading" secondItem="yEW-Js-Zff" secondAttribute="leading" constant="32" id="DAQ-py-k4b"/>
                             <constraint firstItem="yEW-Js-Zff" firstAttribute="trailing" secondItem="FtD-Nt-b2L" secondAttribute="trailing" constant="32" id="DUq-SN-ZI9"/>
                             <constraint firstItem="esK-k7-9tX" firstAttribute="top" secondItem="L0k-Pl-yAk" secondAttribute="bottom" constant="10" id="E7E-Hu-Czt"/>

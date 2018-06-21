@@ -18,6 +18,8 @@ fileprivate enum StoryboardType: String {
     case adoptions = "Adoptions"
     case appointments = "Appointments"
     case foster = "Foster"
+    case contact = "Contact"
+    case history = "History"
 }
 
 // MARK: - static computed vars
@@ -45,6 +47,12 @@ extension UIStoryboard {
     }
     static var foster: UIStoryboard {
         return storyboard(for: .foster)
+    }
+    static var contact: UIStoryboard {
+        return storyboard(for: .contact)
+    }
+    static var history: UIStoryboard {
+        return storyboard(for: .history)
     }
 }
 

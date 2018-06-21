@@ -26,6 +26,10 @@ class AppointmentsDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        bringSameDayCheckBox.tag = 1
+        bringPreviousDayCheckBox.tag = 2
+        returnSameDayCheckBox.tag = 3
+        returnNextDayCheckBox.tag = 4
         bringSameDayCheckBox.addTarget(self, action: #selector(toggleCheckBox), for: UIControlEvents.touchUpInside)
         bringPreviousDayCheckBox.addTarget(self, action: #selector(toggleCheckBox), for: UIControlEvents.touchUpInside)
         returnSameDayCheckBox.addTarget(self, action: #selector(toggleCheckBox), for: UIControlEvents.touchUpInside)
@@ -33,8 +37,14 @@ class AppointmentsDetailViewController: UIViewController {
         dateString = "\(appointmentModel.day.index!)/\(appointmentModel.day.month!)/\(appointmentModel.day.year!)"
         previousDayString = "\(appointmentModel.day.index! - 1)/\(appointmentModel.day.month!)/\(appointmentModel.day.year!)"
         nextDayString = "\(appointmentModel.day.index! + 1)/\(appointmentModel.day.month!)/\(appointmentModel.day.year!)"
-        let clientString = "Nume: \(appointmentModel.client[0]) \n Email: \(appointmentModel.client[1]) \n Telefon: \(appointmentModel.client[2]) \n"
-        infoLabel.text = "\(clientString) \n Data: \(dateString) \n Companion: \(appointmentModel.animalType!) "
+        let clientString = " Nume: \(self.appointmentModel.client.name) \n Email: \(self.appointmentModel.client.email) \n Telefon: \(self.appointmentModel.client.phone) \n"
+        var animalsString = ""
+        for index in self.appointmentModel.animalType {
+            for (type, number) in index {
+                animalsString.append("      Animal: \(type.rawValue), numar: \(number)\n")
+            }
+        }
+        self.infoLabel.text = "\(clientString) \n Data: \(self.dateString) \n Pacient(i):\n\(animalsString) "
         bringSameDayLabel.text = "\(dateString) 8:00 - 9:00"
         bringPreviousDayLabel.text = "\(previousDayString) 16:00 - 17:00"
         returnSameDayLabel.text = "\(dateString) 16:00 - 17:00"
@@ -55,12 +65,32 @@ class AppointmentsDetailViewController: UIViewController {
 
     @objc func toggleCheckBox(sender: UIButton) {
         if (sender.isSelected == true) {
-            sender.setBackgroundImage(UIImage(named: "box"), for: .normal)
-            sender.isSelected = false;
+            UIView.animate(withDuration: 1) {
+                sender.setBackgroundImage(UIImage(named: "box"), for: .normal)
+                sender.isSelected = false
+            }
         }
         else {
-            sender.setBackgroundImage(UIImage(named: "checkBox"), for: .normal)
-            sender.isSelected = true;
+            UIView.animate(withDuration: 1) {
+                sender.setBackgroundImage(UIImage(named: "checkBox"), for: .normal)
+                sender.isSelected = true
+                switch sender.tag {
+                case 1:
+                    self.bringPreviousDayCheckBox.isSelected = false
+                    self.bringPreviousDayCheckBox.setBackgroundImage(UIImage(named: "box"), for: .normal)
+                case 2:
+                    self.bringSameDayCheckBox.isSelected = false
+                    self.bringSameDayCheckBox.setBackgroundImage(UIImage(named: "box"), for: .normal)
+                case 3:
+                    self.returnNextDayCheckBox.isSelected = false
+                    self.returnNextDayCheckBox.setBackgroundImage(UIImage(named: "box"), for: .normal)
+                case 4:
+                    self.returnSameDayCheckBox.isSelected = false
+                    self.returnSameDayCheckBox.setBackgroundImage(UIImage(named: "box"), for: .normal)
+                default:
+                    return
+                }
+            }
         }
     }
 

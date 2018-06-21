@@ -53,6 +53,16 @@ class StoryboardNavigator: NSObject {
                 fatalError()
             }
             controller.present(viewController, animated: false, completion: nil)
+        case 3:
+            guard let viewController = UIViewController.history as? HistoryViewController else {
+                fatalError()
+            }
+            controller.present(viewController, animated: false, completion: nil)
+        case 4:
+            guard let viewController = UIViewController.contact as? ContactViewController else {
+                fatalError()
+            }
+            controller.present(viewController, animated: false, completion: nil)
         default:
             break
         }

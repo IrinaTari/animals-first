@@ -1,22 +1,23 @@
 //
-//  AdoptionsViewController.swift
+//  HistoryViewController.swift
 //  AnimalsFirst
 //
-//  Created by Irina Țari on 5/24/18.
+//  Created by Irina Țari on 6/21/18.
 //  Copyright © 2018 Irina Tari. All rights reserved.
 //
 
 import UIKit
 
-class AdoptionsViewController: UIViewController {
-    @IBOutlet weak var adoptionsTableView: UITableView!
+class HistoryViewController: UIViewController {
+    @IBOutlet weak var historyTableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        adoptionsTableView.delegate = self
-        adoptionsTableView.dataSource = self
-        adoptionsTableView.register(HistoryTableViewCell.self, forCellReuseIdentifier: "AdoptionsTableViewCell")
+        historyTableView.delegate = self
+        historyTableView.dataSource = self
+        historyTableView.register(HistoryTableViewCell.self, forCellReuseIdentifier: "HistoryTableViewCell")
     }
+    
     @IBAction func backButtonAction(_ sender: Any) {
         guard let viewController = UIViewController.client as? ClientViewController else {
             fatalError()
@@ -26,18 +27,18 @@ class AdoptionsViewController: UIViewController {
 }
 
 // MARK: UITableViewDelegate
-extension AdoptionsViewController: UITableViewDelegate {
+extension HistoryViewController: UITableViewDelegate {
 
 }
 
 // MARK: UITableViewDataSource
-extension AdoptionsViewController: UITableViewDataSource {
+extension HistoryViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "AdoptionsTableViewCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryTableViewCell", for: indexPath)
         return cell
     }
 }

@@ -43,6 +43,7 @@ extension ClientViewController: UICollectionViewDelegate, UICollectionViewDataSo
             fatalError()
         }
         cell.titleLabel.text = AFConstants.Collection.array[indexPath.item]
+        cell.titleLabel.textColor = UIColor.white
         cell.contentView.backgroundColor = UIColor.generateRandomColor()
         cell.contentView.backgroundColor = cell.contentView.backgroundColor?.withAlphaComponent(0.7)
         return cell
@@ -53,8 +54,8 @@ extension ClientViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let size = UIScreen.main.bounds.size.width/2
-        return CGSize(width: size, height: size)
+        let size = UIScreen.main.bounds.size.width/2 - 2
+        return CGSize(width: size * 2, height: size)
     }
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -62,10 +63,10 @@ extension ClientViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        return 2
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        return 2
     }
 }
