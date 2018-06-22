@@ -10,14 +10,15 @@ import UIKit
 
 class HistoryViewController: UIViewController {
     @IBOutlet weak var historyTableView: UITableView!
-    private let appointments = AppointmentsModel()
+    private var appointments: [AppointmentsModel] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         historyTableView.delegate = self
         historyTableView.dataSource = self
         historyTableView.register(HistoryTableViewCell.self, forCellReuseIdentifier: "HistoryTableViewCell")
-        FirebaseHelpers.fetchAppointment(appointment: appointments)
+        appointments = FirebaseHelpers.fetchAppointment()
+        print(appointments)
     }
     
     @IBAction func backButtonAction(_ sender: Any) {
@@ -36,7 +37,7 @@ extension HistoryViewController: UITableViewDelegate {
 // MARK: UITableViewDataSource
 extension HistoryViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return appointments.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -44,12 +45,10 @@ extension HistoryViewController: UITableViewDataSource {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryTableViewCell", for: indexPath) as? HistoryTableViewCell {
             print("success!")
             historyCell = cell
-            DispatchQueue.main.async {
-                let appointmentDay = "\(self.appointments.day.index!)/\(self.appointments.day.month!)/\(self.appointments.day.year!)"
-                cell.appointmentLabel?.text = appointmentDay
-                cell.dropOffLabel?.text = self.appointments.bringDay
-                cell.pickUpLabel?.text = self.appointments.returnDay
-            }
+            let appointmentDay = "\(self.appointments[indexPath.row].day.index!)/\(self.appointments[indexPath.row].day.month!)/\(self.appointments[indexPath.row].day.year!)"
+            cell.appointmentLabel?.text = appointmentDay
+            cell.dropOffLabel?.text = self.appointments[indexPath.row].bringDay
+            cell.pickUpLabel?.text = self.appointments[indexPath.row].returnDay
         }
         return historyCell
     }
