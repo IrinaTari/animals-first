@@ -10,5 +10,7 @@ import Foundation
 import UIKit
 
 class ClientCollectionViewCell: UICollectionViewCell {
+    @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var backgroundColorView: UIView!
 }

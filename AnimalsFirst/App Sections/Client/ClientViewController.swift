@@ -14,9 +14,11 @@ import FirebaseDatabase
 
 class ClientViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
+    var imageArray: [UIImage] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        imageArray = [UIImage(named: "appointments"), UIImage(named: "adoptions"), UIImage(named: "foster"), UIImage(named: "history"), UIImage(named: "contact")] as! [UIImage]
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(UINib(nibName: "ClientCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ClientCollectionViewCell")
@@ -44,8 +46,10 @@ extension ClientViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }
         cell.titleLabel.text = AFConstants.Collection.array[indexPath.item]
         cell.titleLabel.textColor = UIColor.white
-        cell.contentView.backgroundColor = UIColor.generateRandomColor()
-        cell.contentView.backgroundColor = cell.contentView.backgroundColor?.withAlphaComponent(0.7)
+        cell.titleLabel.font = cell.titleLabel.font.withSize(23)
+        //cell.titleLabel.adjustTextUsingDynamicType()
+        cell.backgroundColorView.backgroundColor = UIColor.generateRandomColor()
+        cell.backgroundImageView.image = imageArray[indexPath.row]
         return cell
     }
 
