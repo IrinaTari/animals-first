@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,10 +23,16 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xq4-qF-7JN">
                         <rect key="frame" x="126" y="0.0" width="5" height="106"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="5" id="vQA-bb-HNx"/>
+                        </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kMJ-VK-ds7">
                         <rect key="frame" x="131" y="50" width="233" height="5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="5" id="XTX-xv-eu7"/>
+                        </constraints>
                     </view>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="Faj-EU-gMJ">
                         <rect key="frame" x="139" y="57" width="187" height="46.5"/>
@@ -33,7 +40,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Data si ora recuperarii" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cOv-ND-DUt">
                                 <rect key="frame" x="0.0" y="0.0" width="187" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7KI-NW-TBt">
@@ -60,7 +67,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Data programarii" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a8u-V3-eLU">
                                 <rect key="frame" x="0.0" y="0.0" width="97.5" height="59"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uMX-Xc-GuQ">
@@ -75,23 +82,28 @@
                         </constraints>
                     </stackView>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="aj1-M7-tI5">
-                        <rect key="frame" x="139" y="2" width="200" height="45.5"/>
+                        <rect key="frame" x="139" y="2" width="225" height="45.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Data si ora predarii" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l2E-ba-zJG">
-                                <rect key="frame" x="0.0" y="0.0" width="160" height="23"/>
+                                <rect key="frame" x="0.0" y="0.0" width="225" height="23"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="195-Eo-ddY">
-                                <rect key="frame" x="0.0" y="25" width="42" height="20.5"/>
+                                <rect key="frame" x="0.0" y="25" width="225" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </label>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="width" constant="200" id="zKD-Lu-Xvf"/>
+                            <constraint firstAttribute="trailing" secondItem="195-Eo-ddY" secondAttribute="trailing" id="34H-KY-m7X"/>
+                            <constraint firstAttribute="trailing" secondItem="l2E-ba-zJG" secondAttribute="trailing" id="NcC-Hm-2jq"/>
+                            <constraint firstAttribute="bottom" secondItem="195-Eo-ddY" secondAttribute="bottom" id="TWS-3D-JI2"/>
+                            <constraint firstItem="l2E-ba-zJG" firstAttribute="leading" secondItem="aj1-M7-tI5" secondAttribute="leading" id="cMX-6c-JEq"/>
+                            <constraint firstItem="195-Eo-ddY" firstAttribute="leading" secondItem="aj1-M7-tI5" secondAttribute="leading" id="e8k-JA-gzn"/>
+                            <constraint firstItem="l2E-ba-zJG" firstAttribute="top" secondItem="aj1-M7-tI5" secondAttribute="top" id="kQH-Tz-osG"/>
                         </constraints>
                     </stackView>
                 </subviews>
@@ -106,14 +118,14 @@
                     <constraint firstItem="kMJ-VK-ds7" firstAttribute="top" secondItem="aj1-M7-tI5" secondAttribute="bottom" constant="2" id="UrG-mt-Ets"/>
                     <constraint firstAttribute="trailing" secondItem="Faj-EU-gMJ" secondAttribute="trailing" constant="38" id="VrS-0O-nU0"/>
                     <constraint firstAttribute="bottom" secondItem="NTN-wA-yIn" secondAttribute="bottom" constant="8" id="X8Q-vI-ny1"/>
-                    <constraint firstAttribute="trailing" secondItem="aj1-M7-tI5" secondAttribute="trailing" constant="25" id="Y9j-Bl-W8l"/>
+                    <constraint firstAttribute="trailing" secondItem="aj1-M7-tI5" secondAttribute="trailing" id="XFo-Lt-gv7"/>
                     <constraint firstItem="Xq4-qF-7JN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="YZW-aB-Xfy"/>
                     <constraint firstItem="NTN-wA-yIn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="bTE-FT-zi1"/>
                     <constraint firstItem="kMJ-VK-ds7" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="eNa-UN-OyW"/>
                     <constraint firstItem="kMJ-VK-ds7" firstAttribute="leading" secondItem="Xq4-qF-7JN" secondAttribute="trailing" id="izT-2L-EIW"/>
-                    <constraint firstAttribute="trailing" secondItem="kMJ-VK-ds7" secondAttribute="trailing" id="j4I-iQ-gsG"/>
                     <constraint firstItem="aj1-M7-tI5" firstAttribute="leading" secondItem="Xq4-qF-7JN" secondAttribute="trailing" constant="8" id="qPb-k0-bEa"/>
                     <constraint firstItem="aj1-M7-tI5" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="2" id="tO6-cT-XRl"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="kMJ-VK-ds7" secondAttribute="trailing" constant="-16" id="xet-4u-hrH"/>
                     <constraint firstItem="Faj-EU-gMJ" firstAttribute="leading" secondItem="Xq4-qF-7JN" secondAttribute="trailing" constant="8" id="yVQ-gR-W0Y"/>
                 </constraints>
             </tableViewCellContentView>

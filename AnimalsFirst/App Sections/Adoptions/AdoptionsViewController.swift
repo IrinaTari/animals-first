@@ -15,7 +15,7 @@ class AdoptionsViewController: UIViewController {
         super.viewDidLoad()
         adoptionsTableView.delegate = self
         adoptionsTableView.dataSource = self
-        adoptionsTableView.register(HistoryTableViewCell.self, forCellReuseIdentifier: "AdoptionsTableViewCell")
+        adoptionsTableView.register(UINib(nibName: "AdoptionsTableViewCell", bundle: nil), forCellReuseIdentifier: "AdoptionsTableViewCell")
     }
     @IBAction func backButtonAction(_ sender: Any) {
         guard let viewController = UIViewController.client as? ClientViewController else {

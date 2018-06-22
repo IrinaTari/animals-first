@@ -15,7 +15,7 @@ class FosterViewController: UIViewController {
         super.viewDidLoad()
         fosterTableView.delegate = self
         fosterTableView.dataSource = self
-        fosterTableView.register(HistoryTableViewCell.self, forCellReuseIdentifier: "FosterTableViewCell")
+        fosterTableView.register(UINib(nibName: "FosterTableViewCell", bundle: nil), forCellReuseIdentifier: "FosterTableViewCell")
     }
 
     @IBAction func backButtonAction(_ sender: Any) {

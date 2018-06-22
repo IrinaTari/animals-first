@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class UserModel {
+class UserModel: NSObject {
     var name = ""
     var email = ""
     var phone = ""

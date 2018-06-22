@@ -12,7 +12,7 @@ import FirebaseAuth
 import FBSDKCoreKit
 import FirebaseDatabase
 
-class FirebaseHelpers: UIViewController {
+class FirebaseHelpers: NSObject {
 
     static func firebaseSignOut() {
         let firebaseAuth = Auth.auth()
@@ -94,62 +94,6 @@ class FirebaseHelpers: UIViewController {
                 controller.present(viewController, animated: false, completion: nil)
             })
         })
-    }
-
-    static func fetchAppointment() -> [AppointmentsModel] {
-        var appointments: [AppointmentsModel] = []
-        let ref = Database.database().reference(fromURL: AFConstants.Path.databaseRef)
-        let userID = Auth.auth().currentUser?.uid
-        ref.child("appointments").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
-            // Get user value
-            print(snapshot.childrenCount) // I got the expected number of items
-            for child in snapshot.children.allObjects as! [DataSnapshot] {
-                print(child.value!)
-                let year = child.key
-                for yearChild in child.children.allObjects as! [DataSnapshot] {
-                    let month = yearChild.key
-                    for monthChild in yearChild.children.allObjects as! [DataSnapshot] {
-                        let day = monthChild.key
-                        let appointment = AppointmentsModel()
-                        if let dictionary = monthChild.value as? [String : AnyObject] {
-                            appointment.bringDay = dictionary["dropOffDay"] as? String ?? ""
-                            appointment.returnDay = dictionary["pickUpDay"] as? String ?? ""
-                            appointment.client.name = dictionary["name"] as? String ?? ""
-                            appointment.client.uid = userID!
-                            appointment.day.index = Int(day)
-                            appointment.day.month = Int(month)
-                            appointment.day.year = Int(year)
-                            let animalListString = dictionary["animal"] as? String ?? ""
-                            if animalListString.contains("\n") {
-                                let animalsAndNumbers = animalListString.split(separator: "\n", maxSplits: Int.max, omittingEmptySubsequences: true)
-                                for string in animalsAndNumbers {
-                                    let newArray = string.split(separator: "x", maxSplits: Int.max, omittingEmptySubsequences: true)
-                                    let animal = newArray[0].trimmingCharacters(in: CharacterSet.whitespaces)
-                                    let number = newArray[1].trimmingCharacters(in: CharacterSet.whitespaces)
-                                    var animalType = AFConstants.AnimalType.dog
-                                    switch animal {
-                                    case "Caine":
-                                        animalType = AFConstants.AnimalType.dog
-                                    case "Pisica":
-                                        animalType = AFConstants.AnimalType.cat
-                                    case "Motan":
-                                        animalType = AFConstants.AnimalType.maleCat
-                                    default:
-                                        animalType = AFConstants.AnimalType.dog
-                                    }
-                                    let animalDictionary = [animalType : Int(number)!]
-                                    appointment.animalType.append(animalDictionary)
-                                }
-                            }
-                            appointments.append(appointment)
-                        }
-                    }
-                }
-            }
-        }) { (error) in
-            print(error.localizedDescription)
-        }
-    return appointments
     }
 
     static func saveDoctorUser() {
