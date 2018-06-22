@@ -23,7 +23,6 @@
 		6660935020DBE47500FCE46A /* AdoptionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6660934E20DBE47500FCE46A /* AdoptionsTableViewCell.swift */; };
 		6660935420DBE48600FCE46A /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6660935220DBE48600FCE46A /* HistoryTableViewCell.swift */; };
 		6660935520DBE48600FCE46A /* HistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6660935320DBE48600FCE46A /* HistoryTableViewCell.xib */; };
-		6660935720DBED1200FCE46A /* AdoptionsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6660935620DBED1200FCE46A /* AdoptionsTableViewCell.xib */; };
 		6660935B20DBED3C00FCE46A /* FosterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6660935920DBED3C00FCE46A /* FosterTableViewCell.swift */; };
 		6660935C20DBED3C00FCE46A /* FosterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6660935A20DBED3C00FCE46A /* FosterTableViewCell.xib */; };
 		6664C0BF20D13E3300BD2363 /* AppointmentsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6664C0BE20D13E3300BD2363 /* AppointmentsModel.swift */; };
@@ -94,7 +93,6 @@
 		6660934E20DBE47500FCE46A /* AdoptionsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdoptionsTableViewCell.swift; sourceTree = "<group>"; };
 		6660935220DBE48600FCE46A /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		6660935320DBE48600FCE46A /* HistoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryTableViewCell.xib; sourceTree = "<group>"; };
-		6660935620DBED1200FCE46A /* AdoptionsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdoptionsTableViewCell.xib; sourceTree = "<group>"; };
 		6660935920DBED3C00FCE46A /* FosterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FosterTableViewCell.swift; sourceTree = "<group>"; };
 		6660935A20DBED3C00FCE46A /* FosterTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FosterTableViewCell.xib; sourceTree = "<group>"; };
 		6664C0BE20D13E3300BD2363 /* AppointmentsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsModel.swift; sourceTree = "<group>"; };
@@ -238,7 +236,6 @@
 			isa = PBXGroup;
 			children = (
 				6660934E20DBE47500FCE46A /* AdoptionsTableViewCell.swift */,
-				6660935620DBED1200FCE46A /* AdoptionsTableViewCell.xib */,
 			);
 			path = Xibs;
 			sourceTree = "<group>";
@@ -526,7 +523,6 @@
 				6675C70920B6E1D1006A089C /* 2015_p16_01_logo_animal_first_ales_colorat-1.jpg in Resources */,
 				6664C0C720D1577000BD2363 /* CalendarCollectionReusableView.xib in Resources */,
 				66A8FF20208DF54D007BCD48 /* Login.storyboard in Resources */,
-				6660935720DBED1200FCE46A /* AdoptionsTableViewCell.xib in Resources */,
 				6675C71220B6E400006A089C /* Foster.storyboard in Resources */,
 				66A8FF44208DF6A4007BCD48 /* Doctor.storyboard in Resources */,
 				66A8FF4D208DFC14007BCD48 /* lock-open-blue.png in Resources */,
