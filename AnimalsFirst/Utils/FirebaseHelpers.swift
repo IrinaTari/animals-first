@@ -67,12 +67,50 @@ class FirebaseHelpers: UIViewController {
         })
     }
 
-    static func saveAppointment(appointment: AppointmentsModel) {
-
+    static func saveAppointment(appointment: AppointmentsModel, controller: UIViewController) {
+        let ref = Database.database().reference(fromURL: AFConstants.Path.databaseRef)
+        let userID = Auth.auth().currentUser?.uid
+        var animalsString = ""
+        for index in appointment.animalType {
+            for (type, number) in index {
+                animalsString.append("\(type.rawValue) x \(number) \n")
+            }
+        }
+        let appointmentDay = "\(appointment.day.year!)/\(appointment.day.month!)/\(appointment.day.index!)"
+        let values = ["client" : appointment.client.name, "day" : appointmentDay, "dropOffDay" : appointment.bringDay, "pickUpDay" : appointment.returnDay, "animal" : animalsString] as [String : Any]
+        let appointmentRef = ref.child("appointments")
+        let clientUserRef = appointmentRef.child(userID!).child(appointmentDay)
+        clientUserRef.updateChildValues(values, withCompletionBlock: {(err, ref) in
+            if err != nil {
+                print(err!)
+                return
+            }
+            // appointment saved
+            print("appointment saved")
+            AFAlert.showAppointmentSavedAlert(controller, completionBlock: {_ in 
+                guard let viewController = UIViewController.client as? ClientViewController else {
+                    fatalError("ClientViewController failed to init")
+                }
+                controller.present(viewController, animated: false, completion: nil)
+            })
+        })
     }
 
-    static func fetchAppointment() {
-
+    static func fetchAppointment(appointment: AppointmentsModel) {
+        let ref = Database.database().reference(fromURL: AFConstants.Path.databaseRef)
+        let userID = Auth.auth().currentUser?.uid
+        let appointmentDay = "\(appointment.day.index!)/\(appointment.day.month!)/\(appointment.day.year!)"
+        ref.child("appointments").child(userID!).child(appointmentDay).observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            print(snapshot)
+            let value = snapshot.value as? NSDictionary
+            appointment.day = value?["day"] as! AFDayModel
+            appointment.bringDay = value?["dropOffDay"] as? String ?? ""
+            appointment.returnDay = value?["pickUpDay"] as? String ?? ""
+            appointment.animalType = value?["animal"] as! [[AFConstants.AnimalType : Int]]
+        }) { (error) in
+            print(error.localizedDescription)
+        }
     }
 
     static func saveDoctorUser() {
@@ -85,7 +123,6 @@ class FirebaseHelpers: UIViewController {
 
     static func saveClientUser(name: String, email: String, phone: String, id: String) {
         let ref = Database.database().reference(fromURL: AFConstants.Path.databaseRef)
-
         let values = ["name" : name, "email" : email, "phone" : phone]
         let usersRef = ref.child("users")
         let clientUserRef = usersRef.child("clients").child(id)
@@ -111,6 +148,7 @@ class FirebaseHelpers: UIViewController {
             user.email = value?["email"] as? String ?? ""
             user.phone = value?["phone"] as? String ?? ""
             user.type = "clients"
+            user.uid = userID!
         }) { (error) in
             print(error.localizedDescription)
         }

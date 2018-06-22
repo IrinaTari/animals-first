@@ -10,12 +10,14 @@ import UIKit
 
 class HistoryViewController: UIViewController {
     @IBOutlet weak var historyTableView: UITableView!
+    private let appointments = AppointmentsModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         historyTableView.delegate = self
         historyTableView.dataSource = self
         historyTableView.register(HistoryTableViewCell.self, forCellReuseIdentifier: "HistoryTableViewCell")
+        FirebaseHelpers.fetchAppointment(appointment: appointments)
     }
     
     @IBAction func backButtonAction(_ sender: Any) {
@@ -38,7 +40,17 @@ extension HistoryViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryTableViewCell", for: indexPath)
-        return cell
+        var historyCell = HistoryTableViewCell()
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryTableViewCell", for: indexPath) as? HistoryTableViewCell {
+            print("success!")
+            historyCell = cell
+            DispatchQueue.main.async {
+                let appointmentDay = "\(self.appointments.day.index!)/\(self.appointments.day.month!)/\(self.appointments.day.year!)"
+                cell.appointmentLabel?.text = appointmentDay
+                cell.dropOffLabel?.text = self.appointments.bringDay
+                cell.pickUpLabel?.text = self.appointments.returnDay
+            }
+        }
+        return historyCell
     }
 }

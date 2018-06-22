@@ -124,4 +124,8 @@ typealias AlertDismissCompletionBlock = ((Int) -> Void)
     static func showNoDateSelectionAlert(_ controller: UIViewController) {
         AFAlert.showAlertView(controller, title: "Nu se poate face programare", message: "Va rugam, selectati o date de predare si una de recuperare.", cancelButtonTitle: "OK", destructiveButtonTitle: nil, otherButtonsTitle: nil, tapBlock: nil)
     }
+    
+    static func showAppointmentSavedAlert(_ controller: UIViewController, completionBlock: @escaping AlertDismissCompletionBlock) {
+        AFAlert.showAlertView(controller, title: "Programare realizata cu succes!", message: "Puteti vizualiza toate programarile dumneavoastra in sectiunea Istoric din Meniu", cancelButtonTitle: "OK", destructiveButtonTitle: nil, otherButtonsTitle: nil, tapBlock: completionBlock)
+    }
 }

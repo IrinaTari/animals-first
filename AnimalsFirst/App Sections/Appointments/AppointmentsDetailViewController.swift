@@ -111,7 +111,7 @@ class AppointmentsDetailViewController: UIViewController {
                 appointmentModel.bringDay = "\(previousDayString) 16:00 - 17:00"
             }
             // save in db
-            FirebaseHelpers.saveAppointment(appointment: appointmentModel)
+            FirebaseHelpers.saveAppointment(appointment: appointmentModel, controller: self)
         }
     }
 
