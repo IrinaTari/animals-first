@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -33,16 +34,89 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="DXW-qx-gxl">
+                                <rect key="frame" x="29" y="95" width="317" height="201"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="Gjc-5h-wLG">
+                                        <rect key="frame" x="0.0" y="0.0" width="237.5" height="30"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2tB-Ty-mYW">
+                                                <rect key="frame" x="0.0" y="0.0" width="45.5" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="236-ic-JAS">
+                                                <rect key="frame" x="95.5" y="0.0" width="142" height="30"/>
+                                                <state key="normal" title="exemplu@gmail.com"/>
+                                                <connections>
+                                                    <action selector="sendEmailAction:" destination="PLF-ZA-0ig" eventType="touchUpInside" id="Zei-v7-XOC"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="F6h-nS-MlC">
+                                        <rect key="frame" x="0.0" y="80" width="211.5" height="30"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Telefon:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nuk-rH-mF4">
+                                                <rect key="frame" x="0.0" y="0.0" width="60.5" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L5g-wA-spt">
+                                                <rect key="frame" x="110.5" y="0.0" width="101" height="30"/>
+                                                <state key="normal" title="0751-272-356"/>
+                                                <connections>
+                                                    <action selector="phoneCallAction:" destination="PLF-ZA-0ig" eventType="touchUpInside" id="fY9-aY-5QA"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TYU-L5-upM">
+                                        <rect key="frame" x="0.0" y="160" width="229" height="41"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Locatie:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yiw-QM-5hq">
+                                                <rect key="frame" x="0.0" y="0.0" width="114.5" height="41"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Str. Macilor nr. 2 Timișoara" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aw5-ie-TY4">
+                                                <rect key="frame" x="114.5" y="0.0" width="114.5" height="41"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="tsX-qA-fhf">
+                                <rect key="frame" x="16" y="327" width="343" height="320"/>
+                            </mapView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.231507728" green="0.231507728" blue="0.231507728" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Mhx-RV-NkL" firstAttribute="trailing" secondItem="wxE-h4-ALR" secondAttribute="trailing" id="3Fy-L9-P7T"/>
+                            <constraint firstItem="DXW-qx-gxl" firstAttribute="top" secondItem="Mhx-RV-NkL" secondAttribute="bottom" constant="31" id="M3F-dd-eF1"/>
                             <constraint firstItem="Mhx-RV-NkL" firstAttribute="leading" secondItem="wxE-h4-ALR" secondAttribute="leading" id="MrR-SL-akq"/>
+                            <constraint firstItem="wxE-h4-ALR" firstAttribute="trailing" secondItem="tsX-qA-fhf" secondAttribute="trailing" constant="16" id="blt-B4-xw8"/>
                             <constraint firstItem="Mhx-RV-NkL" firstAttribute="top" secondItem="wxE-h4-ALR" secondAttribute="top" id="bya-lc-AVO"/>
+                            <constraint firstItem="tsX-qA-fhf" firstAttribute="leading" secondItem="wxE-h4-ALR" secondAttribute="leading" constant="16" id="dxU-JQ-Hh3"/>
+                            <constraint firstItem="tsX-qA-fhf" firstAttribute="top" secondItem="DXW-qx-gxl" secondAttribute="bottom" constant="31" id="j5e-Hp-2C1"/>
+                            <constraint firstItem="DXW-qx-gxl" firstAttribute="leading" secondItem="wxE-h4-ALR" secondAttribute="leading" constant="29" id="k8W-VN-qMt"/>
+                            <constraint firstAttribute="trailing" secondItem="DXW-qx-gxl" secondAttribute="trailing" constant="29" id="lEH-AL-xIf"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="tsX-qA-fhf" secondAttribute="bottom" constant="20" id="r2t-dW-a4o"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="wxE-h4-ALR"/>
                     </view>
                     <navigationItem key="navigationItem" id="Vpx-WQ-J3E"/>
+                    <connections>
+                        <outlet property="emailButton" destination="236-ic-JAS" id="0wJ-Na-WxN"/>
+                        <outlet property="mapView" destination="tsX-qA-fhf" id="hA7-oZ-REA"/>
+                        <outlet property="phoneNumberButton" destination="L5g-wA-spt" id="jtK-gj-P1L"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UT8-Sb-x6m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
