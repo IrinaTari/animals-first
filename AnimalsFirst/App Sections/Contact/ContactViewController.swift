@@ -13,10 +13,17 @@ class ContactViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var phoneNumberButton: UIButton!
     @IBOutlet weak var emailButton: UIButton!
+    @IBOutlet weak var adressButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        mapView.showsUserLocation = true
+        let locationCoordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(integerLiteral: 45.764262), longitude: CLLocationDegrees(integerLiteral: 21.2049131))
+        mapView.setRegion(MKCoordinateRegion(center: locationCoordinate, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)), animated: false)
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = locationCoordinate
+        annotation.title = "Animals First - cabinet veterinar"
+        mapView.addAnnotation(annotation)
     }
 
     @IBAction func backButtonAction(_ sender: Any) {
@@ -58,6 +65,23 @@ class ContactViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    @IBAction func openMapsAction(_ sender: Any) {
+        let latitude: CLLocationDegrees = 45.764262
+        let longitude: CLLocationDegrees = 21.2049131
+        
+        let regionDistance:CLLocationDistance = 1
+        let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
+        let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
+        let options = [
+            MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),
+            MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)
+        ]
+        let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+        let mapItem = MKMapItem(placemark: placemark)
+        mapItem.name = "Animals First - cabinet veterinar"
+        mapItem.openInMaps(launchOptions: options)
     }
 }
 
