@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="FYm-UD-otr">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="GN8-Vi-3hU">
+            <objects>
+                <viewController id="FYm-UD-otr" customClass="ViewController" customModule="AnimalsFirst" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="t5m-Ld-Ss0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2015_p16_01_logo_animal_first_ales_colorat-1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="CLA-Mj-2St">
+                                <rect key="frame" x="89" y="260" width="196" height="147"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="196" id="8bk-Gb-hzU"/>
+                                    <constraint firstAttribute="height" constant="147" id="WUq-sC-xPL"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="CLA-Mj-2St" firstAttribute="centerY" secondItem="t5m-Ld-Ss0" secondAttribute="centerY" id="uXI-dG-ovk"/>
+                            <constraint firstItem="CLA-Mj-2St" firstAttribute="centerX" secondItem="t5m-Ld-Ss0" secondAttribute="centerX" id="waJ-en-jzo"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="UTe-68-Xw8"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gF2-bk-lbs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="52" y="87"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="2015_p16_01_logo_animal_first_ales_colorat-1.jpg" width="1223" height="870"/>
+    </resources>
+</document>

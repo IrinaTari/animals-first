@@ -24,7 +24,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var FBPlaceholderButton: UIButton!
     let fbbutton = FBSDKLoginButton()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
@@ -42,15 +42,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         // read fb permissions
         fbbutton.readPermissions = ["public_profile", "email"]
 
-        // if user is logged in
-        if let currentUser = Auth.auth().currentUser {
-            print(currentUser)
-            for userType in AFConstants.allTypes() {
-                StoryboardNavigator.findUserAndShowAppropriateScreen(name: userType, currentUser: currentUser, controller: self)
-            }
-        } else {
-            FirebaseHelpers.firebaseSignOut()
-        }
     }
     
     @objc func dismissKeyboard(sender: UIView) {
