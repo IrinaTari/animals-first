@@ -32,7 +32,11 @@ class StoryboardNavigator: NSObject {
             }
             controller.present(viewController, animated: true, completion: nil)
         default:
-            break
+            guard let viewController = UIViewController.login as? LoginViewController else {
+                fatalError("LoginViewController failed at init")
+            }
+            controller.present(viewController, animated: true, completion: nil)
+            FirebaseHelpers.firebaseSignOut()
         }
     }
 
@@ -68,24 +72,30 @@ class StoryboardNavigator: NSObject {
         }
     }
 
-    static func findUserAndShowAppropriateScreen(name: String, currentUser: User, controller: UIViewController) {
-
-        let ref = Database.database().reference()
-        ref.child("users").child(name).observeSingleEvent(of: .value, with: { (snapshot) in
-            // Get user value
-            print(snapshot)
-            guard let dictionary = snapshot.value as? [String : Any] else {
-                fatalError()
-            }
-            for key in (dictionary.keys) {
-                if key == currentUser.uid {
-                    // user exists
-                    self.showAppropriateScreen(userType: name, controller: controller)
-                    return
+    static func findUserAndShowAppropriateScreen(controller: UIViewController) {
+        if let currentUser = Auth.auth().currentUser {
+            let ref = Database.database().reference(fromURL: AFConstants.Path.databaseRef)
+            for userType in AFConstants.allTypes() {
+                let name = userType
+                ref.child("users").child(name).observeSingleEvent(of: .value, with: { (snapshot) in
+                    // Get user value
+                    print(snapshot)
+                    guard let dictionary = snapshot.value as? [String : Any] else {
+                        fatalError()
+                    }
+                    for key in (dictionary.keys) {
+                        if key == currentUser.uid {
+                            // user exists
+                            self.showAppropriateScreen(userType: name, controller: controller)
+                            return
+                        }
+                    }
+                }) { (error) in
+                    print(error.localizedDescription)
                 }
             }
-        }) { (error) in
-            print(error.localizedDescription)
+        } else {
+            self.showAppropriateScreen(userType: "", controller: controller)
         }
     }
 }

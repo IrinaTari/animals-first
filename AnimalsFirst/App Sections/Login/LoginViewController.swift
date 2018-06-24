@@ -66,7 +66,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                 })
                 return
             }
-            StoryboardNavigator.showAppropriateScreen(userType: AFConstants.UserTypes.client, controller: self)
+            StoryboardNavigator.findUserAndShowAppropriateScreen(controller: self)
         })
     }
 

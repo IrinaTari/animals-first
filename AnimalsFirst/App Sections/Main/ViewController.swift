@@ -8,23 +8,24 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseDatabase
+import FBSDKLoginKit
+import FBSDKCoreKit
 
 class ViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(false)
-        // if user is logged in
-        if let currentUser = Auth.auth().currentUser {
-            print(currentUser)
-            for userType in AFConstants.allTypes() {
-                StoryboardNavigator.findUserAndShowAppropriateScreen(name: userType, currentUser: currentUser, controller: self)
+        let currentUser = Auth.auth().currentUser
+        if (currentUser != nil) {
+            for userInfo in (currentUser?.providerData)! {
+                if (userInfo.providerID == "facebook.com") {
+                    print("User is signed in with Facebook");
+                    StoryboardNavigator.showAppropriateScreen(userType: AFConstants.UserTypes.client, controller: self)
+                } else {
+                 StoryboardNavigator.findUserAndShowAppropriateScreen(controller: self)
+                }
             }
-        } else {
-            guard let viewController = UIViewController.login as? LoginViewController else {
-                fatalError("LoginViewController failed at init")
-            }
-            self.present(viewController, animated: true, completion: nil)
-            FirebaseHelpers.firebaseSignOut()
         }
     }
 }
