@@ -26,6 +26,8 @@ class ViewController: UIViewController {
                  StoryboardNavigator.findUserAndShowAppropriateScreen(controller: self)
                 }
             }
+        } else {
+            StoryboardNavigator.showAppropriateScreen(userType: "", controller: self)
         }
     }
 }
