@@ -58,6 +58,8 @@ extension FosterViewController: UITableViewDataSource {
         cell.nameLabel.text = firstTextArray[indexPath.row]
         cell.durationLabel.text = secondTextArray[indexPath.row]
         cell.descriptionLabel.text = thirdTextArray[indexPath.row]
+        // delete this when adding functionality
+        cell.isUserInteractionEnabled = false
         return cell
     }
 }

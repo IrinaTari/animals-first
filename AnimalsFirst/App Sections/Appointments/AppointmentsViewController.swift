@@ -244,39 +244,38 @@ extension AppointmentsViewController: UICollectionViewDelegate, UICollectionView
 extension AppointmentsViewController: UITextFieldDelegate {
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let newText = NSString(string: textField.text!).replacingCharacters(in: range, with: string).trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-        var secondNumber = 0
-        print(newText)
+        var catText = String(catTextField.text!)
+        var dogText = String(dogTextField.text!)
+        var maleCatText = String(maleCatTextField.text!)
+
         if textField == catTextField {
             self.animalType = .cat
+            catText = NSString(string: textField.text!).replacingCharacters(in: range, with: string).trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         } else if textField == dogTextField {
             self.animalType = .dog
-            
+            dogText = NSString(string: textField.text!).replacingCharacters(in: range, with: string).trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         } else if textField == maleCatTextField {
             self.animalType = .maleCat
-        }
-        if !(catTextField.text?.isEmpty)! && !(dogTextField.text?.isEmpty)! {
-            self.animalType = .bothCatAndDog
-            if textField == catTextField {
-                secondNumber = Int(dogTextField.text!)!
-            } else {
-                secondNumber = Int(catTextField.text!)!
-            }
+            maleCatText = NSString(string: textField.text!).replacingCharacters(in: range, with: string).trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         }
         
-        guard let number = Int(newText) else {
+        if catText.isEmpty && dogText.isEmpty && maleCatText.isEmpty {
             showFilteredDay = false
             self.calendarCollectionView.reloadData()
             return true
         }
         showFilteredDay = true
+        let numberOfCats = !catText.isEmpty ? Int(catText) : 0
+        let numberOfDogs = !dogText.isEmpty ? Int(dogText) : 0
+        let numberOfMaleCats = !maleCatText.isEmpty ? Int(maleCatText) : 0
+        
         for month in currentCalendar {
             for day in month.days {
                 guard let newDate = date.setDate(day: day.index!, month: day.month, year: year) else {
                     fatalError()
                 }
                 if day.checkValidDate(forDate: newDate, weekDayIndex: day.weekDay) {
-                    day.isEnabled = !day.checkDayCapacity(animalType: self.animalType, number: number, secondNumber: secondNumber)
+                    day.isEnabled = !day.checkDayCapacity(animalType: self.animalType, numberOfDogs: numberOfDogs!, numberOfCats: numberOfCats!, numberOfMaleCats: numberOfMaleCats!)
                 } else {
                     day.isEnabled = false
                 }

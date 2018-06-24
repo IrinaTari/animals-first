@@ -57,6 +57,8 @@ extension AdoptionsViewController: UITableViewDataSource {
         cell.nameLabel.text = firstTextArray[indexPath.row]
         cell.areaLabel.text = secondTextArray[indexPath.row]
         cell.descriptionLabel.text = thirdTextArray[indexPath.row]
+        // delete this when adding functionality
+        cell.isUserInteractionEnabled = false
         return cell
     }
 }

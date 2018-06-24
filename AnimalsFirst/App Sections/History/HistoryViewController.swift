@@ -109,7 +109,8 @@ extension HistoryViewController: UITableViewDataSource {
         cell.appointmentLabel?.text = appointmentDay
         cell.dropOffLabel?.text = self.appointments[indexPath.row].bringDay
         cell.pickUpLabel?.text = self.appointments[indexPath.row].returnDay
-        
+        // delete this when adding functionality
+        cell.isUserInteractionEnabled = false
         return cell
     }
 }

@@ -38,40 +38,25 @@ class AFDayModel: NSObject {
         self.year = year
     }
 
-    func updateNumberOfAnimals(animalType: AFConstants.AnimalType, number: Int, secondNumber: Int?) {
+    func updateNumberOfAnimals(animalType: AFConstants.AnimalType, numberOfDogs: Int, numberOfCats: Int, numberOfMaleCats: Int) {
         switch animalType {
         case .dog:
-            numberOfDogs += number
-            totalNrOfAnimals += number
+            self.numberOfDogs += numberOfDogs
+            totalNrOfAnimals += numberOfDogs
         case .cat:
-            numberOfCats += number
-            totalNrOfAnimals += number
+            self.numberOfCats += numberOfCats
+            totalNrOfAnimals += numberOfCats
         case .maleCat:
-            numberOfMaleCats += number
+            self.numberOfMaleCats += numberOfMaleCats
         case .bothCatAndDog:
-            totalNrOfAnimals += number + secondNumber!
+            totalNrOfAnimals = 0
         }
     }
 
-    func checkDayCapacity(animalType: AFConstants.AnimalType, number: Int, secondNumber: Int?) -> Bool {
+    func checkDayCapacity(animalType: AFConstants.AnimalType, numberOfDogs: Int, numberOfCats: Int, numberOfMaleCats: Int) -> Bool {
         var full = false
-        switch animalType {
-        case .dog:
-            if numberOfDogs > AFConstants.DayCapacity.maxDogNr - number || totalNrOfAnimals > AFConstants.DayCapacity.maxNrAnimals - number {
-                full = true
-            }
-        case .cat:
-            if numberOfCats > AFConstants.DayCapacity.maxCatNr - number || totalNrOfAnimals > AFConstants.DayCapacity.maxNrAnimals - number {
-                full = true
-            }
-        case .maleCat:
-            if numberOfMaleCats > AFConstants.DayCapacity.maxNrOfMaleCats - number {
-                full = true
-            }
-        case .bothCatAndDog:
-            if numberOfCats + numberOfDogs > AFConstants.DayCapacity.maxNrAnimals - number - secondNumber! {
-                full = true
-            }
+        if self.numberOfDogs > AFConstants.DayCapacity.maxDogNr - numberOfDogs || totalNrOfAnimals > AFConstants.DayCapacity.maxNrAnimals - numberOfCats - numberOfDogs || self.numberOfMaleCats > AFConstants.DayCapacity.maxNrOfMaleCats - numberOfMaleCats || self.numberOfCats > AFConstants.DayCapacity.maxCatNr - numberOfCats {
+            full = true
         }
         return full
     }
